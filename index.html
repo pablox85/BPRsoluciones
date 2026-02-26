@@ -1,89 +1,227 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="es" data-theme="light" data-vision="default">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BPR Soluciones | Desarrollo web, SEO y automatizacion profesional</title>
+  <meta name="description" content="BPR Soluciones disena sitios web profesionales, optimiza SEO tecnico y automatiza procesos con IA para empresas que necesitan crecer con resultados medibles.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="author" content="BPR Soluciones">
+  <meta name="theme-color" content="#0f4c81">
+  <link rel="canonical" href="https://www.bprsoluciones.com/">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/12.9.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/12.9.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/12.9.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/12.9.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/12.9.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/12.9.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/12.9.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/12.9.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/12.9.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/12.9.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BPR Soluciones | Soluciones digitales profesionales">
+  <meta property="og:description" content="Diseno y desarrollo web de alto rendimiento, SEO tecnico y automatizacion para empresas en crecimiento.">
+  <meta property="og:url" content="https://www.bprsoluciones.com/">
+  <meta property="og:site_name" content="BPR Soluciones">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:image" content="https://www.bprsoluciones.com/assets/img/Imagen.png">
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BPR Soluciones">
+  <meta name="twitter:description" content="Desarrollo web profesional, SEO tecnico y automatizacion inteligente.">
+  <meta name="twitter:image" content="https://www.bprsoluciones.com/assets/img/Imagen.png">
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+  <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/styles.min.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "BPR Soluciones",
+        "url": "https://www.bprsoluciones.com/",
+        "logo": "https://www.bprsoluciones.com/assets/img/favicon.png",
+        "description": "Servicios profesionales de desarrollo web, SEO tecnico y automatizacion con IA.",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "hola@bprsoluciones.com",
+          "availableLanguage": ["Spanish", "English"]
         }
-      });
-    </script>
-  </body>
+      },
+      {
+        "@type": "WebSite",
+        "name": "BPR Soluciones",
+        "url": "https://www.bprsoluciones.com/",
+        "inLanguage": "es"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Que incluye el servicio de SEO tecnico?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Incluye auditoria tecnica, optimizacion de estructura semantica, metadatos, rendimiento y mejoras para indexacion en motores de busqueda."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Trabajan con empresas pequenas y medianas?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Si. Adaptamos cada solucion al presupuesto, etapa de negocio y objetivos comerciales de cada empresa."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+  <header class="site-header" id="inicio">
+    <div class="container nav-wrap">
+      <a href="#inicio" class="brand" aria-label="Inicio BPR Soluciones">
+        <span class="brand-mark" aria-hidden="true">BPR</span>
+        <span class="brand-text">BPR Soluciones</span>
+      </a>
+
+      <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Navegacion principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="mode-controls" role="group" aria-label="Opciones de visualizacion">
+        <button class="mode-btn mode-btn-theme" id="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar tema">
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="4.2"></circle>
+            <path d="M12 2.8v2.4M12 18.8v2.4M21.2 12h-2.4M5.2 12H2.8M18.5 5.5l-1.7 1.7M7.2 16.8l-1.7 1.7M18.5 18.5l-1.7-1.7M7.2 7.2L5.5 5.5"></path>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M19.6 14.2A8 8 0 1 1 9.8 4.4a6.6 6.6 0 1 0 9.8 9.8z"></path>
+          </svg>
+          <span class="mode-btn-text">Claro</span>
+        </button>
+        <button class="mode-btn" id="vision-toggle" type="button" aria-pressed="false">Modo colorblind</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <p class="eyebrow reveal" style="--delay: 80ms;">Consultoria y ejecucion digital profesional</p>
+          <h1 class="reveal" style="--delay: 130ms;">BPR Soluciones: tecnologia clara para resultados reales.</h1>
+          <p class="lead reveal" style="--delay: 190ms;">Diseñamos experiencias web confiables, optimizadas para conversion, accesibles y listas para escalar en buscadores con base tecnica solida.</p>
+          <div class="cta-row reveal" style="--delay: 240ms;">
+            <a href="#contacto" class="btn btn-primary">Solicitar diagnostico</a>
+            <a href="#servicios" class="btn btn-secondary">Ver servicios</a>
+          </div>
+          <div class="trust-row reveal" style="--delay: 280ms;" role="list" aria-label="Diferenciales de calidad">
+            <p role="listitem">WCAG friendly</p>
+            <p role="listitem">SEO tecnico</p>
+            <p role="listitem">Core Web Vitals</p>
+          </div>
+        </div>
+
+        <aside class="hero-card reveal" style="--delay: 170ms;" aria-label="Resumen de valor">
+          <h2>Que entregamos</h2>
+          <ul>
+            <li>Estrategia digital y arquitectura de contenido</li>
+            <li>Implementacion limpia, rapida y mantenible</li>
+            <li>Analitica y mejora continua orientada a negocio</li>
+          </ul>
+        </aside>
+      </div>
+      <div class="hero-bg" aria-hidden="true"></div>
+    </section>
+
+    <section id="servicios" class="section">
+      <div class="container">
+        <h2 class="section-title reveal">Servicios principales</h2>
+        <div class="cards">
+          <article class="card reveal" style="--delay: 60ms;">
+            <h3>Desarrollo Web Profesional</h3>
+            <p>Landing pages, sitios corporativos y plataformas a medida con foco en rendimiento, seguridad y escalabilidad.</p>
+          </article>
+          <article class="card reveal" style="--delay: 120ms;">
+            <h3>SEO Tecnico y Contenido</h3>
+            <p>Optimización semántica, schema markup, velocidad y estructura para mejorar visibilidad organica y relevancia.</p>
+          </article>
+          <article class="card reveal" style="--delay: 180ms;">
+            <h3>Automatizacion e IA</h3>
+            <p>Flujos inteligentes que reducen tareas repetitivas, mejoran tiempos de respuesta y elevan productividad.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proceso" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title reveal">Proceso de trabajo</h2>
+        <ol class="timeline reveal" style="--delay: 120ms;">
+          <li><strong>Diagnostico:</strong> objetivos, audiencia y situacion tecnica actual.</li>
+          <li><strong>Diseno:</strong> UX, arquitectura de informacion y tono de marca.</li>
+          <li><strong>Implementacion:</strong> codigo optimizado, accesible y listo para produccion.</li>
+          <li><strong>Evolucion:</strong> medicion, experimentacion y mejoras iterativas.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="resultados" class="section">
+      <div class="container stats">
+        <h2 class="section-title reveal">Resultados que importan</h2>
+        <div class="stats-grid" role="list" aria-label="Metricas de impacto">
+          <p class="reveal" style="--delay: 60ms;" role="listitem"><span>90+</span>Puntaje Lighthouse objetivo</p>
+          <p class="reveal" style="--delay: 120ms;" role="listitem"><span>100%</span>Diseno responsive</p>
+          <p class="reveal" style="--delay: 180ms;" role="listitem"><span>24/7</span>Presencia digital activa</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title reveal">Preguntas frecuentes</h2>
+        <div class="faq-grid">
+          <article class="faq-card reveal" style="--delay: 80ms;">
+            <h3>Como mejoran el posicionamiento?</h3>
+            <p>Trabajamos SEO tecnico, contenido estructurado y velocidad de carga para facilitar rastreo, indexacion y relevancia.</p>
+          </article>
+          <article class="faq-card reveal" style="--delay: 140ms;">
+            <h3>Incluyen accesibilidad?</h3>
+            <p>Si. Implementamos buenas practicas de contraste, navegacion por teclado, etiquetas semanticas y soporte para preferencias de usuario.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="section section-contact">
+      <div class="container">
+        <h2 class="section-title reveal">Conversemos tu proximo proyecto</h2>
+        <p class="reveal" style="--delay: 100ms;">Compartinos tu objetivo y te proponemos una hoja de ruta tecnica concreta para ejecutarlo.</p>
+        <a class="btn btn-primary reveal" style="--delay: 170ms;" href="mailto:hola@bprsoluciones.com">hola@bprsoluciones.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>&copy; <span id="current-year"></span> BPR Soluciones. Todos los derechos reservados.</p>
+      <a href="#inicio">Volver arriba</a>
+    </div>
+  </footer>
+
+  <span class="sr-only" id="mode-status" aria-live="polite"></span>
+  <script src="js/main.js" defer></script>
+</body>
 </html>
