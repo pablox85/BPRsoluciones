@@ -122,7 +122,16 @@
     trackedElements.forEach(function (element) {
       element.addEventListener('click', function () {
         var label = element.getAttribute('data-track') || 'cta';
-        trackEvent('cta_click', {
+        var eventName = 'cta_click';
+        if (label.indexOf('email') !== -1) {
+          eventName = 'click_email';
+        } else if (label.indexOf('whatsapp') !== -1) {
+          eventName = 'click_whatsapp';
+        } else if (label.indexOf('calendar') !== -1) {
+          eventName = 'click_calendar';
+        }
+
+        trackEvent(eventName, {
           cta_label: label,
           cta_text: (element.textContent || '').trim().slice(0, 80)
         });
@@ -144,24 +153,21 @@
       var data = new FormData(leadForm);
       var name = String(data.get('name') || '').trim();
       var email = String(data.get('email') || '').trim();
-      var company = String(data.get('company') || '').trim();
-      var service = String(data.get('service') || '').trim();
+      var need = String(data.get('need') || '').trim();
       var budget = String(data.get('budget') || '').trim();
-      var goal = String(data.get('goal') || '').trim();
 
       trackEvent('generate_lead', {
-        lead_service: service,
+        lead_need_length: need.length,
         lead_budget: budget
       });
+      trackEvent('form_submit', { form_id: 'lead-form' });
 
-      var subject = encodeURIComponent('Nuevo lead web - ' + company);
+      var subject = encodeURIComponent('Nuevo lead web - ' + name);
       var body = encodeURIComponent(
         'Nombre: ' + name + '\n' +
         'Email: ' + email + '\n' +
-        'Empresa: ' + company + '\n' +
-        'Servicio: ' + service + '\n' +
-        'Presupuesto: ' + budget + '\n\n' +
-        'Objetivo:\n' + goal
+        'Presupuesto estimado: ' + budget + '\n\n' +
+        'Necesidad principal:\n' + need
       );
 
       formStatus.textContent = 'Gracias. Abriremos tu cliente de correo para completar el envio.';
@@ -170,11 +176,9 @@
     });
   }
 
-  var storedTheme = localStorage.getItem('bpr-theme');
   var storedVision = localStorage.getItem('bpr-vision');
-  var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  applyTheme(storedTheme || (systemDark ? 'dark' : 'light'));
+  applyTheme('dark');
+  localStorage.setItem('bpr-theme', 'dark');
   applyVision(storedVision || 'default');
   initConsent();
   initCtaTracking();
