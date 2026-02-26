@@ -6,6 +6,15 @@
   var nav = document.getElementById('main-nav');
   var year = document.getElementById('current-year');
   var modeStatus = document.getElementById('mode-status');
+  var cookieBanner = document.getElementById('cookie-banner');
+  var cookieAccept = document.getElementById('cookie-accept');
+  var cookieReject = document.getElementById('cookie-reject');
+  var leadForm = document.getElementById('lead-form');
+  var formStatus = document.getElementById('form-status');
+  var gaMeta = document.querySelector('meta[name="ga4-id"]');
+
+  var CONSENT_KEY = 'bpr-cookie-consent';
+  var gaId = gaMeta ? gaMeta.getAttribute('content') : '';
 
   if (year) year.textContent = String(new Date().getFullYear());
 
@@ -46,12 +55,144 @@
     }
   }
 
+  function loadAnalytics() {
+    if (!gaId || gaId === 'G-XXXXXXXXXX' || window.__bprGaLoaded) {
+      return;
+    }
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () {
+      window.dataLayer.push(arguments);
+    };
+
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(gaId);
+    document.head.appendChild(script);
+
+    window.gtag('js', new Date());
+    window.gtag('config', gaId, {
+      anonymize_ip: true,
+      transport_type: 'beacon'
+    });
+
+    window.__bprGaLoaded = true;
+  }
+
+  function trackEvent(eventName, params) {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, params || {});
+    }
+  }
+
+  function setCookieBannerVisible(visible) {
+    if (!cookieBanner) return;
+    cookieBanner.classList.toggle('is-hidden', !visible);
+  }
+
+  function persistConsent(consentValue) {
+    localStorage.setItem(CONSENT_KEY, consentValue);
+    if (consentValue === 'accepted') {
+      loadAnalytics();
+      trackEvent('cookie_consent', { consent: 'accepted' });
+    }
+    setCookieBannerVisible(false);
+  }
+
+  function initConsent() {
+    if (!cookieBanner) return;
+
+    var consent = localStorage.getItem(CONSENT_KEY);
+    if (consent === 'accepted') {
+      loadAnalytics();
+      setCookieBannerVisible(false);
+      return;
+    }
+
+    if (consent === 'rejected') {
+      setCookieBannerVisible(false);
+      return;
+    }
+
+    setCookieBannerVisible(true);
+  }
+
+  function initCtaTracking() {
+    var trackedElements = document.querySelectorAll('[data-track]');
+    trackedElements.forEach(function (element) {
+      element.addEventListener('click', function () {
+        var label = element.getAttribute('data-track') || 'cta';
+        trackEvent('cta_click', {
+          cta_label: label,
+          cta_text: (element.textContent || '').trim().slice(0, 80)
+        });
+      });
+    });
+  }
+
+  function initLeadForm() {
+    if (!leadForm || !formStatus) return;
+
+    leadForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      if (!leadForm.checkValidity()) {
+        formStatus.textContent = 'Revisa los campos obligatorios antes de enviar.';
+        return;
+      }
+
+      var data = new FormData(leadForm);
+      var name = String(data.get('name') || '').trim();
+      var email = String(data.get('email') || '').trim();
+      var company = String(data.get('company') || '').trim();
+      var service = String(data.get('service') || '').trim();
+      var budget = String(data.get('budget') || '').trim();
+      var goal = String(data.get('goal') || '').trim();
+
+      trackEvent('generate_lead', {
+        lead_service: service,
+        lead_budget: budget
+      });
+
+      var subject = encodeURIComponent('Nuevo lead web - ' + company);
+      var body = encodeURIComponent(
+        'Nombre: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Empresa: ' + company + '\n' +
+        'Servicio: ' + service + '\n' +
+        'Presupuesto: ' + budget + '\n\n' +
+        'Objetivo:\n' + goal
+      );
+
+      formStatus.textContent = 'Gracias. Abriremos tu cliente de correo para completar el envio.';
+      window.location.href = 'mailto:hola@bprsoluciones.com?subject=' + subject + '&body=' + body;
+      leadForm.reset();
+    });
+  }
+
   var storedTheme = localStorage.getItem('bpr-theme');
   var storedVision = localStorage.getItem('bpr-vision');
   var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
   applyTheme(storedTheme || (systemDark ? 'dark' : 'light'));
   applyVision(storedVision || 'default');
+  initConsent();
+  initCtaTracking();
+  initLeadForm();
+
+  if (cookieAccept) {
+    cookieAccept.addEventListener('click', function () {
+      persistConsent('accepted');
+      announce('Cookies de medicion aceptadas');
+    });
+  }
+
+  if (cookieReject) {
+    cookieReject.addEventListener('click', function () {
+      persistConsent('rejected');
+      announce('Cookies de medicion rechazadas');
+    });
+  }
 
   if (themeToggle) {
     themeToggle.addEventListener('click', function () {
