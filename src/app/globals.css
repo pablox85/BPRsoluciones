@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #071014;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: #071014;
+  color: #f5f7fa;
+  font-family: var(--font-manrope), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
+::selection {
+  background: rgba(0, 255, 198, 0.28);
+  color: #ffffff;
+}
+
+.site-shell {
+  min-height: 100vh;
+  animation: pageEnter 0.7s ease-out both;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    radial-gradient(circle at 16% 4%, rgba(0, 255, 198, 0.13), transparent 28%),
+    radial-gradient(circle at 86% 12%, rgba(0, 217, 255, 0.12), transparent 30%),
+    linear-gradient(180deg, #071014 0%, #0d1b1e 48%, #071014 100%);
+  background-size: 42px 42px, 42px 42px, auto, auto, auto;
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  filter: blur(6px);
+  will-change: opacity, transform, filter;
+}
+
+.reveal-up.is-visible {
+  animation: revealUp 0.68s ease-out both;
+  animation-delay: var(--stagger-delay, 0ms);
+}
+
+.stagger-card {
+  opacity: 0;
+  transform: translateY(-22px) rotateX(-18deg) scale(0.97);
+  filter: blur(8px);
+  transform-origin: top center;
+  will-change: opacity, transform, filter;
+}
+
+.stagger-card.is-visible {
+  animation: dropdownCascade 0.76s cubic-bezier(0.18, 0.88, 0.22, 1) both;
+  animation-delay: var(--stagger-delay, 0ms);
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+    filter: blur(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes dropdownCascade {
+  0% {
+    opacity: 0;
+    transform: translateY(-22px) rotateX(-18deg) scale(0.97);
+    filter: blur(8px);
+  }
+
+  62% {
+    opacity: 1;
+    transform: translateY(3px) rotateX(2deg) scale(1.006);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .site-shell,
+  .reveal-up,
+  .stagger-card {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}

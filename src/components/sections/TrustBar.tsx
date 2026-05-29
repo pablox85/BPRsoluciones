@@ -1,0 +1,128 @@
+"use client";
+
+import { Bot, ChevronDown, Gauge, LineChart, SearchCheck } from "lucide-react";
+import type { CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const items = [
+  {
+    label: "SEO tecnico",
+    description: "Estructura, metadata y rendimiento para que Google entienda y posicione mejor tu sitio.",
+    icon: SearchCheck,
+  },
+  {
+    label: "Core Web Vitals",
+    description: "Optimizacion de carga, estabilidad visual e interaccion para mejorar experiencia y ranking.",
+    icon: Gauge,
+  },
+  {
+    label: "Analytics integrado",
+    description: "Medicion de visitas, eventos y conversiones para decidir con datos reales.",
+    icon: LineChart,
+  },
+  {
+    label: "Automatizacion IA",
+    description: "Flujos inteligentes para ahorrar tiempo, responder leads y conectar herramientas digitales.",
+    icon: Bot,
+  },
+];
+
+export function TrustBar() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [revealed, setRevealed] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    let frameId = 0;
+
+    if (!section || revealed) {
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReducedMotion) {
+      frameId = window.requestAnimationFrame(() => setRevealed(true));
+      return () => window.cancelAnimationFrame(frameId);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting || entry.intersectionRatio > 0) {
+          setRevealed(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -8% 0px",
+      },
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, [revealed]);
+
+  return (
+    <section
+      ref={sectionRef}
+      aria-label="Confianza"
+      className="px-4 sm:px-6 lg:px-8"
+    >
+      <div className="mx-auto grid max-w-6xl grid-cols-2 items-start gap-3 overflow-visible rounded-3xl border border-white/10 bg-white/[0.04] p-3 backdrop-blur-xl md:grid-cols-4">
+        {items.map(({ label, description, icon: Icon }, index) => (
+          <article
+            key={label}
+            className={`stagger-card relative rounded-2xl border transition ${
+              revealed ? "is-visible" : ""
+            } ${
+              openIndex === index ? "z-30" : "z-0"
+            } ${
+              openIndex === index
+                ? "border-neon-mint/70 bg-white/[0.08] shadow-glow"
+                : "border-transparent bg-white/[0.035] hover:border-neon-cyan/30 hover:bg-white/[0.06]"
+            }`}
+            style={{ "--stagger-delay": `${index * 80}ms` } as CSSProperties}
+          >
+            <button
+              type="button"
+              aria-expanded={openIndex === index}
+              aria-controls={`trust-panel-${index}`}
+              onClick={() =>
+                setOpenIndex((current) => (current === index ? null : index))
+              }
+              className="relative z-10 flex min-h-20 w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-4 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-neon-mint/70"
+            >
+              <Icon className="size-5 shrink-0 text-neon-mint" aria-hidden="true" />
+              <h2 className="flex-1 text-sm font-semibold text-zinc-100">{label}</h2>
+              <ChevronDown
+                className={`size-4 shrink-0 text-zinc-500 transition ${
+                  openIndex === index ? "rotate-180 text-neon-cyan" : ""
+                }`}
+                aria-hidden="true"
+              />
+            </button>
+            <div
+              id={`trust-panel-${index}`}
+              className={`grid overflow-hidden px-3 transition-[grid-template-rows,opacity,transform] duration-300 ease-out ${
+                openIndex === index
+                  ? "grid-rows-[1fr] opacity-100"
+                  : "grid-rows-[0fr] opacity-0"
+              }`}
+            >
+              <div className="min-h-0 overflow-hidden">
+                <p className="pb-4 pl-8 pt-1 text-xs leading-5 text-zinc-400">
+                  {description}
+                </p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
