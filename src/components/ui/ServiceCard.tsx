@@ -1,7 +1,5 @@
-import { CalendarDays, Check, ChevronDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import type { CSSProperties } from "react";
-import { ButtonLink } from "@/components/ui/Buttons";
-import { siteConfig } from "@/config/site";
 
 type ServiceCardProps = {
   name: string;
@@ -83,14 +81,6 @@ export function ServiceCard({
               </li>
             ))}
           </ul>
-          <ButtonLink
-            href={siteConfig.calendarUrl}
-            className="mt-6 w-full gap-2"
-            variant="secondary"
-          >
-            <CalendarDays className="size-4" aria-hidden="true" />
-            Agendar llamada
-          </ButtonLink>
         </div>
       </div>
     </article>

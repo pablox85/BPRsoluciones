@@ -1,4 +1,5 @@
-import { CalendarDays, Mail, MessageCircle, Send } from "lucide-react";
+import { Mail, Send } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { services, siteConfig } from "@/config/site";
@@ -24,24 +25,21 @@ export function ContactForm() {
         <div className="mt-8 grid gap-3">
           <Link
             href={siteConfig.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex min-h-12 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.05] px-4 text-sm font-semibold text-white hover:border-neon-mint/40"
           >
-            <MessageCircle className="size-5 text-neon-mint" aria-hidden="true" />
+            <FaWhatsapp className="size-5 text-neon-mint" aria-hidden="true" />
             WhatsApp
           </Link>
           <Link
             href={getEmailHref()}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex min-h-12 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.05] px-4 text-sm font-semibold text-white hover:border-neon-mint/40"
           >
             <Mail className="size-5 text-neon-cyan" aria-hidden="true" />
             {siteConfig.email}
-          </Link>
-          <Link
-            href={siteConfig.calendarUrl}
-            className="flex min-h-12 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.05] px-4 text-sm font-semibold text-white hover:border-neon-mint/40"
-          >
-            <CalendarDays className="size-5 text-neon-green" aria-hidden="true" />
-            Agendar llamada
           </Link>
         </div>
       </aside>

@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { CalendarDays } from "lucide-react";
-import { navLinks, siteConfig } from "@/config/site";
-import { ButtonLink } from "@/components/ui/Buttons";
+import { navLinks } from "@/config/site";
 import { Logo } from "@/components/ui/Logo";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 
@@ -21,12 +19,6 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <div className="hidden md:block">
-          <ButtonLink href={siteConfig.calendarUrl} className="gap-2">
-            <CalendarDays className="size-4" aria-hidden="true" />
-            Agendar llamada
-          </ButtonLink>
-        </div>
         <MobileMenu />
       </div>
     </header>

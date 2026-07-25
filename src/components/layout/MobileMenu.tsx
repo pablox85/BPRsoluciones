@@ -3,8 +3,7 @@
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { navLinks, siteConfig } from "@/config/site";
-import { ButtonLink } from "@/components/ui/Buttons";
+import { navLinks } from "@/config/site";
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
@@ -35,13 +34,6 @@ export function MobileMenu() {
               </Link>
             ))}
           </nav>
-          <ButtonLink
-            href={siteConfig.calendarUrl}
-            onClick={() => setOpen(false)}
-            className="mt-4 w-full"
-          >
-            Agendar llamada
-          </ButtonLink>
         </div>
       ) : null}
     </div>

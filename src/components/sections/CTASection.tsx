@@ -1,4 +1,4 @@
-import { CalendarDays, MessageCircle } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import { ButtonLink } from "@/components/ui/Buttons";
 import { Section } from "@/components/ui/Section";
 import { siteConfig } from "@/config/site";
@@ -18,12 +18,8 @@ export function CTASection() {
         </div>
         <div className="mt-8 grid gap-3 sm:flex">
           <ButtonLink href={siteConfig.whatsappUrl} className="gap-2">
-            <MessageCircle className="size-4" aria-hidden="true" />
+            <FaWhatsapp className="size-4" aria-hidden="true" />
             Hablar por WhatsApp
-          </ButtonLink>
-          <ButtonLink href={siteConfig.calendarUrl} variant="secondary" className="gap-2">
-            <CalendarDays className="size-4" aria-hidden="true" />
-            Agendar llamada
           </ButtonLink>
         </div>
       </div>

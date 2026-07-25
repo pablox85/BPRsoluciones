@@ -6,23 +6,24 @@ import { useEffect, useRef, useState } from "react";
 
 const items = [
   {
-    label: "SEO tecnico",
-    description: "Estructura, metadata y rendimiento para que Google entienda y posicione mejor tu sitio.",
+    label: "Posicionamiento Google",
+    description: "Optimizamos tu web para Busquedas de Google",
     icon: SearchCheck,
   },
-  {
-    label: "Core Web Vitals",
-    description: "Optimizacion de carga, estabilidad visual e interaccion para mejorar experiencia y ranking.",
-    icon: Gauge,
-  },
+ {
+  label: "Core Web Vitals",
+  description:
+    "Optimizacion de velocidad y experiencia de usuario para mejorar el rendimiento.",
+  icon: Gauge,
+},
   {
     label: "Analytics integrado",
-    description: "Medicion de visitas, eventos y conversiones para decidir con datos reales.",
+    description: "Conocé cuántas personas visitan tu sitio y qué acciones generan más consultas.",
     icon: LineChart,
   },
   {
     label: "Automatizacion IA",
-    description: "Flujos inteligentes para ahorrar tiempo, responder leads y conectar herramientas digitales.",
+    description: "Ahorra tiempo, responde antes, genera ventas",
     icon: Bot,
   },
 ];

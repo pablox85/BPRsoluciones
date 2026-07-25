@@ -10,14 +10,15 @@ export function ProcessSection() {
         title="Un metodo directo para lanzar, medir y mejorar"
       />
       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-        {processSteps.map(([number, label], index) => (
+        {processSteps.map((step, index) => (
           <article
-            key={number}
+            key={step.number}
             className="scroll-reveal stagger-card rounded-2xl border border-white/10 bg-ink-900/70 p-5"
             style={{ "--stagger-delay": `${index * 80}ms` } as CSSProperties}
           >
-            <p className="font-heading text-sm font-bold text-neon-mint">{number}</p>
-            <h3 className="mt-3 font-heading text-xl font-semibold text-white">{label}</h3>
+            <p className="font-heading text-sm font-bold text-neon-mint">{step.number}</p>
+            <h3 className="mt-3 font-heading text-xl font-semibold text-white">{step.title}</h3>
+            <p className="mt-2 text-sm leading-6 text-zinc-400">{step.description}</p>
           </article>
         ))}
       </div>

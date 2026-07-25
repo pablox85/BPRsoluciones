@@ -24,6 +24,8 @@ export function ButtonLink({
   return (
     <Link
       className={`inline-flex min-h-12 items-center justify-center rounded-2xl border px-5 py-3 text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-neon-mint/70 focus:ring-offset-2 focus:ring-offset-ink-950 ${variants[variant]} ${className}`}
+      target="_blank"
+      rel="noopener noreferrer"
       {...props}
     >
       {children}

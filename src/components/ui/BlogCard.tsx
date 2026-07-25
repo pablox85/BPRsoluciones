@@ -28,7 +28,7 @@ export function BlogCard({ title, excerpt, slug, index = 0 }: BlogCardProps) {
         href={`/blog#${slug}`}
         className="mt-5 inline-flex min-h-12 items-center gap-2 text-sm font-bold text-neon-cyan"
       >
-        Leer enfoque
+        Nuestro Enfoque
         <ArrowUpRight className="size-4" aria-hidden="true" />
       </Link>
     </article>

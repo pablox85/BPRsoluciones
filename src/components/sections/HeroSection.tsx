@@ -1,4 +1,5 @@
-import { ArrowRight, MessageCircle, Search, TrendingUp, Zap } from "lucide-react";
+import { Search, TrendingUp, Zap } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import type { CSSProperties } from "react";
 import { ButtonLink } from "@/components/ui/Buttons";
 import { siteConfig } from "@/config/site";
@@ -15,23 +16,21 @@ export function HeroSection() {
       <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.02fr_0.98fr]">
         <div className="scroll-reveal reveal-up">
           <p className="mb-4 inline-flex rounded-full border border-neon-mint/30 bg-neon-mint/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-neon-mint">
-            Web, SEO e integraciones
+            BPR soluciones digitales
           </p>
-          <h1 className="font-heading text-4xl font-semibold leading-[1.04] tracking-normal text-white sm:text-5xl lg:text-6xl">
-            Webs rapidas. SEO real. Tecnologia que convierte.
+          <h1 className="font-heading text-4xl font-semibold leading-[1.04] tracking-normal text-white sm:text-5xl lg:text-4xl">
+            <span className="block">Webs rapidas.</span>
+            <span className="block">Posicionamiento en Google.</span>
+            <span className="block">Tecnologia que impulsa tu negocio.</span>
           </h1>
           <p className="mt-5 max-w-xl text-base leading-7 text-zinc-300 sm:text-lg">
             Desarrollamos sitios web modernos, optimizados para Google y
-            disenados para convertir visitas en clientes reales.
+            diseñados para convertir visitas en clientes reales.
           </p>
           <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
-            <ButtonLink href={siteConfig.calendarUrl} className="gap-2">
-              Agendar llamada
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </ButtonLink>
-            <ButtonLink href={siteConfig.whatsappUrl} variant="secondary" className="gap-2">
-              <MessageCircle className="size-4" aria-hidden="true" />
-              Hablar por WhatsApp
+            <ButtonLink href={siteConfig.whatsappUrl} className="gap-2">
+              <FaWhatsapp className="size-4" aria-hidden="true" />
+              WhatsApp
             </ButtonLink>
           </div>
         </div>

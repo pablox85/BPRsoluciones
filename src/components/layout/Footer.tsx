@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Mail, MessageCircle } from "lucide-react";
+import { Mail } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import { navLinks, siteConfig } from "@/config/site";
 import { Logo } from "@/components/ui/Logo";
 import { getEmailHref } from "@/lib/links";
@@ -25,11 +26,21 @@ export function Footer() {
         </nav>
         <div className="grid content-start gap-3 text-sm">
           <p className="font-heading font-semibold text-white">Contacto</p>
-          <Link href={siteConfig.whatsappUrl} className="flex min-h-11 items-center gap-2 text-zinc-400 hover:text-white">
-            <MessageCircle className="size-4" aria-hidden="true" />
+          <Link
+            href={siteConfig.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex min-h-11 items-center gap-2 text-zinc-400 hover:text-white"
+          >
+            <FaWhatsapp className="size-4" aria-hidden="true" />
             WhatsApp
           </Link>
-          <Link href={getEmailHref()} className="flex min-h-11 items-center gap-2 text-zinc-400 hover:text-white">
+          <Link
+            href={getEmailHref()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex min-h-11 items-center gap-2 text-zinc-400 hover:text-white"
+          >
             <Mail className="size-4" aria-hidden="true" />
             {siteConfig.email}
           </Link>
