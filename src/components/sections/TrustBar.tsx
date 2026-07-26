@@ -3,6 +3,7 @@
 import { Bot, ChevronDown, Gauge, LineChart, SearchCheck } from "lucide-react";
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
+import { cardSurfaceClass } from "@/components/ui/Card";
 
 const items = [
   {
@@ -94,7 +95,7 @@ export function TrustBar() {
         {items.map(({ label, description, icon: Icon }, index) => (
           <article
             key={label}
-            className={`stagger-card relative rounded-2xl border transition ${
+            className={`stagger-card ${cardSurfaceClass} relative transition ${
               revealed ? "is-visible" : ""
             } ${
               openIndex === index ? "z-30" : "z-0"

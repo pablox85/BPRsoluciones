@@ -12,6 +12,7 @@ import {
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import { differentiators } from "@/config/site";
+import { cardSurfaceClass } from "@/components/ui/Card";
 import { Section, SectionHeader } from "@/components/ui/Section";
 
 const icons = [SearchCheck, Gauge, Sparkles, Cpu, LineChart, Network];
@@ -85,7 +86,7 @@ export function DifferentiatorsSection() {
           return (
             <article
               key={item.title}
-              className={`stagger-card rounded-2xl border bg-white/[0.045] p-5 backdrop-blur-xl transition hover:bg-white/[0.065] ${
+              className={`stagger-card ${cardSurfaceClass} p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850 ${
                 isOpen
                   ? "border-neon-mint/50 shadow-glow"
                   : "border-white/10 hover:border-neon-mint/35"

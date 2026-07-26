@@ -2,6 +2,7 @@ import { Search, TrendingUp, Zap } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import type { CSSProperties } from "react";
 import { ButtonLink } from "@/components/ui/Buttons";
+import { cardSurfaceClass } from "@/components/ui/Card";
 import { siteConfig } from "@/config/site";
 
 const metrics = [
@@ -55,7 +56,7 @@ export function HeroSection() {
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
               {metrics.map(({ label, value, icon: Icon }) => (
-                <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
+                <div key={label} className={`${cardSurfaceClass} p-4`}>
                   <Icon className="mb-4 size-5 text-neon-cyan" aria-hidden="true" />
                   <p className="font-heading text-2xl font-semibold text-white">{value}</p>
                   <p className="mt-1 text-xs text-zinc-400">{label}</p>
@@ -78,11 +79,11 @@ export function HeroSection() {
               </div>
             </div>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+              <div className={`${cardSurfaceClass} p-4`}>
                 <p className="text-xs text-zinc-500">Automatizaciones activas</p>
                 <p className="mt-2 font-heading text-2xl font-semibold text-white">12</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+              <div className={`${cardSurfaceClass} p-4`}>
                 <p className="text-xs text-zinc-500">Eventos medidos</p>
                 <p className="mt-2 font-heading text-2xl font-semibold text-white">1.8k</p>
               </div>

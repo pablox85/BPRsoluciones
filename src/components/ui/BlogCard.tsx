@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { CSSProperties } from "react";
+import { cardSurfaceClass } from "@/components/ui/Card";
 
 type BlogCardProps = {
   title: string;
@@ -12,7 +13,7 @@ type BlogCardProps = {
 export function BlogCard({ title, excerpt, slug, index = 0 }: BlogCardProps) {
   return (
     <article
-      className="scroll-reveal stagger-card rounded-2xl border border-white/10 bg-white/[0.045] p-5 backdrop-blur-xl transition hover:border-neon-cyan/35 hover:bg-white/[0.065]"
+      className={`scroll-reveal stagger-card ${cardSurfaceClass} p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850`}
       style={{ "--stagger-delay": `${index * 90}ms` } as CSSProperties}
     >
       <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-neon-mint">

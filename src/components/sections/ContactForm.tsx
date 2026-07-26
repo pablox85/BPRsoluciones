@@ -3,6 +3,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { services, siteConfig } from "@/config/site";
+import { cardSurfaceClass } from "@/components/ui/Card";
 import { getEmailHref } from "@/lib/links";
 
 const inputClass =
@@ -11,7 +12,7 @@ const inputClass =
 export function ContactForm() {
   return (
     <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-      <aside className="scroll-reveal reveal-up rounded-3xl border border-neon-mint/25 bg-white/[0.045] p-6 shadow-glow backdrop-blur-xl">
+      <aside className={`scroll-reveal reveal-up ${cardSurfaceClass} border-neon-mint/25 p-6 shadow-glow`}>
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-neon-mint">
           Contacto directo
         </p>
@@ -27,7 +28,7 @@ export function ContactForm() {
             href={siteConfig.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex min-h-12 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.05] px-4 text-sm font-semibold text-white hover:border-neon-mint/40"
+            className={`flex min-h-12 items-center gap-3 ${cardSurfaceClass} px-4 text-sm font-semibold text-white transition hover:border-neon-mint/40 hover:bg-ink-850`}
           >
             <FaWhatsapp className="size-5 text-neon-mint" aria-hidden="true" />
             WhatsApp
@@ -36,7 +37,7 @@ export function ContactForm() {
             href={getEmailHref()}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex min-h-12 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.05] px-4 text-sm font-semibold text-white hover:border-neon-mint/40"
+            className={`flex min-h-12 items-center gap-3 ${cardSurfaceClass} px-4 text-sm font-semibold text-white transition hover:border-neon-mint/40 hover:bg-ink-850`}
           >
             <Mail className="size-5 text-neon-cyan" aria-hidden="true" />
             {siteConfig.email}
@@ -45,7 +46,7 @@ export function ContactForm() {
       </aside>
 
       <form
-        className="scroll-reveal reveal-up rounded-3xl border border-white/10 bg-white/[0.045] p-5 backdrop-blur-xl sm:p-6"
+        className={`scroll-reveal reveal-up ${cardSurfaceClass} p-5 sm:p-6`}
         style={{ "--stagger-delay": "120ms" } as CSSProperties}
       >
         <div className="grid gap-4 sm:grid-cols-2">

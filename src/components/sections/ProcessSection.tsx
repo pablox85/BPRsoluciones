@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { processSteps } from "@/config/site";
+import { cardSurfaceClass } from "@/components/ui/Card";
 import { Section, SectionHeader } from "@/components/ui/Section";
 
 export function ProcessSection() {
@@ -13,7 +14,7 @@ export function ProcessSection() {
         {processSteps.map((step, index) => (
           <article
             key={step.number}
-            className="scroll-reveal stagger-card rounded-2xl border border-white/10 bg-ink-900/70 p-5"
+            className={`scroll-reveal stagger-card ${cardSurfaceClass} p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850`}
             style={{ "--stagger-delay": `${index * 80}ms` } as CSSProperties}
           >
             <p className="font-heading text-sm font-bold text-neon-mint">{step.number}</p>

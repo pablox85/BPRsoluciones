@@ -1,5 +1,6 @@
 import { Check, ChevronDown } from "lucide-react";
 import type { CSSProperties } from "react";
+import { cardSurfaceClass } from "@/components/ui/Card";
 
 type ServiceCardProps = {
   name: string;
@@ -28,7 +29,7 @@ export function ServiceCard({
 }: ServiceCardProps) {
   return (
     <article
-      className={`rounded-2xl border bg-white/[0.045] p-5 backdrop-blur-xl transition hover:bg-white/[0.065] sm:p-6 ${
+      className={`${cardSurfaceClass} p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850 sm:p-6 ${
         animationSettled ? "opacity-100" : "stagger-card"
       } ${
         isRevealed && !animationSettled ? "is-visible" : ""

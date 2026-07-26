@@ -5,6 +5,7 @@ import type { CSSProperties } from "react";
 import { useEffect, useState } from "react";
 import { serviceDetails, siteConfig } from "@/config/site";
 import { ButtonLink } from "@/components/ui/Buttons";
+import { cardSurfaceClass } from "@/components/ui/Card";
 import { Section, SectionHeader } from "@/components/ui/Section";
 
 export function ServiceDetailsSection() {
@@ -31,7 +32,7 @@ export function ServiceDetailsSection() {
           <article
             key={service.name}
             id={service.name.toLowerCase().replaceAll(" ", "-")}
-            className={`rounded-3xl border bg-white/[0.045] p-5 backdrop-blur-xl transition hover:bg-white/[0.065] sm:p-6 ${
+            className={`${cardSurfaceClass} p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850 sm:p-6 ${
               animationSettled ? "opacity-100" : "stagger-card is-visible"
             } ${
               openIndex === index
