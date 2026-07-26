@@ -50,10 +50,18 @@ h6,
   background-size: 42px 42px, 42px 42px, auto, auto, auto;
 }
 
+html:not(.motion-ready) .site-shell,
+html:not(.motion-ready) .site-shell *,
+html:not(.motion-ready) .site-shell *::before,
+html:not(.motion-ready) .site-shell *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
 .reveal-up {
-  opacity: 0;
-  transform: translateY(18px) scale(0.985);
-  filter: blur(6px);
+  opacity: 1;
+  transform: none;
+  filter: none;
   will-change: opacity, transform, filter;
 }
 
@@ -63,9 +71,9 @@ h6,
 }
 
 .stagger-card {
-  opacity: 0;
-  transform: translateY(-22px) rotateX(-18deg) scale(0.97);
-  filter: blur(8px);
+  opacity: 1;
+  transform: none;
+  filter: none;
   transform-origin: top center;
   will-change: opacity, transform, filter;
 }

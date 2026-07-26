@@ -50,6 +50,15 @@ export function TrustBar() {
       return () => window.cancelAnimationFrame(frameId);
     }
 
+    const revealIfVisible = () => {
+      const { bottom, top } = section.getBoundingClientRect();
+
+      if (top < window.innerHeight * 0.92 && bottom > 0) {
+        setRevealed(true);
+        observer.disconnect();
+      }
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting || entry.intersectionRatio > 0) {
@@ -64,8 +73,15 @@ export function TrustBar() {
     );
 
     observer.observe(section);
+    revealIfVisible();
+    window.addEventListener("scroll", revealIfVisible, { passive: true });
+    window.addEventListener("resize", revealIfVisible);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", revealIfVisible);
+      window.removeEventListener("resize", revealIfVisible);
+    };
   }, [revealed]);
 
   return (
@@ -74,7 +90,7 @@ export function TrustBar() {
       aria-label="Confianza"
       className="px-4 sm:px-6 lg:px-8"
     >
-      <div className="mx-auto grid max-w-6xl grid-cols-2 items-start gap-3 overflow-visible rounded-3xl border border-white/10 bg-white/[0.04] p-3 backdrop-blur-xl md:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 items-start gap-3 md:grid-cols-4">
         {items.map(({ label, description, icon: Icon }, index) => (
           <article
             key={label}
@@ -84,8 +100,8 @@ export function TrustBar() {
               openIndex === index ? "z-30" : "z-0"
             } ${
               openIndex === index
-                ? "border-neon-mint/70 bg-white/[0.08] shadow-glow"
-                : "border-transparent bg-white/[0.035] hover:border-neon-cyan/30 hover:bg-white/[0.06]"
+                ? "border-neon-mint/70 bg-ink-850 shadow-glow"
+                : "border-transparent bg-ink-900 hover:border-neon-cyan/30 hover:bg-ink-850"
             }`}
             style={{ "--stagger-delay": `${index * 80}ms` } as CSSProperties}
           >

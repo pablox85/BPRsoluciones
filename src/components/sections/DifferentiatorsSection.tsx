@@ -38,6 +38,15 @@ export function DifferentiatorsSection() {
       return () => window.cancelAnimationFrame(frameId);
     }
 
+    const revealIfVisible = () => {
+      const { bottom, top } = section.getBoundingClientRect();
+
+      if (top < window.innerHeight * 0.92 && bottom > 0) {
+        setRevealed(true);
+        observer.disconnect();
+      }
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting || entry.intersectionRatio > 0) {
@@ -52,8 +61,15 @@ export function DifferentiatorsSection() {
     );
 
     observer.observe(section);
+    revealIfVisible();
+    window.addEventListener("scroll", revealIfVisible, { passive: true });
+    window.addEventListener("resize", revealIfVisible);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", revealIfVisible);
+      window.removeEventListener("resize", revealIfVisible);
+    };
   }, [revealed]);
 
   return (
@@ -83,7 +99,7 @@ export function DifferentiatorsSection() {
                 onClick={() =>
                   setOpenIndex((current) => (current === index ? null : index))
                 }
-                className="flex w-full items-center justify-between gap-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-mint/70"
+                className="flex min-h-11 w-full items-center justify-between gap-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-mint/70"
               >
                 <span className="flex items-center gap-4">
                   <Icon className="size-6 shrink-0 text-neon-cyan" aria-hidden="true" />

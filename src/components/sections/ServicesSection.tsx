@@ -28,6 +28,15 @@ export function ServicesSection() {
       return () => window.cancelAnimationFrame(frameId);
     }
 
+    const revealIfVisible = () => {
+      const { bottom, top } = grid.getBoundingClientRect();
+
+      if (top < window.innerHeight * 0.92 && bottom > 0) {
+        setRevealed(true);
+        observer.disconnect();
+      }
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting || entry.intersectionRatio > 0) {
@@ -42,8 +51,15 @@ export function ServicesSection() {
     );
 
     observer.observe(grid);
+    revealIfVisible();
+    window.addEventListener("scroll", revealIfVisible, { passive: true });
+    window.addEventListener("resize", revealIfVisible);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", revealIfVisible);
+      window.removeEventListener("resize", revealIfVisible);
+    };
   }, [revealed]);
 
   useEffect(() => {

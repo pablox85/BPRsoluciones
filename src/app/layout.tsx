@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { AnalyticsScripts } from "@/components/analytics/AnalyticsScripts";
+import { MotionPreload } from "@/components/animations/MotionPreload";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -36,6 +37,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
         </div>
+        <MotionPreload />
         <ScrollReveal />
         <SEOJsonLd />
         <AnalyticsScripts />
