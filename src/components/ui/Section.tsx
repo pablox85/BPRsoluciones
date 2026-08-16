@@ -8,7 +8,7 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section className={`px-4 py-14 sm:px-6 lg:px-8 lg:py-20 ${className}`}>
+    <section className={`px-4 py-16 sm:px-6 lg:px-8 lg:py-24 ${className}`}>
       <div className="mx-auto w-full max-w-6xl">{children}</div>
     </section>
   );
@@ -28,16 +28,16 @@ export function SectionHeader({
   const Heading = heading;
 
   return (
-    <div className="mx-auto mb-8 max-w-3xl text-center sm:mb-12">
+    <div className="mb-10 max-w-3xl sm:mb-14">
       {eyebrow ? (
-        <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-neon-mint">
+        <p className="eyebrow mb-4">
           {eyebrow}
         </p>
       ) : null}
-      <Heading className="font-heading text-3xl font-semibold tracking-normal text-white sm:text-4xl">
+      <Heading className="max-w-2xl font-heading text-3xl font-semibold leading-[1.08] tracking-[-0.035em] text-white sm:text-5xl">
         {title}
       </Heading>
-      {text ? <p className="mt-4 text-base leading-7 text-zinc-400">{text}</p> : null}
+      {text ? <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-400 sm:text-lg">{text}</p> : null}
     </div>
   );
 }

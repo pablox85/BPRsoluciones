@@ -72,6 +72,22 @@ export function ServicesSection() {
     return () => window.clearTimeout(timeoutId);
   }, [revealed]);
 
+  useEffect(() => {
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      const target = event.target;
+
+      if (!(target instanceof Element) || !target.closest("[data-dropdown-card]")) {
+        setOpenIndex(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsidePointer);
+    };
+  }, []);
+
   return (
     <Section>
       <SectionHeader

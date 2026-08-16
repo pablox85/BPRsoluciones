@@ -4,6 +4,11 @@
 
 :root {
   color-scheme: dark;
+  --page-bg: #071014;
+  --surface: rgba(16, 31, 34, 0.72);
+  --surface-raised: rgba(20, 39, 42, 0.82);
+  --line: rgba(197, 244, 237, 0.12);
+  --muted: #9aacab;
 }
 
 * {
@@ -12,15 +17,17 @@
 
 html {
   scroll-behavior: smooth;
-  background: #071014;
+  background: var(--page-bg);
 }
 
 body {
   margin: 0;
   overflow-x: hidden;
-  background: #071014;
+  background: var(--page-bg);
   color: #f5f7fa;
   font-family: var(--font-manrope), sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,
@@ -31,6 +38,28 @@ h5,
 h6,
 .font-heading {
   font-family: var(--font-space-grotesk), sans-serif;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(0, 255, 198, 0.78);
+  outline-offset: 3px;
 }
 
 ::selection {
@@ -39,15 +68,38 @@ h6,
 }
 
 .site-shell {
-  min-height: 100vh;
+  min-height: 100dvh;
   animation: pageEnter 0.7s ease-out both;
   background:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    radial-gradient(circle at 16% 4%, rgba(0, 255, 198, 0.13), transparent 28%),
-    radial-gradient(circle at 86% 12%, rgba(0, 217, 255, 0.12), transparent 30%),
-    linear-gradient(180deg, #071014 0%, #0d1b1e 48%, #071014 100%);
-  background-size: 42px 42px, 42px 42px, auto, auto, auto;
+    linear-gradient(rgba(180, 235, 227, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180, 235, 227, 0.026) 1px, transparent 1px),
+    radial-gradient(ellipse at 12% 0%, rgba(0, 255, 198, 0.12), transparent 32%),
+    radial-gradient(ellipse at 88% 8%, rgba(0, 217, 255, 0.09), transparent 30%),
+    linear-gradient(180deg, #071014 0%, #0b171a 48%, #071014 100%);
+  background-size: 48px 48px, 48px 48px, auto, auto, auto;
+  background-attachment: fixed;
+}
+
+::placeholder {
+  color: #687b7d;
+}
+
+@layer components {
+  .premium-surface {
+    border: 1px solid var(--line);
+    background: linear-gradient(145deg, rgba(24, 47, 49, 0.78), rgba(10, 24, 27, 0.72));
+    box-shadow: 0 18px 50px rgba(1, 13, 15, 0.24), inset 0 1px 0 rgba(223, 255, 250, 0.035);
+    backdrop-filter: blur(18px);
+  }
+
+  .eyebrow {
+    color: #72e7ce;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
 }
 
 html:not(.motion-ready) .site-shell,

@@ -73,19 +73,39 @@ export function DifferentiatorsSection() {
     };
   }, [revealed]);
 
+  useEffect(() => {
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      const target = event.target;
+
+      if (!(target instanceof Element) || !target.closest("[data-dropdown-card]")) {
+        setOpenIndex(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsidePointer);
+    };
+  }, []);
+
   return (
     <Section className="pt-0">
       <SectionHeader
         eyebrow="Diferenciales"
         title="Pensado para conversion de clientes, no solo para verse bien"
       />
-      <div ref={sectionRef} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div
+        ref={sectionRef}
+        className="grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      >
         {differentiators.map((item, index) => {
           const Icon = icons[index];
           const isOpen = openIndex === index;
           return (
             <article
               key={item.title}
+              data-dropdown-card
               className={`stagger-card ${cardSurfaceClass} p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850 ${
                 isOpen
                   ? "border-neon-mint/50 shadow-glow"
@@ -102,18 +122,23 @@ export function DifferentiatorsSection() {
                 }
                 className="flex min-h-11 w-full items-center justify-between gap-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-mint/70"
               >
-                <span className="flex items-center gap-4">
+                <span className="flex flex-1 items-center gap-4">
                   <Icon className="size-6 shrink-0 text-neon-cyan" aria-hidden="true" />
                   <span className="font-heading text-lg font-semibold text-white">
                     {item.title}
                   </span>
                 </span>
-                <ChevronDown
-                  className={`size-6 shrink-0 text-zinc-500 transition ${
-                    isOpen ? "rotate-180 text-neon-cyan" : ""
-                  }`}
-                  aria-hidden="true"
-                />
+                <span className="flex shrink-0 items-center gap-2">
+                  <span className="whitespace-nowrap text-xs font-semibold text-zinc-500">
+                    Detalles
+                  </span>
+                  <ChevronDown
+                    className={`size-6 shrink-0 text-zinc-500 transition ${
+                      isOpen ? "rotate-180 text-neon-cyan" : ""
+                    }`}
+                    aria-hidden="true"
+                  />
+                </span>
               </button>
               <div
                 id={`differentiator-panel-${index}`}
