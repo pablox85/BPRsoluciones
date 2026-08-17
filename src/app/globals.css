@@ -171,6 +171,34 @@ html:not(.motion-ready) .site-shell *::after {
   animation-delay: var(--stagger-delay, 0ms);
 }
 
+.mobile-menu-panel {
+  background: linear-gradient(
+    180deg,
+    rgba(7, 16, 20, 0.76) 0%,
+    rgba(7, 16, 20, 0.62) 100%
+  );
+  -webkit-backdrop-filter: blur(20px) saturate(0.82);
+  backdrop-filter: blur(20px) saturate(0.82);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+  transform-origin: top right;
+}
+
+.mobile-menu-backdrop--opening {
+  animation: mobileMenuBackdropIn 220ms ease-out both;
+}
+
+.mobile-menu-panel--opening {
+  animation: mobileMenuPanelIn 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mobile-menu-backdrop--closing {
+  animation: mobileMenuBackdropOut 220ms ease-in both;
+}
+
+.mobile-menu-panel--closing {
+  animation: mobileMenuPanelOut 280ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
 @keyframes pageEnter {
   from {
     opacity: 0;
@@ -217,6 +245,40 @@ html:not(.motion-ready) .site-shell *::after {
   }
 }
 
+@keyframes mobileMenuBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mobileMenuPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mobileMenuBackdropOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes mobileMenuPanelOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -234,5 +296,24 @@ html:not(.motion-ready) .site-shell *::after {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-shell > main,
+  .site-shell > footer {
+    transition: filter 220ms ease-out;
+  }
+
+  body.mobile-menu-open .site-shell > main,
+  body.mobile-menu-open .site-shell > footer {
+    filter: blur(6px) brightness(0.58);
+    pointer-events: none;
+  }
+
+  .mobile-menu-backdrop {
+    background-color: rgba(7, 16, 20, 0.8);
+    -webkit-backdrop-filter: blur(20px) saturate(0.72);
+    backdrop-filter: blur(20px) saturate(0.72);
   }
 }

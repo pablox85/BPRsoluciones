@@ -20,16 +20,16 @@ export function BlogCard({ title, excerpt, slug, index = 0 }: BlogCardProps) {
         Guia BPR
       </p>
       <h2 className="font-heading text-xl font-semibold leading-tight text-white">
-        <Link className="inline-flex min-h-11 items-center" href={`/blog#${slug}`}>
+        <Link className="inline-flex min-h-11 items-center" href={`/blog/${slug}`}>
           {title}
         </Link>
       </h2>
       <p className="mt-3 text-sm leading-6 text-zinc-400">{excerpt}</p>
       <Link
-        href={`/blog#${slug}`}
+        href={`/blog/${slug}`}
         className="mt-5 inline-flex min-h-12 items-center gap-2 text-sm font-bold text-neon-cyan"
       >
-        Nuestro Enfoque
+        Leer artículo
         <ArrowUpRight className="size-4" aria-hidden="true" />
       </Link>
     </article>

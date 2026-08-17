@@ -29,7 +29,7 @@ export function ServiceCard({
 }: ServiceCardProps) {
   return (
     <article
-      className={`${cardSurfaceClass} p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850 sm:p-6 ${
+      className={`${cardSurfaceClass} min-w-0 p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850 sm:p-6 ${
         animationSettled ? "opacity-100" : "stagger-card"
       } ${
         isRevealed && !animationSettled ? "is-visible" : ""
@@ -49,7 +49,7 @@ export function ServiceCard({
         aria-controls={`service-card-panel-${index}`}
         aria-label={`Ver detalles del plan ${name}`}
         onClick={onToggle}
-        className="flex min-h-20 w-full items-start justify-between gap-3 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-neon-mint/70"
+        className="flex min-h-20 min-w-0 w-full items-start justify-between gap-3 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-neon-mint/70"
       >
         <div className="min-w-0">
           <h3 className="font-heading text-xl font-semibold text-white">{name}</h3>

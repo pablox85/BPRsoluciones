@@ -95,7 +95,7 @@ export function TrustBar() {
         {items.map(({ label, description, icon: Icon }, index) => (
           <article
             key={label}
-            className={`stagger-card ${cardSurfaceClass} relative transition ${
+            className={`stagger-card ${cardSurfaceClass} relative min-w-0 transition ${
               revealed ? "is-visible" : ""
             } ${
               openIndex === index ? "z-30" : "z-0"
@@ -113,10 +113,10 @@ export function TrustBar() {
               onClick={() =>
                 setOpenIndex((current) => (current === index ? null : index))
               }
-              className="relative z-10 flex min-h-20 w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-4 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-neon-mint/70"
+              className="relative z-10 flex min-h-20 min-w-0 w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-4 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-neon-mint/70"
             >
               <Icon className="size-5 shrink-0 text-neon-mint" aria-hidden="true" />
-              <h2 className="flex-1 text-sm font-semibold text-zinc-100">{label}</h2>
+              <h2 className="min-w-0 flex-1 text-sm font-semibold text-zinc-100">{label}</h2>
               <ChevronDown
                 className={`size-4 shrink-0 text-zinc-500 transition ${
                   openIndex === index ? "rotate-180 text-neon-cyan" : ""

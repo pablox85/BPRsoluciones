@@ -106,7 +106,7 @@ export function DifferentiatorsSection() {
             <article
               key={item.title}
               data-dropdown-card
-              className={`stagger-card ${cardSurfaceClass} p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850 ${
+              className={`stagger-card ${cardSurfaceClass} min-w-0 p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850 ${
                 isOpen
                   ? "border-neon-mint/50 shadow-glow"
                   : "border-white/10 hover:border-neon-mint/35"
@@ -120,11 +120,11 @@ export function DifferentiatorsSection() {
                 onClick={() =>
                   setOpenIndex((current) => (current === index ? null : index))
                 }
-                className="flex min-h-11 w-full items-center justify-between gap-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-mint/70"
+                className="flex min-h-11 min-w-0 w-full items-center justify-between gap-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-mint/70"
               >
-                <span className="flex flex-1 items-center gap-4">
+                <span className="flex min-w-0 flex-1 items-center gap-4">
                   <Icon className="size-6 shrink-0 text-neon-cyan" aria-hidden="true" />
-                  <span className="font-heading text-lg font-semibold text-white">
+                  <span className="min-w-0 font-heading text-lg font-semibold text-white">
                     {item.title}
                   </span>
                 </span>
