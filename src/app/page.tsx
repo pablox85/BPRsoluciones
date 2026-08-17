@@ -15,13 +15,13 @@ export const metadata: Metadata = buildMetadata({
 
 export default function HomePage() {
   return (
-    <>
+    <div className="page-theme page-theme-home">
       <HeroSection />
       <TrustBar />
       <ServicesSection />
       <DifferentiatorsSection />
       <ProcessSection />
       <CTASection />
-    </>
+    </div>
   );
 }

@@ -12,8 +12,10 @@ export const metadata: Metadata = buildMetadata({
 
 export default function ContactPage() {
   return (
-    <Section>
-      <ContactForm />
-    </Section>
+    <div className="page-theme page-theme-contact">
+      <Section>
+        <ContactForm />
+      </Section>
+    </div>
   );
 }

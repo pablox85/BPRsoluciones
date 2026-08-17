@@ -1,8 +1,8 @@
 "use client";
 
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
-import type { CSSProperties } from "react";
-import { useEffect, useState } from "react";
+import type { CSSProperties, MouseEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { serviceDetails, siteConfig } from "@/config/site";
 import { ButtonLink } from "@/components/ui/Buttons";
 import { cardSurfaceClass } from "@/components/ui/Card";
@@ -11,12 +11,65 @@ import { Section, SectionHeader } from "@/components/ui/Section";
 export function ServiceDetailsSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [animationSettled, setAnimationSettled] = useState(false);
+  const scrollAnchorRef = useRef<{
+    button: HTMLButtonElement;
+    documentTop: number;
+    top: number;
+  } | null>(null);
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => setAnimationSettled(true), 900);
 
     return () => window.clearTimeout(timeoutId);
   }, []);
+
+  useEffect(() => {
+    const anchor = scrollAnchorRef.current;
+
+    if (!anchor) {
+      return;
+    }
+
+    const restoreAnchor = () => {
+      const currentAnchor = scrollAnchorRef.current;
+
+      if (!currentAnchor) {
+        return;
+      }
+
+      const root = document.documentElement;
+      const previousScrollBehavior = root.style.scrollBehavior;
+      const targetScrollY = currentAnchor.documentTop - currentAnchor.top;
+
+      root.style.scrollBehavior = "auto";
+      window.scrollTo({ top: Math.max(0, targetScrollY), left: 0, behavior: "auto" });
+      window.setTimeout(() => {
+        root.style.scrollBehavior = previousScrollBehavior;
+      }, 100);
+    };
+
+    const frameId = window.requestAnimationFrame(restoreAnchor);
+    const settleTimeoutId = window.setTimeout(() => {
+      restoreAnchor();
+      scrollAnchorRef.current = null;
+    }, 1000);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.clearTimeout(settleTimeoutId);
+    };
+  }, [openIndex]);
+
+  const toggleService = (index: number, event: MouseEvent<HTMLButtonElement>) => {
+    const button = event.currentTarget;
+
+    scrollAnchorRef.current = {
+      button,
+      documentTop: button.getBoundingClientRect().top + window.scrollY,
+      top: button.getBoundingClientRect().top,
+    };
+    setOpenIndex((current) => (current === index ? null : index));
+  };
 
   return (
     <Section className="pt-10 sm:pt-14 lg:pt-16">
@@ -32,7 +85,7 @@ export function ServiceDetailsSection() {
           <article
             key={service.name}
             id={service.name.toLowerCase().replaceAll(" ", "-")}
-            className={`${cardSurfaceClass} p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850 sm:p-6 ${
+            className={`${cardSurfaceClass} p-0 transition hover:border-neon-cyan/30 hover:bg-ink-850 ${
               animationSettled ? "opacity-100" : "stagger-card is-visible"
             } ${
               openIndex === index
@@ -45,27 +98,26 @@ export function ServiceDetailsSection() {
               type="button"
               aria-expanded={openIndex === index}
               aria-controls={`service-detail-${index}`}
-              onClick={() =>
-                setOpenIndex((current) => (current === index ? null : index))
-              }
-              className="flex w-full flex-col gap-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-neon-mint/70 sm:flex-row sm:items-center sm:justify-between"
+              onClick={(event) => toggleService(index, event)}
+              className="flex w-full flex-col gap-4 p-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-neon-mint/70 sm:p-6"
             >
-              <div className="flex flex-wrap items-center gap-3">
-                <h2 className="font-heading text-2xl font-semibold text-white">
-                  {service.name}
-                </h2>
-                <span className="rounded-full border border-neon-mint/30 bg-neon-mint/10 px-3 py-1 text-xs font-bold text-neon-mint">
-                  {service.price}
+              <div className="flex w-full items-center justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <h2 className="font-heading text-2xl font-semibold text-white">
+                    {service.name}
+                  </h2>
+                  <span className="rounded-full border border-neon-mint/30 bg-neon-mint/10 px-3 py-1 text-xs font-bold text-neon-mint">
+                    {service.price}
+                  </span>
+                </div>
+                <span className="shrink-0 rounded-full border border-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-neon-cyan">
+                  {openIndex === index ? "Ocultar" : "Ver detalle"}
                 </span>
               </div>
-              <span className="rounded-full border border-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-neon-cyan">
-                {openIndex === index ? "Ocultar" : "Ver detalle"}
-              </span>
+              <p className="text-left text-base font-semibold leading-7 text-zinc-100">
+                {service.tagline}
+              </p>
             </button>
-
-            <p className="mt-4 text-base font-semibold leading-7 text-zinc-100">
-              {service.tagline}
-            </p>
 
             <div
               id={`service-detail-${index}`}
@@ -76,7 +128,7 @@ export function ServiceDetailsSection() {
               }`}
             >
               <div className="min-h-0 overflow-hidden">
-                <div className="mt-5 grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-8">
+                <div className="grid gap-6 px-5 pb-5 lg:grid-cols-[0.85fr_1.15fr] lg:gap-8 sm:px-6 sm:pb-6">
                   <div>
                     <p className="text-sm leading-7 text-zinc-400">
                       {service.description}
@@ -111,8 +163,8 @@ export function ServiceDetailsSection() {
                     </ul>
                     <ButtonLink
                       href={siteConfig.calendarUrl}
-                      variant={index === 1 ? "primary" : "secondary"}
-                      className="mt-6 w-full gap-2 sm:w-auto"
+                      variant="primary"
+                      className="mt-6 w-full gap-2 sm:w-72"
                     >
                       Consultar {service.name}
                       <ArrowUpRight className="size-4" aria-hidden="true" />

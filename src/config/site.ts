@@ -130,7 +130,7 @@ export const differentiators = [
     description: "Carga rápido para mejorar la experiencia.",
   },
   {
-    title: "Diseño premium orientado a resultados",
+    title: "Diseño orientado a resultados",
     description: "Pensada para convertir visitas en clientes.",
   },
   {

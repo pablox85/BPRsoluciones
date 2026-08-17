@@ -21,6 +21,7 @@
     "autoprefixer": "^10.4.27",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.1.7",
+    "playwright": "^1.62.1",
     "postcss": "^8.5.12",
     "puppeteer": "^25.3.0",
     "puppeteer-core": "^24.43.1",

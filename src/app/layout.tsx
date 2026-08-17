@@ -6,6 +6,7 @@ import { MotionPreload } from "@/components/animations/MotionPreload";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { SEOJsonLd } from "@/components/seo/SEOJsonLd";
 import { buildMetadata } from "@/lib/seo/metadata";
 import "./globals.css";
@@ -37,6 +38,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
         </div>
+        <FloatingWhatsApp />
         <MotionPreload />
         <ScrollReveal />
         <SEOJsonLd />

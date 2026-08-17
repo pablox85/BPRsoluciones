@@ -13,18 +13,20 @@ export const metadata: Metadata = buildMetadata({
 
 export default function BlogPage() {
   return (
-    <Section>
-      <SectionHeader
-        eyebrow="Blog"
-        title="Estrategia digital explicada con criterio tecnico"
-        text="Artículos para ayudarte a tomar mejores decisiones sobre tu web, SEO y automatizaciones."
-        heading="h1"
-      />
-      <div className="grid gap-4 md:grid-cols-3">
-        {blogPosts.map((post, index) => (
-          <BlogCard key={post.slug} {...post} index={index} />
-        ))}
-      </div>
-    </Section>
+    <div className="page-theme page-theme-blog">
+      <Section>
+        <SectionHeader
+          eyebrow="Blog"
+          title="Estrategia digital explicada con criterio tecnico"
+          text="Artículos para ayudarte a tomar mejores decisiones sobre tu web, SEO y automatizaciones."
+          heading="h1"
+        />
+        <div className="grid gap-4 md:grid-cols-3">
+          {blogPosts.map((post, index) => (
+            <BlogCard key={post.slug} {...post} index={index} />
+          ))}
+        </div>
+      </Section>
+    </div>
   );
 }

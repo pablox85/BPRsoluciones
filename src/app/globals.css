@@ -80,6 +80,42 @@ textarea:focus-visible {
   background-attachment: fixed;
 }
 
+.page-theme {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 82% 4%, var(--theme-glow), transparent 32%),
+    linear-gradient(180deg, var(--theme-wash), transparent 42%);
+}
+
+.page-theme-home {
+  --theme-glow: rgba(0, 255, 198, 0.055);
+  --theme-wash: rgba(0, 255, 198, 0.022);
+  background:
+    radial-gradient(ellipse at 82% 4%, rgba(0, 255, 198, 0.075), transparent 34%),
+    linear-gradient(
+      180deg,
+      rgba(0, 255, 198, 0.045) 0%,
+      rgba(7, 16, 20, 0.01) 38%,
+      rgba(2, 8, 10, 0.3) 100%
+    );
+}
+
+.page-theme-services {
+  --theme-glow: rgba(0, 217, 255, 0.065);
+  --theme-wash: rgba(0, 217, 255, 0.025);
+}
+
+.page-theme-blog {
+  --theme-glow: rgba(73, 220, 190, 0.05);
+  --theme-wash: rgba(24, 115, 110, 0.025);
+}
+
+.page-theme-contact {
+  --theme-glow: rgba(20, 241, 149, 0.06);
+  --theme-wash: rgba(20, 241, 149, 0.024);
+}
+
 ::placeholder {
   color: #687b7d;
 }
