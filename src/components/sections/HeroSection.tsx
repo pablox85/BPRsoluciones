@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa6";
 import { ButtonLink } from "@/components/ui/Buttons";
 import { siteConfig } from "@/config/site";
@@ -5,7 +6,7 @@ import { siteConfig } from "@/config/site";
 export function HeroSection() {
   return (
     <section className="px-4 pb-16 pt-12 sm:px-6 md:pt-20 lg:px-8 lg:pb-28">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         <div className="scroll-reveal reveal-up">
           <p className="eyebrow mb-5 inline-flex border-l-2 border-neon-mint pl-3">
             BPR soluciones digitales
@@ -25,6 +26,16 @@ export function HeroSection() {
               WhatsApp
             </ButtonLink>
           </div>
+        </div>
+        <div className="scroll-reveal reveal-up flex justify-center">
+          <Image
+            src="/images/bpr2.png"
+            alt="BPR Soluciones"
+            width={768}
+            height={512}
+            className="hero-logo-glow h-auto w-full max-w-[30rem] object-contain"
+            priority
+          />
         </div>
       </div>
     </section>

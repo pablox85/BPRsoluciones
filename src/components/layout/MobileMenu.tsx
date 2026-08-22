@@ -66,7 +66,7 @@ export function MobileMenu() {
             onClick={() => updateMenu(false)}
             className={`mobile-menu-backdrop absolute inset-x-0 top-20 z-[60] h-[calc(100dvh-5rem)] cursor-default bg-ink-950/80 backdrop-blur-xl ${closing ? "mobile-menu-backdrop--closing" : "mobile-menu-backdrop--opening"}`}
           />
-          <div className={`mobile-menu-panel absolute left-4 right-4 top-20 z-[70] rounded-2xl border border-neon-mint/15 p-4 ${closing ? "mobile-menu-panel--closing" : "mobile-menu-panel--opening"}`}>
+          <div className={`mobile-menu-panel absolute left-4 right-4 top-20 z-[70] rounded-2xl border border-white/[0.08] p-4 ${closing ? "mobile-menu-panel--closing" : "mobile-menu-panel--opening"}`}>
             <nav aria-label="Menu movil" className="grid gap-2">
               {navLinks.map((link) => (
                 (() => {
