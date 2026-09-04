@@ -28,16 +28,22 @@ Abrir `http://localhost:3000`.
 
 ## Variables de entorno
 
-Crear `.env.local` tomando `.env.example` como base:
+Crear `.env.local` tomando `.env.example` como base. Vercel Analytics no
+requiere variables; Google Search Console se configura fuera del proyecto con
+la verificación del dominio.
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://bprsoluciones.com
+NEXT_PUBLIC_SITE_URL=https://tu-dominio.com
 NEXT_PUBLIC_WHATSAPP_URL=https://wa.me/59800000000
-NEXT_PUBLIC_EMAIL=hola@bprsoluciones.com
-NEXT_PUBLIC_CALENDAR_URL=https://cal.com/bprsoluciones
+NEXT_PUBLIC_EMAIL=hola@tu-dominio.com
+NEXT_PUBLIC_CALENDAR_URL=https://cal.com/tu-usuario
 NEXT_PUBLIC_CLARITY_ID=
 NEXT_PUBLIC_GA_ID=
 ```
+
+El formulario envía las consultas directamente a `CONTACT_TO_EMAIL` mediante
+SMTP. Para Gmail, usar una contraseña de aplicación en `SMTP_PASS`; nunca la
+clave habitual de la cuenta.
 
 ## Validacion
 

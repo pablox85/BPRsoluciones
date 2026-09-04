@@ -1,7 +1,9 @@
+"use client";
+
 import { Mail, Send } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
-import type { CSSProperties } from "react";
+import { useRef, useState, type CSSProperties, type FormEvent } from "react";
 import { services, siteConfig } from "@/config/site";
 import { cardSurfaceClass } from "@/components/ui/Card";
 import { getEmailHref } from "@/lib/links";
@@ -10,6 +12,41 @@ const inputClass =
   "min-h-12 w-full rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-neon-mint/70 focus:ring-2 focus:ring-neon-mint/20";
 
 export function ContactForm() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStatus("sending");
+    setMessage("");
+
+    const formData = new FormData(event.currentTarget);
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(Object.fromEntries(formData)),
+    }).catch(() => null);
+
+    const result: { error?: string; code?: string; requestId?: string } | null = response
+      ? await response.json().catch(() => null)
+      : null;
+
+    if (!response?.ok) {
+      setStatus("error");
+      const diagnostic = [result?.code, result?.requestId ? `ref. ${result.requestId}` : ""]
+        .filter(Boolean)
+        .join(" · ");
+      const errorMessage = result?.error ?? "No pudimos enviar tu consulta. Probá nuevamente.";
+      setMessage(diagnostic ? `${errorMessage} Código: ${diagnostic}.` : errorMessage);
+      return;
+    }
+
+    formRef.current?.reset();
+    setStatus("success");
+    setMessage("¡Gracias! Recibimos tu consulta y te responderemos a la brevedad.");
+  }
+
   return (
     <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
       <aside className={`scroll-reveal reveal-up ${cardSurfaceClass} border-neon-mint/25 p-6 shadow-glow`}>
@@ -46,10 +83,20 @@ export function ContactForm() {
       </aside>
 
       <form
+        ref={formRef}
+        onSubmit={handleSubmit}
         className={`scroll-reveal reveal-up ${cardSurfaceClass} p-5 sm:p-6`}
         style={{ "--stagger-delay": "120ms" } as CSSProperties}
       >
         <div className="grid gap-4 sm:grid-cols-2">
+          <input
+            aria-hidden="true"
+            autoComplete="off"
+            className="hidden"
+            name="website"
+            tabIndex={-1}
+            type="text"
+          />
           <label className="grid gap-2 text-sm font-semibold text-zinc-200">
             Nombre
             <input className={inputClass} name="name" autoComplete="name" required />
@@ -90,14 +137,19 @@ export function ContactForm() {
         </div>
         <button
           type="submit"
+          disabled={status === "sending"}
           className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl border border-neon-mint/40 bg-neon-mint px-5 py-3 text-sm font-bold text-ink-950 shadow-glow transition hover:bg-white sm:w-auto"
         >
           <Send className="size-4" aria-hidden="true" />
-          Enviar consulta
+          {status === "sending" ? "Enviando..." : "Enviar consulta"}
         </button>
-        <p className="mt-4 text-xs leading-5 text-zinc-500">
-          El formulario queda listo para conectar a CRM, email transaccional o
-          automatizaciones segun el flujo comercial.
+        <p
+          aria-live="polite"
+          className={`mt-4 text-xs leading-5 ${
+            status === "error" ? "text-red-300" : status === "success" ? "text-neon-mint" : "text-zinc-500"
+          }`}
+        >
+          {message || "Tu consulta llegará directamente a nuestro equipo por email."}
         </p>
       </form>
     </div>

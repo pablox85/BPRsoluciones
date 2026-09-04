@@ -27,7 +27,7 @@ export function HeroSection() {
             </ButtonLink>
           </div>
         </div>
-        <div className="scroll-reveal reveal-up flex justify-center">
+        <div className="scroll-reveal reveal-up order-first flex justify-center lg:order-none">
           <Image
             src="/images/bpr2.png"
             alt="BPR Soluciones"
