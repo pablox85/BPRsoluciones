@@ -1,9 +1,9 @@
 "use client";
 
-import { Mail, Send } from "lucide-react";
+import { CheckCircle2, Mail, Send, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
-import { useRef, useState, type CSSProperties, type FormEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import { services, siteConfig } from "@/config/site";
 import { cardSurfaceClass } from "@/components/ui/Card";
 import { getEmailHref } from "@/lib/links";
@@ -13,8 +13,29 @@ const inputClass =
 
 export function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+
+  function closeSuccessModal() {
+    setIsSuccessModalOpen(false);
+    setStatus("idle");
+    setMessage("");
+  }
+
+  useEffect(() => {
+    if (!isSuccessModalOpen) return;
+
+    closeButtonRef.current?.focus();
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeSuccessModal();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isSuccessModalOpen]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,10 +66,12 @@ export function ContactForm() {
     formRef.current?.reset();
     setStatus("success");
     setMessage("¡Gracias! Recibimos tu consulta y te responderemos a la brevedad.");
+    setIsSuccessModalOpen(true);
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+    <>
+      <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
       <aside className={`scroll-reveal reveal-up ${cardSurfaceClass} border-neon-mint/25 p-6 shadow-glow`}>
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-neon-mint">
           Contacto directo
@@ -152,6 +175,52 @@ export function ContactForm() {
           {message || "Tu consulta llegará directamente a nuestro equipo por email."}
         </p>
       </form>
-    </div>
+      </div>
+
+      {isSuccessModalOpen ? (
+        <div
+          className="contact-success-modal fixed inset-0 z-[100] flex h-dvh w-full items-center justify-center overflow-y-auto bg-ink-950/75 p-4 backdrop-blur-md"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) closeSuccessModal();
+          }}
+        >
+          <section
+            aria-describedby="contact-success-description"
+            aria-labelledby="contact-success-title"
+            aria-modal="true"
+            className={`contact-success-dialog w-full max-w-md border-neon-mint/40 p-6 shadow-[0_28px_100px_rgba(0,0,0,0.6),0_0_0_1px_rgba(0,255,198,0.08)] sm:p-8`}
+            role="dialog"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div className="grid size-12 shrink-0 place-items-center rounded-2xl border border-neon-mint/35 bg-neon-mint/10 text-neon-mint">
+                <CheckCircle2 className="size-7" aria-hidden="true" />
+              </div>
+              <button
+                ref={closeButtonRef}
+                aria-label="Cerrar confirmación"
+                className="grid size-10 place-items-center rounded-xl border border-white/10 text-zinc-300 transition hover:border-neon-mint/40 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-mint/70"
+                onClick={closeSuccessModal}
+                type="button"
+              >
+                <X className="size-5" aria-hidden="true" />
+              </button>
+            </div>
+            <h2 id="contact-success-title" className="mt-6 font-heading text-3xl font-semibold text-white">
+              Consulta enviada
+            </h2>
+            <p id="contact-success-description" className="mt-3 leading-7 text-zinc-300">
+              Recibimos tu mensaje correctamente. Te responderemos a la brevedad.
+            </p>
+            <button
+              className="mt-7 inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-neon-mint/40 bg-neon-mint px-5 py-3 text-sm font-bold text-ink-950 transition hover:bg-white"
+              onClick={closeSuccessModal}
+              type="button"
+            >
+              Entendido
+            </button>
+          </section>
+        </div>
+      ) : null}
+    </>
   );
 }
