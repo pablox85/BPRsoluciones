@@ -5,24 +5,26 @@ type MetadataInput = {
   title?: string;
   description?: string;
   path?: string;
+  type?: "website" | "article";
 };
 
 export function buildMetadata({
   title,
   description = siteConfig.description,
   path = "/",
+  type = "website",
 }: MetadataInput = {}): Metadata {
   const url = new URL(path, siteConfig.domain);
   const resolvedTitle = title
     ? `${title} | ${siteConfig.name}`
-    : `${siteConfig.name} | Webs rapidas, SEO real y automatizacion`;
+    : `Desarrollo web en Uruguay | ${siteConfig.name}`;
 
   return {
     metadataBase: new URL(siteConfig.domain),
     title: resolvedTitle,
     description,
     alternates: {
-      canonical: url.pathname,
+      canonical: url.toString(),
     },
     openGraph: {
       title: resolvedTitle,
@@ -30,13 +32,13 @@ export function buildMetadata({
       url,
       siteName: siteConfig.name,
       locale: "es_UY",
-      type: "website",
+      type,
       images: [
         {
           url: "/opengraph-image",
           width: 1200,
           height: 630,
-          alt: `${siteConfig.name} - tecnologia que convierte`,
+          alt: `${siteConfig.name} - tecnología que convierte`,
         },
       ],
     },
@@ -45,10 +47,6 @@ export function buildMetadata({
       title: resolvedTitle,
       description,
       images: ["/opengraph-image"],
-    },
-    robots: {
-      index: true,
-      follow: true,
     },
   };
 }

@@ -1,34 +1,37 @@
 import { siteConfig } from "@/config/site";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export function SEOJsonLd() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: siteConfig.name,
-    url: siteConfig.domain,
-    description: siteConfig.description,
-    areaServed: ["Uruguay", "Latinoamerica", "Estados Unidos"],
-    serviceType: [
-      "Desarrollo web",
-      "SEO tecnico",
-      "Automatizacion digital",
-      "Integraciones digitales",
-    ],
-    email: siteConfig.email,
-    sameAs: [siteConfig.whatsappUrl],
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "USD",
-      lowPrice: "100",
-      highPrice: "1000",
-      offerCount: "4",
-    },
-  };
-
+  const organizationId = `${siteConfig.domain}/#organization`;
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+    <JsonLd data={{
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": organizationId,
+          name: siteConfig.name,
+          url: siteConfig.domain,
+          description: siteConfig.description,
+          email: siteConfig.email,
+          logo: {
+            "@type": "ImageObject",
+            url: `${siteConfig.domain}/images/bprLogo.png`,
+            width: 1972,
+            height: 798,
+          },
+          areaServed: { "@type": "Country", name: "Uruguay" },
+          knowsAbout: ["Desarrollo web", "Automatización", "Inteligencia artificial", "Software a medida"],
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${siteConfig.domain}/#website`,
+          name: siteConfig.name,
+          url: siteConfig.domain,
+          inLanguage: "es-UY",
+          publisher: { "@id": organizationId },
+        },
+      ],
+    }} />
   );
 }

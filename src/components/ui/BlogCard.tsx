@@ -17,7 +17,7 @@ export function BlogCard({ title, excerpt, slug, index = 0 }: BlogCardProps) {
       style={{ "--stagger-delay": `${index * 90}ms` } as CSSProperties}
     >
       <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-neon-mint">
-        Guia BPR
+        Guía BPR
       </p>
       <h2 className="font-heading text-xl font-semibold leading-tight text-white">
         <Link className="inline-flex min-h-11 items-center" href={`/blog/${slug}`}>
@@ -27,6 +27,7 @@ export function BlogCard({ title, excerpt, slug, index = 0 }: BlogCardProps) {
       <p className="mt-3 text-sm leading-6 text-zinc-400">{excerpt}</p>
       <Link
         href={`/blog/${slug}`}
+        aria-label={`Leer artículo: ${title}`}
         className="mt-5 inline-flex min-h-12 items-center gap-2 text-sm font-bold text-neon-cyan"
       >
         Leer artículo

@@ -8,13 +8,13 @@ import { cardSurfaceClass } from "@/components/ui/Card";
 const items = [
   {
     label: "Posicionamiento Google",
-    description: "Optimizamos tu web para Busquedas de Google",
+    description: "Optimizamos tu web para búsquedas de Google",
     icon: SearchCheck,
   },
  {
   label: "Core Web Vitals",
   description:
-    "Optimizacion de velocidad y experiencia de usuario para mejorar el rendimiento.",
+    "Optimización de velocidad y experiencia de usuario para mejorar el rendimiento.",
   icon: Gauge,
 },
   {
@@ -23,7 +23,7 @@ const items = [
     icon: LineChart,
   },
   {
-    label: "Automatizacion IA",
+    label: "Automatización IA",
     description: "Ahorra tiempo, responde antes, genera ventas",
     icon: Bot,
   },
@@ -116,7 +116,7 @@ export function TrustBar() {
               className="relative z-10 flex min-h-20 min-w-0 w-full cursor-pointer items-center gap-3 rounded-2xl px-3 py-4 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-neon-mint/70"
             >
               <Icon className="size-5 shrink-0 text-neon-mint" aria-hidden="true" />
-              <h2 className="min-w-0 flex-1 text-sm font-semibold text-zinc-100">{label}</h2>
+              <h2 className="min-w-0 flex-1 break-words text-sm font-semibold text-zinc-100">{label}</h2>
               <ChevronDown
                 className={`size-4 shrink-0 text-zinc-500 transition ${
                   openIndex === index ? "rotate-180 text-neon-cyan" : ""

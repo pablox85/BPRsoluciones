@@ -10,7 +10,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = buildMetadata({
   path: "/",
   description:
-    "BPR Soluciones crea webs rapidas, SEO tecnico, automatizacion e integraciones digitales para convertir visitas en clientes reales.",
+    "Desarrollo web para empresas en Uruguay. Creamos sitios rápidos, automatizaciones con IA y software a medida para generar consultas y simplificar procesos.",
 });
 
 export default function HomePage() {

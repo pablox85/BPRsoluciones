@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   return pages.map((path) => ({
-    url: `${siteConfig.domain}${path}`,
+    url: new URL(path || "/", siteConfig.domain).toString(),
     lastModified: now,
     changeFrequency: path === "" ? "weekly" : "monthly",
     priority: path === "" ? 1 : path.startsWith("/blog/") ? 0.7 : 0.8,

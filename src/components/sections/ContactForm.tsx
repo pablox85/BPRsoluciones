@@ -77,11 +77,11 @@ export function ContactForm() {
           Contacto directo
         </p>
         <h1 className="mt-4 font-heading text-4xl font-semibold leading-tight text-white">
-          Hablemos de tu proxima etapa digital.
+          Hablemos de tu próxima etapa digital.
         </h1>
         <p className="mt-4 text-base leading-7 text-zinc-400">
-          Contanos que queres vender, medir o automatizar. Te respondemos con
-          un camino claro para lanzar o mejorar tu presencia digital.
+          Contanos qué querés desarrollar o automatizar en tu empresa en Uruguay.
+          Te orientamos sobre una web, una solución con IA o software a medida.
         </p>
         <div className="mt-8 grid gap-3">
           <Link
@@ -133,11 +133,11 @@ export function ContactForm() {
             <input className={inputClass} type="email" name="email" autoComplete="email" required />
           </label>
           <label className="grid gap-2 text-sm font-semibold text-zinc-200">
-            Telefono
+            Teléfono
             <input className={inputClass} name="phone" autoComplete="tel" />
           </label>
           <label className="grid gap-2 text-sm font-semibold text-zinc-200 sm:col-span-2">
-            Servicio de interes
+            Servicio de interés
             <select className={inputClass} name="service" defaultValue="">
               <option value="" disabled>
                 Seleccionar servicio

@@ -12,13 +12,13 @@ export function HeroSection() {
             BPR soluciones digitales
           </p>
           <h1 className="max-w-2xl font-heading text-3xl font-semibold leading-[0.98] tracking-[-0.055em] text-white sm:text-4xl lg:text-5xl">
-            <span className="block">Webs rapidas.</span>
+            <span className="block">Desarrollo web en Uruguay.</span>
             <span className="block">Posicionamiento en Google.</span>
-            <span className="block">Tecnologia que impulsa tu negocio.</span>
+            <span className="block">Tecnología que impulsa tu negocio.</span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-7 text-zinc-300 sm:text-lg">
-            Desarrollamos sitios web modernos, optimizados para Google y
-            diseñados para convertir visitas en clientes reales.
+            Creamos sitios web, automatizaciones con inteligencia artificial y
+            software a medida para empresas que quieren generar consultas y ahorrar tiempo.
           </p>
           <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
             <ButtonLink href={siteConfig.whatsappUrl} className="gap-2">
@@ -31,10 +31,11 @@ export function HeroSection() {
           <Image
             src="/images/bpr2.png"
             alt="BPR Soluciones"
-            width={768}
-            height={512}
+            width={1972}
+            height={798}
+            sizes="(max-width: 511px) calc(100vw - 32px), (max-width: 1023px) 480px, (max-width: 1151px) 44vw, 480px"
             className="hero-logo-glow h-auto w-full max-w-[30rem] object-contain"
-            priority
+            preload
           />
         </div>
       </div>

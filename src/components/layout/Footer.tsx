@@ -12,12 +12,12 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-sm text-sm leading-6 text-zinc-400">
-            Infraestructura digital para empresas que necesitan velocidad, SEO,
-            automatizacion y medicion real.
+            Desarrollo web, automatización e inteligencia artificial para empresas
+            en Uruguay. Software a medida para simplificar tu trabajo.
           </p>
         </div>
         <nav aria-label="Footer" className="grid gap-3 text-sm">
-          <p className="font-heading font-semibold text-white">Navegacion</p>
+          <p className="font-heading font-semibold text-white">Navegación</p>
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className="flex min-h-11 items-center text-zinc-400 hover:text-white">
               {link.label}

@@ -8,7 +8,7 @@ export function ProcessSection() {
     <Section className="pt-0">
       <SectionHeader
         eyebrow="Proceso"
-        title="Un metodo directo para lanzar, medir y mejorar"
+        title="Un método directo para lanzar, medir y mejorar"
       />
       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {processSteps.map((step, index) => (

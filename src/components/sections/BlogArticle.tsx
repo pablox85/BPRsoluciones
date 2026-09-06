@@ -64,7 +64,11 @@ export function BlogArticle({ article }: { article: BlogArticleData }) {
 
       <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-7 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-xl text-sm leading-6 text-zinc-400">
-          ¿Tu web carga lento o no genera suficientes consultas? Revisemos qué está frenando la conversión.
+          ¿Querés aplicar estas ideas a tu empresa? Conocé nuestros{" "}
+          <Link href="/servicios" className="text-neon-mint underline underline-offset-4">
+            planes web y soluciones a medida
+          </Link>{" "}
+          o contanos qué necesitás.
         </p>
         <Link
           href="/contacto"

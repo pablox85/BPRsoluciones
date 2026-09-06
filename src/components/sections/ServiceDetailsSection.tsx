@@ -75,8 +75,8 @@ export function ServiceDetailsSection() {
     <Section className="pt-10 sm:pt-14 lg:pt-16">
       <SectionHeader
         eyebrow="Servicios"
-        title="Planes web, SEO y automatizacion para cada etapa"
-        text="Cada plan esta pensado para una etapa distinta: lanzar rapido, profesionalizar la presencia digital, escalar SEO o automatizar procesos."
+        title="Planes web y software a medida en Uruguay"
+        text="Compará lo que incluye cada plan de desarrollo web. También creamos automatizaciones con IA, integraciones y software a medida para los procesos de tu empresa."
         heading="h1"
       />
 

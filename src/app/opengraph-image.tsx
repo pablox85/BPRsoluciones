@@ -27,10 +27,10 @@ export default function Image() {
           {siteConfig.name}
         </div>
         <div style={{ fontSize: 76, lineHeight: 1.02, fontWeight: 700, maxWidth: 920 }}>
-          Webs rapidas. SEO real. Tecnologia que convierte.
+          Webs rápidas. SEO real. Tecnología que convierte.
         </div>
         <div style={{ marginTop: 34, fontSize: 28, color: "#A1A1AA" }}>
-          Desarrollo web, automatizacion e integraciones digitales.
+          Desarrollo web, automatización e integraciones digitales.
         </div>
       </div>
     ),

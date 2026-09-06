@@ -93,7 +93,7 @@ export function ServicesSection() {
       <SectionHeader
         eyebrow="Servicios"
         title="Paquetes claros para crecer con infraestructura digital"
-        text="Desde una landing rapida optimizada para Google, hasta una plataforma completa con automatizaciones y mediciones."
+        text="Desde una landing rápida optimizada para Google, hasta una plataforma completa con automatizaciones y mediciones."
       />
       <div ref={gridRef} className="grid items-start gap-4 md:grid-cols-2 xl:grid-cols-4">
         {services.map((service, index) => (

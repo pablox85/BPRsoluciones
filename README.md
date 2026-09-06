@@ -50,7 +50,24 @@ clave habitual de la cuenta.
 ```bash
 npm run lint
 npm run build
+npm run test:seo
 ```
+
+Las pruebas SEO requieren un build reciente y Node.js 24. Comprueban las ocho
+rutas públicas, canonicals, schema, sitemap y dimensiones de la imagen principal.
+
+Para recorrer el build con Chromium (Playwright), iniciá el servidor y ejecutá
+la auditoría en otra terminal:
+
+```bash
+npm run start -- --hostname 127.0.0.1 --port 3100
+npm run audit:seo -- latest
+```
+
+La auditoría guarda HTML resumido, métricas de laboratorio y capturas en
+`.seo-audit/` (ignorado por Git). Bloquea analytics externos e intercepta el
+envío del formulario: no envía correos reales. LCP, CLS e interacciones locales
+no sustituyen los datos de campo de Search Console.
 
 ## Deploy en Vercel
 
@@ -59,3 +76,10 @@ npm run build
 3. Deploy con el preset automatico de Next.js.
 
 La web genera `/sitemap.xml`, `/robots.txt` y OpenGraph desde App Router.
+
+El dominio oficial de este proyecto es `https://bprsoluciones.uy`. Definí
+`NEXT_PUBLIC_SITE_URL=https://bprsoluciones.uy` en Production antes del build.
+La variable acepta un origen HTTP(S), sin rutas, consultas ni credenciales;
+un valor vacío usa el dominio oficial. El dominio debe trasladarse desde el
+proyecto de la página en construcción cuando se autorice la publicación.
+Comprobá también que `www` redirija al dominio oficial y no a la inversa.

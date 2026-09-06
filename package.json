@@ -4,7 +4,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test:seo": "node --test tests/seo.test.mjs",
+    "audit:seo": "node scripts/seo-audit.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

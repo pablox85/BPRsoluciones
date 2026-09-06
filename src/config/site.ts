@@ -1,11 +1,13 @@
+import { normalizeSiteUrl } from "@/lib/seo/site-url";
+
 export const siteConfig = {
   name: "BPR Soluciones",
-  domain: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bprsoluciones.com",
+  domain: normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
   description:
-    "Webs modernas, SEO tecnico, automatizacion e integraciones digitales para empresas que quieren convertir mas visitas en clientes.",
+    "Desarrollo web, automatización con inteligencia artificial y software a medida para empresas en Uruguay. Soluciones digitales para generar consultas y ahorrar tiempo.",
   whatsappUrl:
     process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/+598343651",
-  email: process.env.NEXT_PUBLIC_EMAIL ?? "hola@bprsoluciones.com",
+  email: process.env.NEXT_PUBLIC_EMAIL?.trim() || "bprsoluciones1@gmail.com",
   calendarUrl:
     process.env.NEXT_PUBLIC_CALENDAR_URL ?? "https://cal.com/bprsoluciones",
 };
@@ -21,22 +23,22 @@ export const services = [
   {
     name: "Starter",
     price: "USD 150",
-    description: "Landing simple, rapida, optimizada y analitica.",
-    features: ["Diseñada para vender mas", "Optimizada para Google", "Carga rapida"],
+    description: "Landing simple, rápida, optimizada y analítica.",
+    features: ["Diseñada para vender más", "Optimizada para Google", "Carga rápida"],
   },
   {
     name: "Business",
     price: "USD 450",
     description:
-      "Web corporativa con posiciniomiento en Google, secciones comerciales y analitica.",
-    features: ["Todo lo de Starter", "Arquitectura comercial", "Maximo rendimiento", "Medicion de resultados", "Comportamiento de usuarios"],
+      "Web corporativa con posicionamiento en Google, secciones comerciales y analítica.",
+    features: ["Todo lo de Starter", "Arquitectura comercial", "Máximo rendimiento", "Medición de resultados", "Comportamiento de usuarios"],
   },
   {
     name: "Premium",
     price: "USD 1000",
     description:
-      "Web completa con Poscicionamiento en Google, automatizacion, metricas y arquitectura escalable.",
-    features: ["Todo lo de Starte + Busines", "Automatizacion (IA)", "Sistema escalable"],
+      "Web completa con posicionamiento en Google, automatización, métricas y arquitectura escalable.",
+    features: ["Todo lo de Starter + Business", "Automatización (IA)", "Sistema escalable"],
   },
  {
   name: "A medida",
@@ -45,7 +47,7 @@ export const services = [
     "Si tu proyecto necesita algo único, diseñamos una solución adaptada a tu forma de trabajar.",
   features: [
     "Conecta tus herramientas",
-    "Personliza tus paneles",
+    "Personaliza tus paneles",
     "Automatiza con IA",
   ],
 },
@@ -135,11 +137,11 @@ export const differentiators = [
   },
   {
     title: "Automatización con IA",
-    description: "Responde mas rapido, genra mas ventas.",
+    description: "Responde más rápido, genera más ventas.",
   },
   {
     title: "Métricas reales",
-    description: "Medi visitas, comportamiento de usuarios con datos reales.",
+    description: "Medí visitas y el comportamiento de usuarios con datos reales.",
   },
   {
     title: "Arquitectura moderna y escalable",
@@ -183,38 +185,38 @@ export const processSteps = [
 export const blogPosts = [
   {
     slug: "seo-tecnico-desde-el-dia-uno",
-    title: "Por que tu empresa necesita SEO tecnico desde el dia uno",
+    title: "Por qué tu empresa necesita SEO técnico desde el día uno",
     category: "SEO técnico",
     excerpt:
       "La base de tu web es lo que permite que Google la encuentre, la entienda y la muestre a más personas.",
   },
       {
     slug: "seo-score",
-    title: "Seo Score: que es y como usarlo para mejorar tu posicionamiento",
+    title: "SEO Score: qué es y cómo usarlo para mejorar tu posicionamiento",
     category: "SEO y posicionamiento",
     excerpt:
-      "Una herramienta gratuita que te permite medir la salud SEO de tu web y detectar problemas de indexacion, velocidad y optimizacion.",
+      "Qué mide un SEO Score y cómo interpretar sus resultados para priorizar mejoras de indexación, velocidad y contenido en tu web.",
   },
   {
     slug: "web-rapida-vs-web-linda",
-    title: "Web rapida vs web linda: cual convierte mas?",
-    category: "Performance y conversion",
+    title: "Web rápida vs. web linda: ¿cuál convierte más?",
+    category: "Performance y conversión",
     excerpt:
       "El diseño atrae, la velocidad y los datos hacen que funcione.",
   },
   {
     slug: "automatizacion-ia-pymes-primeros-pasos",
-    title: "Automatizacion con IA para pymes: primeros pasos",
+    title: "Automatización con IA para pymes: primeros pasos",
     category: "Automatización e IA",
     excerpt:
-      "Como detectar tareas repetitivas, conectar herramientas y medir el impacto antes de escalar.",
+      "Cómo detectar tareas repetitivas, conectar herramientas y medir el impacto antes de escalar.",
   },
 ];
 
 export const blogArticles = [
   {
     slug: "seo-tecnico-desde-el-dia-uno",
-    title: "Por que tu empresa necesita SEO tecnico desde el dia uno",
+    title: "Por qué tu empresa necesita SEO técnico desde el día uno",
     category: "SEO técnico",
     readingTime: "4 min de lectura",
     lead:
@@ -247,7 +249,7 @@ export const blogArticles = [
   },
   {
     slug: "seo-score",
-    title: "Seo Score: que es y como usarlo para mejorar tu posicionamiento",
+    title: "SEO Score: qué es y cómo usarlo para mejorar tu posicionamiento",
     category: "SEO y posicionamiento",
     readingTime: "3 min de lectura",
     lead:
@@ -276,12 +278,12 @@ export const blogArticles = [
       },
     ],
     conclusion:
-      "Un SEO Score es un tablero de control, no el destino. Usalo para detectar fricciones, priorizar correcciones y comprobar que tu sitio sigue preparado para ser encontrado y convertir visitas.",
+      "Un SEO Score es un tablero de control, no el destino. Úsalo para detectar fricciones, priorizar correcciones y comprobar que tu sitio sigue preparado para ser encontrado y convertir visitas.",
   },
   {
     slug: "web-rapida-vs-web-linda",
-    title: "Web rapida vs web linda: cual convierte mas?",
-    category: "Performance y conversion",
+    title: "Web rápida vs. web linda: ¿cuál convierte más?",
+    category: "Performance y conversión",
     readingTime: "4 min de lectura",
     lead:
       "Una web atractiva puede captar atención. Pero si tarda en cargar, confunde o no guía a la persona hacia una acción, esa atención se pierde antes de convertirse en una consulta.",
@@ -313,7 +315,7 @@ export const blogArticles = [
   },
   {
     slug: "automatizacion-ia-pymes-primeros-pasos",
-    title: "Automatizacion con IA para pymes: primeros pasos",
+    title: "Automatización con IA para pymes: primeros pasos",
     category: "Automatización e IA",
     readingTime: "4 min de lectura",
     lead:

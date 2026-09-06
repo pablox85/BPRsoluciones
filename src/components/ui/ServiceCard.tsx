@@ -53,7 +53,7 @@ export function ServiceCard({
       >
         <div className="min-w-0">
           <h3 className="font-heading text-xl font-semibold text-white">{name}</h3>
-          <p className="mt-2 font-heading text-2xl font-semibold text-neon-mint">
+          <p className="mt-2 font-heading text-[clamp(1.25rem,6vw,1.5rem)] font-semibold text-neon-mint">
             {price}
           </p>
         </div>

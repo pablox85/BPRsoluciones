@@ -93,7 +93,7 @@ export function DifferentiatorsSection() {
     <Section className="pt-0">
       <SectionHeader
         eyebrow="Diferenciales"
-        title="Pensado para conversion de clientes, no solo para verse bien"
+        title="Pensado para conversión de clientes, no solo para verse bien"
       />
       <div
         ref={sectionRef}
@@ -124,7 +124,7 @@ export function DifferentiatorsSection() {
               >
                 <span className="flex min-w-0 flex-1 items-center gap-4">
                   <Icon className="size-6 shrink-0 text-neon-cyan" aria-hidden="true" />
-                  <span className="min-w-0 font-heading text-lg font-semibold text-white">
+                  <span className="min-w-0 break-words font-heading text-lg font-semibold text-white">
                     {item.title}
                   </span>
                 </span>
