@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 
 export function AnalyticsScripts() {
   const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID;
@@ -20,6 +21,7 @@ export function AnalyticsScripts() {
 
       {gaId ? (
         <>
+          <PageViewTracker />
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
             strategy="afterInteractive"
