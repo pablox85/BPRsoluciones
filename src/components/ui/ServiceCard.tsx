@@ -1,4 +1,5 @@
 import { Check, ChevronDown } from "lucide-react";
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import { cardSurfaceClass } from "@/components/ui/Card";
 
@@ -13,6 +14,7 @@ type ServiceCardProps = {
   isRevealed?: boolean;
   animationSettled?: boolean;
   onToggle?: () => void;
+  detailsHref?: string;
 };
 
 export function ServiceCard({
@@ -26,6 +28,7 @@ export function ServiceCard({
   isRevealed = true,
   animationSettled = true,
   onToggle,
+  detailsHref,
 }: ServiceCardProps) {
   return (
     <article
@@ -89,6 +92,14 @@ export function ServiceCard({
               </li>
             ))}
           </ul>
+          {detailsHref ? (
+            <Link
+              href={detailsHref}
+              className="mt-5 inline-flex text-sm font-semibold text-neon-mint transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-mint/70"
+            >
+              Ver plan completo
+            </Link>
+          ) : null}
         </div>
       </div>
     </article>

@@ -6,7 +6,7 @@ export const siteConfig = {
   description:
     "Desarrollo web, automatización con inteligencia artificial y software a medida para empresas en Uruguay. Soluciones digitales para generar consultas y ahorrar tiempo.",
   whatsappUrl:
-    process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/+598343651",
+    process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/59891343651",
   email: process.env.NEXT_PUBLIC_EMAIL?.trim() || "bprsoluciones1@gmail.com",
   calendarUrl:
     process.env.NEXT_PUBLIC_CALENDAR_URL ?? "https://cal.com/bprsoluciones",

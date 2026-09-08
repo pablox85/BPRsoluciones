@@ -5,7 +5,18 @@ import { services } from "@/config/site";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 
-export function ServicesSection() {
+const serviceDetailIds: Record<string, string> = {
+  Starter: "starter",
+  Business: "business",
+  Premium: "premium",
+  "A medida": "soluciones-a-medida",
+};
+
+type ServicesSectionProps = {
+  showDetailsLinks?: boolean;
+};
+
+export function ServicesSection({ showDetailsLinks = false }: ServicesSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [animationSettled, setAnimationSettled] = useState(false);
@@ -106,6 +117,11 @@ export function ServicesSection() {
             animationSettled={animationSettled}
             onToggle={() =>
               setOpenIndex((current) => (current === index ? null : index))
+            }
+            detailsHref={
+              showDetailsLinks
+                ? `/servicios?plan=${serviceDetailIds[service.name]}#${serviceDetailIds[service.name]}`
+                : undefined
             }
             featured={service.name === "Business"}
           />

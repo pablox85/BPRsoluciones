@@ -18,7 +18,7 @@ export default function HomePage() {
     <div className="page-theme page-theme-home">
       <HeroSection />
       <TrustBar />
-      <ServicesSection />
+      <ServicesSection showDetailsLinks />
       <DifferentiatorsSection />
       <ProcessSection />
       <CTASection />

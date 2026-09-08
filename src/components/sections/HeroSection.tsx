@@ -11,7 +11,7 @@ export function HeroSection() {
           <p className="eyebrow mb-5 inline-flex border-l-2 border-neon-mint pl-3">
             BPR soluciones digitales
           </p>
-          <h1 className="max-w-2xl font-heading text-3xl font-semibold leading-[0.98] tracking-[-0.055em] text-white sm:text-4xl lg:text-5xl">
+          <h1 className="max-w-2xl font-heading text-3xl font-semibold leading-[1.2] tracking-[-0.055em] text-white sm:text-4xl lg:text-5xl">
             <span className="block">Desarrollo web en Uruguay.</span>
             <span className="block">Posicionamiento en Google.</span>
             <span className="block">Tecnología que impulsa tu negocio.</span>

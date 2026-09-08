@@ -8,14 +8,20 @@ import { ButtonLink } from "@/components/ui/Buttons";
 import { cardSurfaceClass } from "@/components/ui/Card";
 import { Section, SectionHeader } from "@/components/ui/Section";
 
+const getWhatsAppInquiryUrl = (serviceName: string) => {
+  const url = new URL(siteConfig.whatsappUrl);
+  url.searchParams.set(
+    "text",
+    `Hola, quiero consultar por el servicio ${serviceName}.`,
+  );
+
+  return url.toString();
+};
+
 export function ServiceDetailsSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [animationSettled, setAnimationSettled] = useState(false);
-  const scrollAnchorRef = useRef<{
-    button: HTMLButtonElement;
-    documentTop: number;
-    top: number;
-  } | null>(null);
+  const pendingScrollRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => setAnimationSettled(true), 900);
@@ -24,50 +30,38 @@ export function ServiceDetailsSection() {
   }, []);
 
   useEffect(() => {
-    const anchor = scrollAnchorRef.current;
+    const planId = new URLSearchParams(window.location.search).get("plan");
+    const index = serviceDetails.findIndex(
+      (service) => service.name.toLowerCase().replaceAll(" ", "-") === planId,
+    );
 
-    if (!anchor) {
-      return;
-    }
+    if (index < 0) return;
 
-    const restoreAnchor = () => {
-      const currentAnchor = scrollAnchorRef.current;
+    const frameId = window.requestAnimationFrame(() => setOpenIndex(index));
 
-      if (!currentAnchor) {
-        return;
-      }
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
 
-      const root = document.documentElement;
-      const previousScrollBehavior = root.style.scrollBehavior;
-      const targetScrollY = currentAnchor.documentTop - currentAnchor.top;
+  useEffect(() => {
+    const card = pendingScrollRef.current;
+    if (!card) return;
 
-      root.style.scrollBehavior = "auto";
-      window.scrollTo({ top: Math.max(0, targetScrollY), left: 0, behavior: "auto" });
-      window.setTimeout(() => {
-        root.style.scrollBehavior = previousScrollBehavior;
-      }, 100);
-    };
+    const timeoutId = window.setTimeout(() => {
+      card.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+        block: "start",
+      });
+      pendingScrollRef.current = null;
+    }, 320);
 
-    const frameId = window.requestAnimationFrame(restoreAnchor);
-    const settleTimeoutId = window.setTimeout(() => {
-      restoreAnchor();
-      scrollAnchorRef.current = null;
-    }, 1000);
-
-    return () => {
-      window.cancelAnimationFrame(frameId);
-      window.clearTimeout(settleTimeoutId);
-    };
+    return () => window.clearTimeout(timeoutId);
   }, [openIndex]);
 
   const toggleService = (index: number, event: MouseEvent<HTMLButtonElement>) => {
-    const button = event.currentTarget;
-
-    scrollAnchorRef.current = {
-      button,
-      documentTop: button.getBoundingClientRect().top + window.scrollY,
-      top: button.getBoundingClientRect().top,
-    };
+    pendingScrollRef.current =
+      openIndex === index ? null : event.currentTarget.closest("article");
     setOpenIndex((current) => (current === index ? null : index));
   };
 
@@ -85,7 +79,7 @@ export function ServiceDetailsSection() {
           <article
             key={service.name}
             id={service.name.toLowerCase().replaceAll(" ", "-")}
-            className={`${cardSurfaceClass} p-0 transition hover:border-neon-cyan/30 hover:bg-ink-850 ${
+            className={`scroll-mt-28 ${cardSurfaceClass} p-0 transition hover:border-neon-cyan/30 hover:bg-ink-850 ${
               animationSettled ? "opacity-100" : "stagger-card is-visible"
             } ${
               openIndex === index
@@ -162,11 +156,11 @@ export function ServiceDetailsSection() {
                       ))}
                     </ul>
                     <ButtonLink
-                      href={siteConfig.calendarUrl}
+                      href={getWhatsAppInquiryUrl(service.name)}
                       variant="primary"
                       className="mt-6 w-full gap-2 sm:w-72"
                     >
-                      Consultar {service.name}
+                      Consultar por WhatsApp
                       <ArrowUpRight className="size-4" aria-hidden="true" />
                     </ButtonLink>
                   </div>

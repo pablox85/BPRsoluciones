@@ -7,15 +7,15 @@ import { siteConfig } from "@/config/site";
 
 const BUTTON_SIZE = 56;
 const MARGIN = 16;
+const DEFAULT_BOTTOM_PERCENT = 20;
 const STORAGE_KEY = "bpr-whatsapp-position";
-const MOBILE_MENU_EVENT = "bpr-mobile-menu-change";
 const FLOATING_WHATSAPP_STYLE =
   "fixed z-0 inline-flex size-14 touch-none select-none items-center justify-center rounded-full border border-[#25D366]/70 bg-[#25D366]/10 text-[#25D366] shadow-[0_8px_30px_rgba(37,211,102,0.25)] backdrop-blur-md hover:bg-[#25D366]/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/80";
 
 type Position = { x: number; y: number };
 type Side = "left" | "right";
 type SafeArea = { top: number; right: number; bottom: number; left: number };
-type SavedPosition = { side: Side; bottom: number };
+type SavedPosition = { side: Side; bottomPercent: number };
 
 const readSafeArea = (): SafeArea => {
   const probe = document.createElement("div");
@@ -39,16 +39,27 @@ const readSavedPosition = (): SavedPosition | null => {
     const saved = window.localStorage.getItem(STORAGE_KEY);
     if (!saved) return null;
 
-    const position = JSON.parse(saved) as SavedPosition;
-    if (
-      (position.side !== "left" && position.side !== "right") ||
-      !Number.isFinite(position.bottom) ||
-      position.bottom < 0
-    ) {
+    const position = JSON.parse(saved) as {
+      side?: unknown;
+      bottom?: unknown;
+      bottomPercent?: unknown;
+    };
+
+    if (position.side !== "left" && position.side !== "right") return null;
+
+    let bottomPercent: number;
+    if (typeof position.bottomPercent === "number") {
+      bottomPercent = position.bottomPercent;
+    } else if (typeof position.bottom === "number") {
+      // Migrate the previous pixel-based preference when present.
+      bottomPercent = (position.bottom / window.innerHeight) * 100;
+    } else {
       return null;
     }
 
-    return position;
+    if (!Number.isFinite(bottomPercent) || bottomPercent < 0) return null;
+
+    return { side: position.side, bottomPercent };
   } catch {
     return null;
   }
@@ -57,10 +68,9 @@ const readSavedPosition = (): SavedPosition | null => {
 export function FloatingWhatsApp() {
   const [position, setPosition] = useState<Position | null>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const safeAreaRef = useRef<SafeArea>({ top: 0, right: 0, bottom: 0, left: 0 });
   const sideRef = useRef<Side>("right");
-  const bottomRef = useRef(MARGIN);
+  const bottomPercentRef = useRef(DEFAULT_BOTTOM_PERCENT);
 
   const drag = useRef({
     active: false,
@@ -88,8 +98,9 @@ export function FloatingWhatsApp() {
     };
   }, [getBounds]);
 
-  const getPositionForSide = useCallback((side: Side, bottom: number): Position => {
+  const getPositionForSide = useCallback((side: Side, bottomPercent: number): Position => {
     const bounds = getBounds();
+    const bottom = (window.innerHeight * bottomPercent) / 100 + safeAreaRef.current.bottom;
 
     return clampPosition(
       side === "left" ? bounds.left : bounds.right,
@@ -97,9 +108,9 @@ export function FloatingWhatsApp() {
     );
   }, [clampPosition, getBounds]);
 
-  const savePosition = (side: Side, bottom: number) => {
+  const savePosition = (side: Side, bottomPercent: number) => {
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ side, bottom }));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ side, bottomPercent }));
     } catch {
       // Storage can be unavailable in private browsing modes.
     }
@@ -110,8 +121,8 @@ export function FloatingWhatsApp() {
       safeAreaRef.current = readSafeArea();
       const savedPosition = readSavedPosition();
       sideRef.current = savedPosition?.side ?? "right";
-      bottomRef.current = savedPosition?.bottom ?? MARGIN + safeAreaRef.current.bottom;
-      setPosition(getPositionForSide(sideRef.current, bottomRef.current));
+      bottomPercentRef.current = savedPosition?.bottomPercent ?? DEFAULT_BOTTOM_PERCENT;
+      setPosition(getPositionForSide(sideRef.current, bottomPercentRef.current));
     };
 
     const frameId = window.requestAnimationFrame(initialize);
@@ -123,7 +134,7 @@ export function FloatingWhatsApp() {
     const handleResize = () => {
       safeAreaRef.current = readSafeArea();
       setPosition((current) =>
-        current ? getPositionForSide(sideRef.current, bottomRef.current) : current,
+        current ? getPositionForSide(sideRef.current, bottomPercentRef.current) : current,
       );
     };
 
@@ -135,18 +146,6 @@ export function FloatingWhatsApp() {
       window.visualViewport?.removeEventListener("resize", handleResize);
     };
   }, [getPositionForSide]);
-
-  useEffect(() => {
-    const handleMobileMenuChange = (event: Event) => {
-      setIsMobileMenuOpen(
-        (event as CustomEvent<{ open: boolean }>).detail.open,
-      );
-    };
-
-    window.addEventListener(MOBILE_MENU_EVENT, handleMobileMenuChange);
-
-    return () => window.removeEventListener(MOBILE_MENU_EVENT, handleMobileMenuChange);
-  }, []);
 
   const finishDrag = (element: HTMLAnchorElement) => {
     if (!drag.current.active) return;
@@ -165,12 +164,17 @@ export function FloatingWhatsApp() {
         current.x + BUTTON_SIZE / 2 < window.innerWidth / 2 ? "left" : "right";
       const nextPosition = getPositionForSide(
         side,
-        window.innerHeight - current.y - BUTTON_SIZE,
+        ((window.innerHeight - current.y - BUTTON_SIZE - safeAreaRef.current.bottom) /
+          window.innerHeight) *
+          100,
       );
 
       sideRef.current = side;
-      bottomRef.current = window.innerHeight - nextPosition.y - BUTTON_SIZE;
-      savePosition(side, bottomRef.current);
+      bottomPercentRef.current =
+        ((window.innerHeight - nextPosition.y - BUTTON_SIZE - safeAreaRef.current.bottom) /
+          window.innerHeight) *
+        100;
+      savePosition(side, bottomPercentRef.current);
 
       return nextPosition;
     });
@@ -231,8 +235,7 @@ export function FloatingWhatsApp() {
         }
       }}
       data-floating-whatsapp
-      className={`${FLOATING_WHATSAPP_STYLE} ${isMobileMenuOpen ? "pointer-events-none scale-95 opacity-35 blur-[2px]" : ""} ${
-        isDragging
+      className={`${FLOATING_WHATSAPP_STYLE} ${isDragging
           ? "transition-none"
           : "transition-[left,top,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
       }`}
