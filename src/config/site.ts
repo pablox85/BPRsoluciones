@@ -184,6 +184,13 @@ export const processSteps = [
 
 export const blogPosts = [
   {
+    slug: "web-rapida-vs-web-linda",
+    title: "Web rápida vs. web linda: ¿cuál convierte más?",
+    category: "Performance y conversión",
+    excerpt:
+      "El diseño atrae, la velocidad y los datos hacen que funcione.",
+  },
+  {
     slug: "seo-tecnico-desde-el-dia-uno",
     title: "Por qué tu empresa necesita SEO técnico desde el día uno",
     category: "SEO técnico",
@@ -196,13 +203,6 @@ export const blogPosts = [
     category: "SEO y posicionamiento",
     excerpt:
       "Qué mide un SEO Score y cómo interpretar sus resultados para priorizar mejoras de indexación, velocidad y contenido en tu web.",
-  },
-  {
-    slug: "web-rapida-vs-web-linda",
-    title: "Web rápida vs. web linda: ¿cuál convierte más?",
-    category: "Performance y conversión",
-    excerpt:
-      "El diseño atrae, la velocidad y los datos hacen que funcione.",
   },
   {
     slug: "automatizacion-ia-pymes-primeros-pasos",

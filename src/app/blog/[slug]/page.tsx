@@ -15,6 +15,11 @@ const articleMetadata: Record<
   (typeof blogArticles)[number]["slug"],
   { title: string; description: string }
 > = {
+    "web-rapida-vs-web-linda": {
+    title: "Web rápida o web linda: ¿qué convierte más?",
+    description:
+      "Descubrí cómo combinar diseño, velocidad y una navegación clara para mejorar la experiencia móvil y convertir más visitas en consultas para tu empresa.",
+  },
   "seo-tecnico-desde-el-dia-uno": {
     title: "SEO técnico desde el primer día",
     description:
@@ -24,11 +29,6 @@ const articleMetadata: Record<
     title: "SEO Score: qué es y cómo aprovecharlo",
     description:
       "Conocé qué mide un SEO Score, cómo interpretar sus resultados y cómo priorizar mejoras técnicas para que tu web sea más fácil de encontrar y usar.",
-  },
-  "web-rapida-vs-web-linda": {
-    title: "Web rápida o web linda: ¿qué convierte más?",
-    description:
-      "Descubrí cómo combinar diseño, velocidad y una navegación clara para mejorar la experiencia móvil y convertir más visitas en consultas para tu empresa.",
   },
   "automatizacion-ia-pymes-primeros-pasos": {
     title: "Automatización con IA para pymes: cómo empezar",
