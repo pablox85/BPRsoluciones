@@ -35,6 +35,16 @@ const articleMetadata: Record<
     description:
       "Aprendé a identificar tareas repetitivas, conectar herramientas y medir resultados para empezar a automatizar procesos con IA en tu pyme, paso a paso.",
   },
+  "cuanto-cuesta-pagina-web-uruguay": {
+    title: "Cuánto cuesta una página web en Uruguay",
+    description:
+      "Conocé qué define el precio de una página web en Uruguay, qué conviene incluir y cómo elegir un alcance alineado con los objetivos de tu empresa.",
+  },
+  "como-elegir-desarrollo-web-uruguay": {
+    title: "Cómo elegir desarrollo web en Uruguay",
+    description:
+      "Una guía para elegir un servicio de desarrollo web en Uruguay según objetivos comerciales, alcance, soporte y posibilidades de crecimiento.",
+  },
 };
 
 const getArticle = (slug: string) =>

@@ -5,6 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     "",
     "/servicios",
+    "/desarrollo-web-uruguay",
     "/blog",
     "/contacto",
     ...blogArticles.map((article) => `/blog/${article.slug}`),

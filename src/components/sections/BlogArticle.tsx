@@ -68,6 +68,10 @@ export function BlogArticle({ article }: { article: BlogArticleData }) {
           <Link href="/servicios" className="text-neon-mint underline underline-offset-4">
             planes web y soluciones a medida
           </Link>{" "}
+          o nuestro enfoque de{" "}
+          <Link href="/desarrollo-web-uruguay" className="text-neon-mint underline underline-offset-4">
+            desarrollo web en Uruguay
+          </Link>{" "}
           o contanos qué necesitás.
         </p>
         <Link

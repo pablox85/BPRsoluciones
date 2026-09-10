@@ -15,6 +15,7 @@ type ServiceCardProps = {
   animationSettled?: boolean;
   onToggle?: () => void;
   detailsHref?: string;
+  id?: string;
 };
 
 export function ServiceCard({
@@ -29,10 +30,12 @@ export function ServiceCard({
   animationSettled = true,
   onToggle,
   detailsHref,
+  id,
 }: ServiceCardProps) {
   return (
     <article
-      className={`${cardSurfaceClass} min-w-0 p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850 sm:p-6 ${
+      id={id}
+      className={`scroll-mt-36 ${cardSurfaceClass} min-w-0 p-5 transition hover:border-neon-cyan/30 hover:bg-ink-850 sm:p-6 ${
         animationSettled ? "opacity-100" : "stagger-card"
       } ${
         isRevealed && !animationSettled ? "is-visible" : ""

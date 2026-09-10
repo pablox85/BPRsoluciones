@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 import type { CSSProperties, MouseEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 import { serviceDetails, siteConfig } from "@/config/site";
@@ -16,6 +17,13 @@ const getWhatsAppInquiryUrl = (serviceName: string) => {
   );
 
   return url.toString();
+};
+
+const homePlanIds: Record<string, string> = {
+  Starter: "starter",
+  Business: "business",
+  Premium: "premium",
+  "Soluciones a medida": "a-medida",
 };
 
 export function ServiceDetailsSection() {
@@ -69,10 +77,16 @@ export function ServiceDetailsSection() {
     <Section className="pt-10 sm:pt-14 lg:pt-16">
       <SectionHeader
         eyebrow="Servicios"
-        title="Planes web y software a medida en Uruguay"
-        text="Compará lo que incluye cada plan de desarrollo web. También creamos automatizaciones con IA, integraciones y software a medida para los procesos de tu empresa."
+        title="Páginas web económicas en Uruguay para hacer crecer tu negocio"
+        text="Compará planes de páginas web desde USD 150 y elegí el que mejor se adapta a tu empresa. Si estás buscando páginas web baratas en Uruguay, te ayudamos a encontrar una opción clara, profesional y preparada para crecer. También creamos automatizaciones con IA, integraciones y software a medida."
         heading="h1"
       />
+      <p className="-mt-6 mb-10 max-w-3xl text-sm leading-7 text-zinc-400 sm:text-base">
+        ¿Querés conocer nuestro enfoque? Visitá la página de{" "}
+        <Link href="/desarrollo-web-uruguay" className="text-neon-mint underline underline-offset-4">
+          desarrollo web en Uruguay
+        </Link>.
+      </p>
 
       <div className="grid gap-5">
         {serviceDetails.map((service, index) => (
@@ -155,14 +169,22 @@ export function ServiceDetailsSection() {
                         </li>
                       ))}
                     </ul>
-                    <ButtonLink
-                      href={getWhatsAppInquiryUrl(service.name)}
-                      variant="primary"
-                      className="mt-6 w-full gap-2 sm:w-72"
-                    >
-                      Consultar por WhatsApp
-                      <ArrowUpRight className="size-4" aria-hidden="true" />
-                    </ButtonLink>
+                    <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+                      <ButtonLink
+                        href={getWhatsAppInquiryUrl(service.name)}
+                        variant="primary"
+                        className="w-full gap-2 sm:w-72"
+                      >
+                        Consultar por WhatsApp
+                        <ArrowUpRight className="size-4" aria-hidden="true" />
+                      </ButtonLink>
+                      <Link
+                        href={`/?plan=${homePlanIds[service.name]}#plan-${homePlanIds[service.name]}`}
+                        className="inline-flex min-h-11 items-center text-sm font-semibold text-neon-mint underline underline-offset-4 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-mint/70"
+                      >
+                        Ver este plan en Inicio
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

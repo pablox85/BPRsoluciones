@@ -15,6 +15,7 @@ export const siteConfig = {
 export const navLinks = [
   { href: "/", label: "Inicio" },
   { href: "/servicios", label: "Servicios" },
+  { href: "/desarrollo-web-uruguay", label: "Desarrollo web" },
   { href: "/blog", label: "Blog" },
   { href: "/contacto", label: "Contacto" },
 ];
@@ -211,6 +212,20 @@ export const blogPosts = [
     excerpt:
       "Cómo detectar tareas repetitivas, conectar herramientas y medir el impacto antes de escalar.",
   },
+  {
+    slug: "cuanto-cuesta-pagina-web-uruguay",
+    title: "Cuánto cuesta una página web en Uruguay y qué conviene incluir",
+    category: "Páginas web para empresas",
+    excerpt:
+      "Qué cambia el precio de una web y cómo elegir un alcance útil para tu negocio sin pagar de más.",
+  },
+  {
+    slug: "como-elegir-desarrollo-web-uruguay",
+    title: "Cómo elegir un servicio de desarrollo web en Uruguay",
+    category: "Desarrollo web",
+    excerpt:
+      "Una guía para comparar propuestas de desarrollo web según objetivos, alcance y posibilidades de crecimiento.",
+  },
 ];
 
 export const blogArticles = [
@@ -345,5 +360,71 @@ export const blogArticles = [
     ],
     conclusion:
       "La IA no reemplaza una operación desordenada: la hace más rápida. Elegir un problema puntual, conectarlo bien y medir el resultado permite automatizar con criterio y construir sobre una base útil.",
+  },
+  {
+    slug: "cuanto-cuesta-pagina-web-uruguay",
+    title: "Cuánto cuesta una página web en Uruguay y qué conviene incluir",
+    category: "Páginas web para empresas",
+    readingTime: "4 min de lectura",
+    lead:
+      "El precio de una página web no depende solo de cuántas secciones tiene. También cambia según el objetivo comercial, el contenido, las integraciones y el nivel de acompañamiento que necesita tu empresa.",
+    sections: [
+      {
+        title: "Empezá por el objetivo, no por una lista de funciones",
+        paragraphs: [
+          "Una landing para presentar un servicio, generar consultas o validar una propuesta necesita una estructura distinta a una web corporativa con varias áreas, contenidos y procesos internos.",
+          "Definir qué querés lograr permite elegir un alcance útil. Así evitás pagar por herramientas que no vas a usar o quedarte corto con una web que no explica bien tu oferta.",
+        ],
+      },
+      {
+        title: "Qué suele estar incluido en una web profesional",
+        paragraphs: [
+          "Una base sólida contempla diseño adaptable a celulares, una estructura clara, velocidad de carga, canales de contacto y medición de visitas. Son elementos que ayudan a que el sitio funcione como una herramienta comercial.",
+          "También conviene revisar quién prepara los textos, las imágenes, el dominio y el soporte posterior. Tener esos puntos claros desde el inicio evita costos o demoras inesperadas.",
+        ],
+      },
+      {
+        title: "Elegí una inversión que acompañe el crecimiento",
+        paragraphs: [
+          "Una página económica puede ser un buen punto de partida si resuelve una necesidad concreta y está preparada para evolucionar. El precio más bajo no siempre representa el menor costo si después hay que rehacer todo.",
+          "Compará propuestas por lo que aportan a tu negocio: claridad para quien visita, facilidad para contactar, rendimiento y capacidad de sumar mejoras cuando haga falta.",
+        ],
+      },
+    ],
+    conclusion:
+      "La mejor inversión no es una cifra aislada: es una web alineada con tu objetivo actual, con un alcance transparente y una base que te permita crecer sin empezar de cero.",
+  },
+  {
+    slug: "como-elegir-desarrollo-web-uruguay",
+    title: "Cómo elegir un servicio de desarrollo web en Uruguay",
+    category: "Desarrollo web",
+    readingTime: "4 min de lectura",
+    lead:
+      "Elegir un servicio de desarrollo web implica mucho más que comparar diseños. Una buena decisión conecta lo que tu empresa quiere lograr con una experiencia clara para sus futuros clientes.",
+    sections: [
+      {
+        title: "Buscá una propuesta que entienda tu negocio",
+        paragraphs: [
+          "Antes de hablar de tecnología, una propuesta útil debería preguntar qué vendés, a quién querés llegar y qué acción esperás que realice quien visita la web.",
+          "Ese diagnóstico ayuda a ordenar prioridades: mostrar servicios, captar consultas, agendar reuniones, vender online o simplificar un proceso que hoy demanda tiempo del equipo.",
+        ],
+      },
+      {
+        title: "Revisá el alcance y las responsabilidades",
+        paragraphs: [
+          "Compará qué incluye cada alternativa: arquitectura de contenidos, diseño, versión móvil, carga inicial, analítica, SEO técnico e integraciones. Lo importante es saber qué se entrega y cómo se medirá que funciona.",
+          "También consultá por los tiempos, las instancias de revisión y el mantenimiento. Una comunicación clara durante el proyecto suele evitar que las decisiones importantes queden para el final.",
+        ],
+      },
+      {
+        title: "Pensá en el lanzamiento como el comienzo",
+        paragraphs: [
+          "Publicar la web es el inicio de una etapa de aprendizaje. Las visitas, las consultas y el comportamiento de las personas muestran dónde conviene mejorar el contenido o el recorrido.",
+          "Elegir una base rápida y ordenada facilita sumar nuevas páginas, contenidos y automatizaciones a medida que el negocio lo necesita.",
+        ],
+      },
+    ],
+    conclusion:
+      "Un buen desarrollo web combina criterio comercial, una ejecución técnica cuidada y una forma de trabajo transparente. Elegí una propuesta que te ayude a resolver lo que importa hoy y a construir lo que sigue.",
   },
 ] as const;

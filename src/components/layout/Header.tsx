@@ -14,7 +14,7 @@ export function Header() {
         <div className="mx-auto md:mx-0">
           <Logo />
         </div>
-        <nav aria-label="Principal" className="order-last grid w-full grid-cols-4 items-center gap-1 pb-2 md:order-none md:w-auto md:flex md:gap-1 md:pb-0">
+        <nav aria-label="Principal" className="order-last grid w-full grid-cols-3 items-center gap-1 pb-2 sm:grid-cols-5 md:order-none md:w-auto md:flex md:gap-1 md:pb-0">
           {navLinks.map((link) => (
             (() => {
               const isActive =

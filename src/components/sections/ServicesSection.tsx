@@ -12,6 +12,13 @@ const serviceDetailIds: Record<string, string> = {
   "A medida": "soluciones-a-medida",
 };
 
+const homeServiceIds: Record<string, string> = {
+  Starter: "starter",
+  Business: "business",
+  Premium: "premium",
+  "A medida": "a-medida",
+};
+
 type ServicesSectionProps = {
   showDetailsLinks?: boolean;
 };
@@ -84,6 +91,17 @@ export function ServicesSection({ showDetailsLinks = false }: ServicesSectionPro
   }, [revealed]);
 
   useEffect(() => {
+    const planId = new URLSearchParams(window.location.search).get("plan");
+    const index = services.findIndex((service) => homeServiceIds[service.name] === planId);
+
+    if (index < 0) return;
+
+    const frameId = window.requestAnimationFrame(() => setOpenIndex(index));
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
+
+  useEffect(() => {
     const closeOnOutsidePointer = (event: PointerEvent) => {
       const target = event.target;
 
@@ -110,6 +128,7 @@ export function ServicesSection({ showDetailsLinks = false }: ServicesSectionPro
         {services.map((service, index) => (
           <ServiceCard
             key={service.name}
+            id={`plan-${homeServiceIds[service.name]}`}
             {...service}
             index={index}
             isOpen={openIndex === index}
