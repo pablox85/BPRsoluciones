@@ -25,12 +25,14 @@ export const services = [
   {
     name: "Starter",
     price: "USD 150",
+    estimatedTime: "3 a 7 días hábiles",
     description: "Landing simple, rápida, optimizada y analítica.",
     features: ["Diseñada para vender más", "Optimizada para Google", "Carga rápida"],
   },
   {
     name: "Business",
     price: "USD 450",
+    estimatedTime: "2 a 3 semanas",
     description:
       "Web corporativa con posicionamiento en Google, secciones comerciales y analítica.",
     features: ["Todo lo de Starter", "Arquitectura comercial", "Máximo rendimiento", "Medición de resultados", "Comportamiento de usuarios"],
@@ -38,6 +40,7 @@ export const services = [
   {
     name: "Premium",
     price: "USD 1000",
+    estimatedTime: "4 a 6 semanas",
     description:
       "Web completa con posicionamiento en Google, automatización, métricas y arquitectura escalable.",
     features: ["Todo lo de Starter + Business", "Automatización (IA)", "Sistema escalable"],
@@ -45,6 +48,7 @@ export const services = [
  {
   name: "A medida",
   price: "Presupuesto",
+  estimatedTime: "A definir",
   description:
     "Si tu proyecto necesita algo único, diseñamos una solución adaptada a tu forma de trabajar.",
   features: [
@@ -59,6 +63,7 @@ export const serviceDetails = [
   {
   name: "Starter",
   price: "USD 150",
+  estimatedTime: "3 a 7 días hábiles",
   tagline: "Para lanzar tu negocio online de forma rápida y profesional.",
   description:
     "Ideal para profesionales, comercios y empresas que necesitan una página clara, rápida y preparada para generar consultas desde el primer día.",
@@ -75,6 +80,7 @@ export const serviceDetails = [
   {
   name: "Business",
   price: "USD 450",
+  estimatedTime: "2 a 3 semanas",
   tagline: "Para empresas que quieren generar más oportunidades desde su web.",
   description:
     "Ideal para negocios que buscan mostrar sus servicios de forma profesional, aparecer mejor en Google.",
@@ -92,6 +98,7 @@ export const serviceDetails = [
   {
   name: "Premium",
   price: "USD 1000",
+  estimatedTime: "4 a 6 semanas",
   tagline: "Para empresas que quieren crecer con una estrategia digital completa.",
   description:
     "Pensado para empresas que buscan atraer más clientes, automatizar tareas y tomar decisiones con datos reales, todo sobre una plataforma preparada para crecer.",
@@ -109,6 +116,7 @@ export const serviceDetails = [
   {
   name: "Soluciones a medida",
   price: "Proyecto",
+  estimatedTime: "A definir",
   tagline: "Para automatizar tareas y crear herramientas adaptadas a tu negocio.",
   description:
     "Si una web no alcanza, desarrollamos soluciones personalizadas para ahorrar tiempo, organizar la información y simplificar el trabajo de tu equipo.",

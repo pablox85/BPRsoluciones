@@ -48,5 +48,16 @@ export function buildMetadata({
       description,
       images: ["/opengraph-image"],
     },
+    icons: {
+      icon: [
+        {
+          url: "/images/favicon-bpr.png",
+          type: "image/png",
+          sizes: "512x512",
+        },
+      ],
+      shortcut: "/images/favicon-bpr.png",
+      apple: "/images/favicon-bpr.png",
+    },
   };
 }

@@ -46,7 +46,7 @@ test('twelve public pages: unique metadata, matching schema, correct canonicals'
     assert(html.includes(`property="og:url" content="${canonical}"`));
     assert(html.includes('name="twitter:card" content="summary_large_image"'));
     assert(!/<meta name="robots" content="[^"]*noindex/.test(html));
-    assert(html.includes('href="/icon.svg?'));
+    assert(html.includes('rel="icon" href="/images/favicon-bpr.png" type="image/png" sizes="512x512"'));
     const nodes = nodesOf(html);
     const organization = nodes.filter(n => n['@type'] === 'Organization');
     const website = nodes.filter(n => n['@type'] === 'WebSite');

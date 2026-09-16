@@ -6,6 +6,7 @@ import { cardSurfaceClass } from "@/components/ui/Card";
 type ServiceCardProps = {
   name: string;
   price: string;
+  estimatedTime?: string;
   description: string;
   features: string[];
   featured?: boolean;
@@ -21,6 +22,7 @@ type ServiceCardProps = {
 export function ServiceCard({
   name,
   price,
+  estimatedTime,
   description,
   features,
   featured = false,
@@ -62,6 +64,11 @@ export function ServiceCard({
           <p className="mt-2 font-heading text-[clamp(1.25rem,6vw,1.5rem)] font-semibold text-neon-mint">
             {price}
           </p>
+          {estimatedTime ? (
+            <p className="mt-2 text-xs font-semibold text-zinc-400">
+              Tiempo estimado: <span className="text-zinc-200">{estimatedTime}</span>
+            </p>
+          ) : null}
         </div>
         <span className="mt-1 flex shrink-0 items-center gap-2">
           <span className="whitespace-nowrap text-xs font-semibold text-zinc-500">

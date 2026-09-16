@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Clock3 } from "lucide-react";
 import Link from "next/link";
 import type { CSSProperties, MouseEvent } from "react";
 import { useEffect, useRef, useState } from "react";
@@ -117,6 +117,12 @@ export function ServiceDetailsSection() {
                   <span className="rounded-full border border-neon-mint/30 bg-neon-mint/10 px-3 py-1 text-xs font-bold text-neon-mint">
                     {service.price}
                   </span>
+                  {service.estimatedTime ? (
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-neon-cyan/25 bg-neon-cyan/[0.07] px-3 py-1 text-xs font-bold text-neon-cyan">
+                      <Clock3 className="size-3.5" aria-hidden="true" />
+                      {service.estimatedTime}
+                    </span>
+                  ) : null}
                 </div>
                 <span className="shrink-0 rounded-full border border-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-neon-cyan">
                   {openIndex === index ? "Ocultar" : "Ver detalle"}
