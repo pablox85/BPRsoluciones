@@ -22,14 +22,14 @@ test('JSON-LD escapes script termination without changing data', () => {
 
 const root = '.next/server/app/';
 const articles = readdirSync(root + 'blog').filter(f => f.endsWith('.html')).map(f => 'blog/' + f);
-const files = ['index.html', 'servicios.html', 'desarrollo-web-uruguay.html', 'blog.html', 'contacto.html', ...articles];
+const files = ['index.html', 'servicios.html', 'desarrollo-web-uruguay.html', 'preguntas-frecuentes.html', 'blog.html', 'contacto.html', ...articles];
 const nodesOf = html => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m => {
   const data = JSON.parse(m[1]);
   return data['@graph'] || [data];
 });
 
-test('eleven public pages: unique metadata, matching schema, correct canonicals', () => {
-  assert.equal(files.length, 11);
+test('twelve public pages: unique metadata, matching schema, correct canonicals', () => {
+  assert.equal(files.length, 12);
   const titles = new Set(), descriptions = new Set(), canonicals = new Set();
   for (const file of files) {
     const html = readFileSync(root + file, 'utf8');
@@ -55,7 +55,7 @@ test('eleven public pages: unique metadata, matching schema, correct canonicals'
     assert.equal(website[0].publisher['@id'], organization[0]['@id']);
     assert.equal(organization[0].areaServed.name, 'Uruguay');
     assert(!nodes.some(n => ['ProfessionalService', 'LocalBusiness'].includes(n['@type'])));
-    const faqPages = new Set(['index.html', 'servicios.html']);
+    const faqPages = new Set(['index.html', 'servicios.html', 'preguntas-frecuentes.html']);
     const faq = nodes.filter(n => n['@type'] === 'FAQPage');
     if (faqPages.has(file)) {
       assert.equal(faq.length, 1, file);
@@ -78,7 +78,7 @@ test('eleven public pages: unique metadata, matching schema, correct canonicals'
       assert(html.includes('property="og:type" content="article"'));
     } else assert(html.includes('property="og:type" content="website"'));
   }
-  for (const collection of [titles, descriptions, canonicals]) assert.equal(collection.size, 11);
+  for (const collection of [titles, descriptions, canonicals]) assert.equal(collection.size, 12);
 });
 
 test('Service offers match the visible plans and their actual anchors', () => {
@@ -106,8 +106,8 @@ test('hero reserves the real image aspect ratio and supplies responsive sizes', 
 test('sitemap and robots use canonical origin, contain only public pages', () => {
   const xml = readFileSync(root + 'sitemap.xml.body', 'utf8');
   const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
-  assert.equal(urls.length, 11);
-  assert.equal(new Set(urls).size, 11);
+  assert.equal(urls.length, 12);
+  assert.equal(new Set(urls).size, 12);
   assert(urls.every(url => new URL(url).origin === 'https://bprsoluciones.uy' && !url.includes('/api/')));
   assert(readFileSync(root + 'robots.txt.body', 'utf8').includes('Sitemap: https://bprsoluciones.uy/sitemap.xml'));
 });

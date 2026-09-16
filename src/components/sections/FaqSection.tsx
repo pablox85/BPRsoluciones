@@ -1,8 +1,10 @@
 import { ChevronDown } from "lucide-react";
+import type { CSSProperties } from "react";
 import { Section, SectionHeader } from "@/components/ui/Section";
 
 type FaqSectionProps = {
-  page: "home" | "services";
+  page: "home" | "services" | "faq";
+  heading?: "h1" | "h2";
 };
 
 export const faqsByPage = {
@@ -46,9 +48,43 @@ export const faqsByPage = {
     answer: "Te asesoramos con el dominio y podemos acompañar el mantenimiento posterior. Los sitios se construyen con una base técnica orientada a SEO para que Google pueda rastrearlos y entenderlos mejor.",
   },
   ],
+  faq: [
+  {
+    question: "¿Cuánto cuesta una página web en Uruguay?",
+    answer: "Nuestro plan Starter comienza en USD 150 para una landing profesional. El valor final depende de las secciones, funcionalidades, contenidos e integraciones que necesite tu negocio.",
+  },
+  {
+    question: "¿Qué incluye una página web profesional?",
+    answer: "Incluye diseño adaptable a celulares, una estructura clara para presentar tus servicios, llamados a la acción para generar consultas y una base técnica rápida y preparada para Google. El alcance exacto se define según el plan.",
+  },
+  {
+    question: "¿Cuánto demora crear una página web?",
+    answer: "Depende del alcance, los contenidos disponibles y las integraciones necesarias. Antes de comenzar definimos las etapas del proyecto y una fecha de entrega realista.",
+  },
+  {
+    question: "¿Necesito tener dominio y hosting antes de contratar?",
+    answer: "No. Podemos orientarte para elegir el dominio y hosting adecuados, configurarlos y dejar tu sitio publicado con una base técnica correcta.",
+  },
+  {
+    question: "¿La página web aparece en Google?",
+    answer: "Construimos sitios con una base técnica y de contenido orientada a SEO para que Google pueda rastrearlos y entenderlos. El posicionamiento orgánico depende de la competencia, las búsquedas y una estrategia sostenida en el tiempo.",
+  },
+  {
+    question: "¿La web funciona bien en celulares?",
+    answer: "Sí. Diseñamos cada sitio para que se adapte correctamente a celulares, tablets y computadoras, priorizando una navegación clara y tiempos de carga rápidos.",
+  },
+  {
+    question: "¿Puedo actualizar mi sitio después de publicarlo?",
+    answer: "Sí. Podemos acompañarte con mantenimiento, nuevas secciones, mejoras de contenido y ajustes técnicos después del lanzamiento, según las necesidades de tu empresa.",
+  },
+  {
+    question: "¿También desarrollan automatizaciones y software a medida?",
+    answer: "Sí. Además de páginas web, desarrollamos automatizaciones e integraciones para simplificar tareas, conectar herramientas y crear soluciones adaptadas a los procesos de tu negocio.",
+  },
+  ],
 } as const;
 
-export function FaqSection({ page }: FaqSectionProps) {
+export function FaqSection({ page, heading = "h2" }: FaqSectionProps) {
   const questions = faqsByPage[page];
 
   return (
@@ -57,18 +93,24 @@ export function FaqSection({ page }: FaqSectionProps) {
         eyebrow="Preguntas frecuentes"
         title="Lo que necesitás saber antes de crear tu web"
         text="Respuestas claras sobre inversión, tiempos y cómo preparamos tu sitio para crecer."
+        heading={heading}
       />
       <div className="grid gap-3">
-        {questions.map(({ question, answer }) => (
+        {questions.map(({ question, answer }, index) => (
           <details
             key={question}
-            className="group rounded-2xl border border-white/10 bg-ink-900/70 px-5 py-1 transition hover:border-neon-mint/35 sm:px-6"
+            className="faq-item scroll-reveal stagger-card group rounded-2xl border border-white/10 bg-ink-900/70 px-5 py-1 sm:px-6"
+            style={{ "--stagger-delay": `${index * 80}ms` } as CSSProperties}
           >
             <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3 font-heading text-base font-semibold text-white marker:content-none focus:outline-none">
               {question}
-              <ChevronDown className="size-5 shrink-0 text-neon-cyan transition group-open:rotate-180" aria-hidden="true" />
+              <ChevronDown className="faq-icon size-5 shrink-0 text-neon-cyan" aria-hidden="true" />
             </summary>
-            <div className="pb-5 text-sm leading-7 text-zinc-400 sm:text-base">{answer}</div>
+            <div className="faq-answer pb-5">
+              <p className="rounded-r-xl border-l-2 border-neon-cyan/60 bg-neon-cyan/[0.055] px-4 py-3 text-sm leading-7 text-zinc-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.025)] sm:text-base">
+                {answer}
+              </p>
+            </div>
           </details>
         ))}
       </div>

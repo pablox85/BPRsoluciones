@@ -145,7 +145,7 @@ textarea:focus-visible {
 }
 
 html:not(.motion-ready) .site-shell,
-html:not(.motion-ready) .site-shell *,
+html:not(.motion-ready) .site-shell *:not(.faq-item):not(.faq-answer):not(.faq-icon),
 html:not(.motion-ready) .site-shell *::before,
 html:not(.motion-ready) .site-shell *::after {
   animation: none !important;
@@ -183,6 +183,42 @@ html:not(.motion-ready) .site-shell *::after {
 
 .contact-success-dialog {
   animation: contactSuccessDialogIn 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.faq-item {
+  transition:
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.faq-item:hover {
+  border-color: rgba(0, 255, 198, 0.35);
+  transform: translateY(-1px);
+}
+
+.faq-item:not([open]) .faq-answer {
+  display: none;
+}
+
+.faq-item[open] {
+  border-color: rgba(0, 255, 198, 0.42);
+  background-color: rgba(16, 36, 38, 0.82);
+  box-shadow: 0 14px 36px rgba(0, 255, 198, 0.07), inset 0 1px 0 rgba(223, 255, 250, 0.04);
+}
+
+.faq-icon {
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), color 180ms ease;
+}
+
+.faq-item[open] .faq-icon {
+  color: #72e7ce;
+  transform: rotate(180deg);
+}
+
+.faq-item[open] .faq-answer {
+  animation: faqAnswerOpen 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .logo-sparkle {
@@ -294,6 +330,18 @@ html:not(.motion-ready) .site-shell *::after {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes faqAnswerOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

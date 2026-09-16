@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/servicios",
     "/desarrollo-web-uruguay",
+    "/preguntas-frecuentes",
     "/blog",
     "/contacto",
     ...blogArticles.map((article) => `/blog/${article.slug}`),

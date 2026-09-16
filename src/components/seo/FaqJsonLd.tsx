@@ -1,7 +1,7 @@
 import { faqsByPage } from "@/components/sections/FaqSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 
-export function FaqJsonLd({ page }: { page: "home" | "services" }) {
+export function FaqJsonLd({ page }: { page: "home" | "services" | "faq" }) {
   return (
     <JsonLd
       data={{
