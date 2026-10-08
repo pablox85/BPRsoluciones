@@ -7,6 +7,7 @@ import { siteConfig } from "@/config/site";
 
 const BUTTON_SIZE = 56;
 const MARGIN = 16;
+const FOOTER_GAP = 0;
 const DEFAULT_BOTTOM_PERCENT = 20;
 const STORAGE_KEY = "bpr-whatsapp-position";
 const FLOATING_WHATSAPP_STYLE =
@@ -67,6 +68,7 @@ const readSavedPosition = (): SavedPosition | null => {
 
 export function FloatingWhatsApp() {
   const [position, setPosition] = useState<Position | null>(null);
+  const [isFooterCoveringButtonArea, setIsFooterCoveringButtonArea] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const safeAreaRef = useRef<SafeArea>({ top: 0, right: 0, bottom: 0, left: 0 });
   const sideRef = useRef<Side>("right");
@@ -102,11 +104,27 @@ export function FloatingWhatsApp() {
     const bounds = getBounds();
     const bottom = (window.innerHeight * bottomPercent) / 100 + safeAreaRef.current.bottom;
 
+    const footer = document.querySelector("footer");
+    const footerRect = footer?.getBoundingClientRect();
+    const footerIsVisible = footerRect && footerRect.top < window.innerHeight && footerRect.bottom > 0;
+    const footerSafeBottom = footerIsVisible
+      ? footerRect.top - BUTTON_SIZE - FOOTER_GAP
+      : bounds.bottom;
+
     return clampPosition(
       side === "left" ? bounds.left : bounds.right,
-      window.innerHeight - BUTTON_SIZE - bottom,
+      Math.min(window.innerHeight - BUTTON_SIZE - bottom, footerSafeBottom),
     );
   }, [clampPosition, getBounds]);
+
+  const readFooterCoverage = useCallback(() => {
+    const footerRect = document.querySelector("footer")?.getBoundingClientRect();
+    return Boolean(
+      footerRect &&
+        footerRect.top < BUTTON_SIZE + FOOTER_GAP &&
+        footerRect.bottom > 0,
+    );
+  }, []);
 
   const savePosition = (side: Side, bottomPercent: number) => {
     try {
@@ -122,17 +140,31 @@ export function FloatingWhatsApp() {
       const savedPosition = readSavedPosition();
       sideRef.current = savedPosition?.side ?? "right";
       bottomPercentRef.current = savedPosition?.bottomPercent ?? DEFAULT_BOTTOM_PERCENT;
+      setIsFooterCoveringButtonArea(readFooterCoverage());
       setPosition(getPositionForSide(sideRef.current, bottomPercentRef.current));
     };
 
     const frameId = window.requestAnimationFrame(initialize);
 
     return () => window.cancelAnimationFrame(frameId);
-  }, [getPositionForSide]);
+  }, [getPositionForSide, readFooterCoverage]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsFooterCoveringButtonArea(readFooterCoverage());
+      setPosition((current) =>
+        current ? getPositionForSide(sideRef.current, bottomPercentRef.current) : current,
+      );
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [getPositionForSide, readFooterCoverage]);
 
   useEffect(() => {
     const handleResize = () => {
       safeAreaRef.current = readSafeArea();
+      setIsFooterCoveringButtonArea(readFooterCoverage());
       setPosition((current) =>
         current ? getPositionForSide(sideRef.current, bottomPercentRef.current) : current,
       );
@@ -145,7 +177,7 @@ export function FloatingWhatsApp() {
       window.removeEventListener("resize", handleResize);
       window.visualViewport?.removeEventListener("resize", handleResize);
     };
-  }, [getPositionForSide]);
+  }, [getPositionForSide, readFooterCoverage]);
 
   const finishDrag = (element: HTMLAnchorElement) => {
     if (!drag.current.active) return;
@@ -235,7 +267,7 @@ export function FloatingWhatsApp() {
         }
       }}
       data-floating-whatsapp
-      className={`${FLOATING_WHATSAPP_STYLE} ${isDragging
+      className={`${FLOATING_WHATSAPP_STYLE} ${isFooterCoveringButtonArea ? "pointer-events-none opacity-0" : ""} ${isDragging
           ? "transition-none"
           : "transition-[left,top,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
       }`}
