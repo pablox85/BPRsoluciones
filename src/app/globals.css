@@ -127,6 +127,31 @@ textarea:focus-visible {
     backdrop-filter: blur(18px);
   }
 
+  .mobile-secondary-nav {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-secondary-nav::before {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 38%;
+    height: 2px;
+    content: "";
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 255, 198, 1) 40%,
+      rgba(0, 217, 255, 0.95) 60%,
+      transparent
+    );
+    box-shadow: 0 0 14px rgba(0, 255, 198, 0.8), 0 0 26px rgba(0, 217, 255, 0.35);
+    animation: mobileNavDividerShimmer 2.7s ease-in-out infinite;
+  }
+
 .eyebrow {
     color: #72e7ce;
     font-size: 0.7rem;
@@ -342,6 +367,28 @@ html:not(.motion-ready) .site-shell *::after {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes mobileNavDividerShimmer {
+  0%,
+  12% {
+    transform: translateX(-115%);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  72% {
+    opacity: 1;
+  }
+
+  88%,
+  100% {
+    transform: translateX(345%);
+    opacity: 0;
   }
 }
 

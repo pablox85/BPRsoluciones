@@ -11,3 +11,6 @@ next-env.d.ts
 *.env.example
 src/capturas
 .seo-audit/
+.codex/
+.tools/
+.next/

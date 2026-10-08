@@ -64,9 +64,9 @@ export const serviceDetails = [
   name: "Starter",
   price: "USD 150",
   estimatedTime: "3 a 7 días hábiles",
-  tagline: "Para lanzar tu negocio online de forma rápida y profesional.",
+  tagline: "Para lanzar tu negocio online de forma rápida y profesional. ",
   description:
-    "Ideal para profesionales, comercios y empresas que necesitan una página clara, rápida y preparada para generar consultas desde el primer día.",
+      "Ideal para profesionales, comercios y empresas que necesitan una página clara, rápida y preparada para generar consultas desde el primer día.",
   includes: [
     "Diseño adaptable a celulares, tablets y PC",
     "Estructura pensada para generar más consultas",
