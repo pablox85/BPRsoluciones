@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { navLinks } from "@/config/site";
 import { Logo } from "@/components/ui/Logo";
 
@@ -10,12 +10,35 @@ export function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const mobileSecondaryLinks = navLinks.filter((link) =>
-    ["/servicios", "/blog"].includes(link.href),
+    ["/servicios", "/contacto"].includes(link.href),
   );
+
+  useLayoutEffect(() => {
+    const scrollRoot = document.documentElement;
+    const previousScrollBehavior = scrollRoot.style.scrollBehavior;
+
+    scrollRoot.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+
+    const frameId = window.requestAnimationFrame(() => {
+      scrollRoot.style.scrollBehavior = previousScrollBehavior;
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      scrollRoot.style.scrollBehavior = previousScrollBehavior;
+    };
+  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-50 px-3 pt-3 sm:px-5 lg:px-8">
-      <div className="relative mx-auto flex min-h-16 w-full max-w-7xl flex-wrap items-center justify-between gap-3 rounded-[1.35rem] border border-white/[0.1] bg-ink-950/80 px-3 shadow-[0_16px_45px_rgba(1,13,15,0.3),inset_0_1px_0_rgba(223,255,250,0.05)] backdrop-blur-2xl sm:px-5">
+      <div className="navbar-frame relative mx-auto flex min-h-16 w-full max-w-7xl flex-wrap items-center justify-between gap-3 rounded-[1.35rem] border border-white/[0.1] bg-ink-950/80 px-3 shadow-[0_16px_45px_rgba(1,13,15,0.3),inset_0_1px_0_rgba(223,255,250,0.05)] backdrop-blur-2xl sm:px-5">
+        <svg
+          aria-hidden="true"
+          className="navbar-border-beam pointer-events-none absolute inset-0 size-full"
+        >
+          <rect pathLength="1000" />
+        </svg>
         <div className="shrink-0">
           <Logo />
         </div>
@@ -62,7 +85,7 @@ export function Header() {
                   aria-current={isActive ? "page" : undefined}
                   className={`flex min-h-9 items-center justify-center rounded-xl border px-3 text-xs font-semibold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-mint focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 ${
                     isActive
-                      ? "border-neon-mint/35 bg-white/[0.08] text-white shadow-[inset_0_0_0_1px_rgba(114,231,206,0.22)]"
+                      ? "border-neon-mint/35 bg-white/[0.08] text-white shadow-[inset_0_0_0_1px_rgba(114,231,206,0.22)] hover:-translate-y-0.5 hover:bg-white/[0.12]"
                       : "border-white/10 bg-white/[0.03] text-zinc-400 hover:-translate-y-0.5 hover:border-neon-cyan/35 hover:bg-white/[0.06] hover:text-white"
                   }`}
                 >

@@ -3,6 +3,7 @@ import { Manrope, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { AnalyticsScripts } from "@/components/analytics/AnalyticsScripts";
 import { MotionPreload } from "@/components/animations/MotionPreload";
+import { PageContent } from "@/components/animations/PageContent";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -35,7 +36,7 @@ export default function RootLayout({
       <body className={`${manrope.variable} ${spaceGrotesk.variable} antialiased`}>
         <div className="site-shell">
           <Header />
-          <main>{children}</main>
+          <PageContent>{children}</PageContent>
           <Footer />
         </div>
         <FloatingWhatsApp />

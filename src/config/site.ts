@@ -7,6 +7,8 @@ export const siteConfig = {
     "Desarrollo web, automatización con inteligencia artificial y software a medida para empresas en Uruguay. Soluciones digitales para generar consultas y ahorrar tiempo.",
   whatsappUrl:
     process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/59891343651",
+  instagramUrl:
+    process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "https://instagram.com/bprsoluciones",
   email: process.env.NEXT_PUBLIC_EMAIL?.trim() || "bprsoluciones1@gmail.com",
   calendarUrl:
     process.env.NEXT_PUBLIC_CALENDAR_URL ?? "https://cal.com/bprsoluciones",
@@ -17,7 +19,6 @@ export const navLinks = [
   { href: "/servicios", label: "Servicios" },
   { href: "/desarrollo-web-uruguay", label: "Desarrollo web" },
   { href: "/preguntas-frecuentes", label: "FAQs" },
-  { href: "/blog", label: "Blog" },
   { href: "/contacto", label: "Contacto" },
 ];
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa6";
+import { ArrowUpRight, Mail } from "lucide-react";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa6";
 import { navLinks, siteConfig } from "@/config/site";
 import { Logo } from "@/components/ui/Logo";
 import { getEmailHref } from "@/lib/links";
@@ -30,10 +30,21 @@ export function Footer() {
             href={siteConfig.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex min-h-11 items-center gap-2 text-zinc-400 hover:text-white"
+            className="group flex min-h-11 items-center gap-2 text-zinc-400 hover:text-white"
           >
             <FaWhatsapp className="size-4" aria-hidden="true" />
-            WhatsApp
+            +59891343651
+            <ArrowUpRight className="size-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+          </Link>
+          <Link
+            href={siteConfig.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex min-h-11 items-center gap-2 text-zinc-400 hover:text-white"
+          >
+            <FaInstagram className="size-4" aria-hidden="true" />
+            Bpr Soluciones
+            <ArrowUpRight className="size-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
           </Link>
           <Link
             href={getEmailHref()}
