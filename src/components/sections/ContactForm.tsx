@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import { services, siteConfig } from "@/config/site";
 import { cardSurfaceClass } from "@/components/ui/Card";
-import { trackWhatsAppClick } from "@/lib/analytics";
 import { getEmailHref } from "@/lib/links";
 
 const inputClass =
@@ -89,7 +88,6 @@ export function ContactForm() {
             href={siteConfig.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackWhatsAppClick("contact_form")}
             className={`flex min-h-12 items-center gap-3 ${cardSurfaceClass} px-4 text-sm font-semibold text-white transition hover:border-neon-mint/40 hover:bg-ink-850`}
           >
             <FaWhatsapp className="size-5 text-neon-mint" aria-hidden="true" />
