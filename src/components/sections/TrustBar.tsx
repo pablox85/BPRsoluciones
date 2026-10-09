@@ -1,6 +1,13 @@
 "use client";
 
-import { Bot, ChevronDown, Gauge, LineChart, SearchCheck } from "lucide-react";
+import {
+  Bot,
+  ChevronDown,
+  FolderKanban,
+  Gauge,
+  LineChart,
+  SearchCheck,
+} from "lucide-react";
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import { cardSurfaceClass } from "@/components/ui/Card";
@@ -26,6 +33,11 @@ const items = [
     label: "Automatización IA",
     description: "Ahorra tiempo, responde antes, genera ventas",
     icon: Bot,
+  },
+  {
+    label: "Nuestros proyectos",
+    description: "Conocé algunos de los proyectos que desarrollamos para nuestros clientes.",
+    icon: FolderKanban,
   },
 ];
 
@@ -91,7 +103,7 @@ export function TrustBar() {
       aria-label="Confianza"
       className="px-4 sm:px-6 lg:px-8"
     >
-      <div className="mx-auto grid max-w-6xl grid-cols-2 items-start gap-3 md:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 items-start gap-3 md:grid-cols-5">
         {items.map(({ label, description, icon: Icon }, index) => (
           <article
             key={label}

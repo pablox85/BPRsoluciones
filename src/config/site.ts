@@ -18,6 +18,7 @@ export const navLinks = [
   { href: "/", label: "Inicio" },
   { href: "/servicios", label: "Servicios" },
   { href: "/desarrollo-web-uruguay", label: "Desarrollo web" },
+  { href: "/proyectos", label: "Nuestros proyectos" },
   { href: "/preguntas-frecuentes", label: "FAQs" },
   { href: "/contacto", label: "Contacto" },
 ];
