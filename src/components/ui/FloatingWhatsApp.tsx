@@ -251,6 +251,7 @@ export function FloatingWhatsApp() {
 
   return (
     <Link
+      id="whatspp_FL"
       href={siteConfig.whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
