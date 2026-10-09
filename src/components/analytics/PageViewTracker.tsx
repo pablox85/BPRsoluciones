@@ -3,20 +3,6 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-declare global {
-  interface Window {
-    gtag?: (
-      command: "event",
-      eventName: "page_view",
-      parameters: {
-        page_path: string;
-        page_location: string;
-        page_title: string;
-      },
-    ) => void;
-  }
-}
-
 export function PageViewTracker() {
   const pathname = usePathname();
   const previousPathnameRef = useRef(pathname);

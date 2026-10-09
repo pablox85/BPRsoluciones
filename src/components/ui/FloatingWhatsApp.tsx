@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { siteConfig } from "@/config/site";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const BUTTON_SIZE = 56;
 const MARGIN = 16;
@@ -264,7 +265,10 @@ export function FloatingWhatsApp() {
       onClick={(event) => {
         if (drag.current.moved) {
           event.preventDefault();
+          return;
         }
+
+        trackWhatsAppClick("floating");
       }}
       data-floating-whatsapp
       className={`${FLOATING_WHATSAPP_STYLE} ${isFooterCoveringButtonArea ? "pointer-events-none opacity-0" : ""} ${isDragging
