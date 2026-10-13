@@ -15,23 +15,30 @@ export const metadata: Metadata = buildMetadata({
 
 const projects = [
   {
-    category: "Desarrollo web",
+    category: "Desarrollo web - proyectos",
     title: "Sitios que convierten visitas en consultas",
     description:
       "Diseñamos páginas claras, rápidas y preparadas para que cada visita encuentre el próximo paso.",
-    backTitle: "Una web pensada para generar oportunidades.",
+    backTitle: "Webs pensadas para maximizar las ventas.",
     backDescription:
-      "Combinamos estrategia, diseño, rendimiento y SEO para que tu propuesta sea clara y cada visita tenga un próximo paso.",
+      "Empresas que contrataron nuestros servicios.",
+    backDescription2: "Lorem ipsum.",
+    href: "https://www.polarizadosdeleste.com/?utm_source=BprSoluciones",
+    linkLabel: "Polarizados del este",
     accent: "from-neon-mint/25 via-ink-850 to-ink-950",
   },
   {
     category: "Automatización",
     title: "Procesos más simples para tu equipo",
     description:
-      "Conectamos herramientas y automatizamos tareas repetitivas para ahorrar tiempo y responder mejor.",
+      "Conectamos herramientas y automatizamos tareas repetitivas.",
     backTitle: "Menos tareas repetitivas, más tiempo para crecer.",
-    backDescription:
-      "Automatizamos flujos y conectamos tus herramientas para reducir errores, agilizar respuestas y liberar tiempo de tu equipo.",
+    backDescription: "Somos partners de",
+    backDescription2: "Automatizá la atención al cliente, optimizá procesos y generá más oportunidades de venta con inteligencia artificial.",
+    highlightBackDescription2: true,
+    href: "https://meigahub.com/?utm_source=BprSoluciones",
+    linkLabel: "MeigaHub.com",
+    linkInline: true,
     accent: "from-neon-cyan/25 via-ink-850 to-ink-950",
   },
   {
@@ -42,6 +49,7 @@ const projects = [
     backTitle: "Tecnología que se adapta a tu forma de trabajar.",
     backDescription:
       "Diseñamos software a medida para resolver necesidades concretas y acompañar la evolución de tu negocio.",
+    backDescription2: "Lorem ipsum.",
     accent: "from-violet-400/20 via-ink-850 to-ink-950",
   },
 ];

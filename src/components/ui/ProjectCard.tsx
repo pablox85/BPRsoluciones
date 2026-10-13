@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { answerHighlightStyle } from "@/components/ui/answerHighlightStyle";
 
 type ProjectCardProps = {
   category: string;
@@ -8,6 +9,11 @@ type ProjectCardProps = {
   description: string;
   backTitle: string;
   backDescription: string;
+  backDescription2?: string;
+  highlightBackDescription2?: boolean;
+  href?: string;
+  linkLabel?: string;
+  linkInline?: boolean;
   accent: string;
   isFlipped: boolean;
   onFlip: () => void;
@@ -19,14 +25,32 @@ export function ProjectCard({
   description,
   backTitle,
   backDescription,
+  backDescription2,
+  highlightBackDescription2,
+  href,
+  linkLabel,
+  linkInline,
   accent,
   isFlipped,
   onFlip,
 }: ProjectCardProps) {
   const [hasFlipped, setHasFlipped] = useState(false);
+  const projectLink = href ? (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      tabIndex={isFlipped ? 0 : -1}
+      className={`pointer-events-auto relative z-10 text-sm font-semibold text-neon-mint underline underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neon-mint ${
+        linkInline ? "inline" : "mt-5 inline-flex"
+      }`}
+    >
+      {linkLabel ?? `Visitar ${new URL(href).hostname} ↗`}
+    </a>
+  ) : null;
 
   return (
-    <article className="group relative min-h-[22rem] [perspective:1200px]">
+    <article className="group relative min-h-[28rem] sm:min-h-[24rem] lg:min-h-[30rem] xl:min-h-[24rem] [perspective:1200px]">
       <button
         type="button"
         aria-label={isFlipped ? `Volver al frente de la tarjeta ${category}` : `Ver más sobre ${category}`}
@@ -40,7 +64,7 @@ export function ProjectCard({
         <span className="sr-only">{isFlipped ? "Volver al frente" : "Ver más detalles"}</span>
       </button>
       <div
-        className={`relative min-h-[22rem] transform-gpu [transform-style:preserve-3d] ${
+        className={`pointer-events-none relative z-20 min-h-[28rem] transform-gpu sm:min-h-[24rem] lg:min-h-[30rem] xl:min-h-[24rem] [transform-style:preserve-3d] ${
           hasFlipped
             ? isFlipped
               ? "project-card-flip-open"
@@ -50,8 +74,8 @@ export function ProjectCard({
           isFlipped ? "[transform:rotateY(180deg)]" : ""
         }`}
       >
-        <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 bg-ink-900/70 shadow-card transition group-hover:-translate-y-1 group-hover:border-neon-cyan/35 [backface-visibility:hidden]">
-          <div className={`flex min-h-48 items-end bg-gradient-to-br ${accent} p-6`}>
+        <div aria-hidden={isFlipped} className="absolute inset-0 overflow-hidden rounded-3xl border border-white/10 bg-ink-900/70 shadow-card transition group-hover:-translate-y-1 group-hover:border-neon-cyan/35 [backface-visibility:hidden]">
+          <div className={`flex h-1/4 items-end bg-gradient-to-br ${accent} p-6`}>
             <span className="rounded-full border border-white/15 bg-ink-950/50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-neon-mint">
               {category}
             </span>
@@ -63,7 +87,7 @@ export function ProjectCard({
           </div>
         </div>
 
-        <div className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-3xl border border-neon-mint/35 bg-[linear-gradient(145deg,rgba(7,44,43,0.96),rgba(8,18,23,0.98))] p-6 shadow-glow [backface-visibility:hidden] [transform:rotateY(180deg)]">
+        <div aria-hidden={!isFlipped} className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-3xl border border-neon-mint/35 bg-[linear-gradient(145deg,rgba(7,44,43,0.96),rgba(8,18,23,0.98))] p-6 shadow-glow [backface-visibility:hidden] [transform:rotateY(180deg)]">
             <div>
               <span className="rounded-full border border-neon-mint/30 bg-neon-mint/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-neon-mint">
                 {category}
@@ -73,7 +97,14 @@ export function ProjectCard({
               </h2>
               <p className="mt-4 text-sm leading-6 text-zinc-300">
                 {backDescription}
+                {linkInline && projectLink && <> {projectLink}</>}
               </p>
+              {backDescription2 && (
+                <p className={`mt-3 text-sm leading-6 text-zinc-300 ${highlightBackDescription2 ? answerHighlightStyle : ""}`}>
+                  {backDescription2}
+                </p>
+              )}
+              {!linkInline && projectLink}
             </div>
             <span className="text-sm font-semibold text-neon-mint">Hacé clic para volver</span>
         </div>

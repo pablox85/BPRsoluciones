@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import type { CSSProperties } from "react";
+import { answerHighlightStyle } from "@/components/ui/answerHighlightStyle";
 import { Section, SectionHeader } from "@/components/ui/Section";
 
 type FaqSectionProps = {
@@ -111,7 +112,7 @@ export function FaqSection({ page, heading = "h2" }: FaqSectionProps) {
               <ChevronDown className="faq-icon size-5 shrink-0 text-neon-cyan" aria-hidden="true" />
             </summary>
             <div className="faq-answer pb-5">
-              <p className="whitespace-pre-line rounded-r-xl border-l-2 border-neon-cyan/60 bg-neon-cyan/[0.055] px-4 py-3 text-sm leading-7 text-zinc-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.025)] sm:text-base">
+              <p className={`${answerHighlightStyle} text-sm leading-7 text-zinc-200 sm:text-base`}>
                 {answer}
               </p>
             </div>
