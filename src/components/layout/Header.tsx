@@ -120,12 +120,12 @@ export function Header() {
                   href={link.href}
                   aria-current={isActive ? "page" : undefined}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`${isMobileSecondary ? "hidden md:flex" : "flex"} relative min-h-10 items-center justify-center whitespace-nowrap rounded-xl px-2 text-center text-[0.7rem] font-semibold transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-mint focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 md:px-3 md:text-sm ${
+                  className={`${isMobileSecondary ? "hidden md:flex" : "flex"} relative min-h-10 items-center justify-center whitespace-nowrap rounded-xl px-2 text-center text-[0.7rem] font-semibold transition duration-200 hover:-translate-y-1 hover:border-neon-cyan/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-mint focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950 md:px-3 md:text-sm ${
                     isContact
-                    ? "border border-neon-mint/45 bg-neon-mint px-3 text-ink-950 shadow-[0_0_24px_rgba(0,255,198,0.16),inset_0_1px_0_rgba(255,255,255,0.35)] hover:-translate-y-0.5 hover:bg-white md:px-4"
+                    ? "border border-neon-mint/45 bg-neon-mint px-3 text-ink-950 shadow-[0_0_24px_rgba(0,255,198,0.16),inset_0_1px_0_rgba(255,255,255,0.35)] hover:bg-white md:px-4"
                       : isActive
-                        ? "premium-surface border-neon-mint/35 bg-[linear-gradient(145deg,rgba(24,47,49,0.78),rgba(10,24,27,0.72))] text-white shadow-[inset_0_1px_0_rgba(223,255,250,0.035)] md:border-transparent md:bg-transparent md:shadow-none"
-                        : "border border-white/10 bg-[linear-gradient(145deg,rgba(24,47,49,0.62),rgba(10,24,27,0.56))] text-zinc-300 shadow-[inset_0_1px_0_rgba(223,255,250,0.035)] hover:-translate-y-0.5 hover:border-neon-cyan/35 hover:bg-ink-850 hover:text-white md:border-transparent md:bg-transparent md:shadow-none md:hover:translate-y-0 md:hover:border-transparent md:hover:bg-white/[0.05]"
+                        ? "premium-surface border-neon-mint/35 bg-[linear-gradient(145deg,rgba(24,47,49,0.78),rgba(10,24,27,0.72))] text-white shadow-[inset_0_1px_0_rgba(223,255,250,0.035)] md:border-neon-mint/35 md:bg-white/[0.08] md:shadow-[inset_0_0_0_1px_rgba(114,231,206,0.16)]"
+                        : "border border-white/10 bg-[linear-gradient(145deg,rgba(24,47,49,0.62),rgba(10,24,27,0.56))] text-zinc-300 shadow-[inset_0_1px_0_rgba(223,255,250,0.035)] hover:bg-ink-850 hover:text-white md:border-transparent md:bg-transparent md:shadow-none md:hover:bg-white/[0.05]"
                   }`}
                 >
                   {link.label}

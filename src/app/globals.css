@@ -82,6 +82,41 @@ textarea:focus-visible {
   animation: pageEnter 0.7s ease-out both;
 }
 
+@keyframes projectCardFlip {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes projectCardUnflip {
+  from {
+    transform: rotateY(180deg);
+  }
+
+  to {
+    transform: rotateY(0deg);
+  }
+}
+
+.project-card-flip-open {
+  animation: projectCardFlip 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.project-card-flip-close {
+  animation: projectCardUnflip 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card-flip-open,
+  .project-card-flip-close {
+    animation: none;
+  }
+}
+
 .page-theme {
   position: relative;
   isolation: isolate;
