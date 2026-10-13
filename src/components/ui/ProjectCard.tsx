@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { answerHighlightStyle } from "@/components/ui/answerHighlightStyle";
 
 type ProjectCardProps = {
@@ -10,9 +11,10 @@ type ProjectCardProps = {
   backTitle: string;
   backDescription: string;
   highlightBackDescription?: boolean;
+  backDescriptionNoWrapDesktop?: boolean;
   backDescription2?: string;
   highlightBackDescription2?: boolean;
-  companyLinks?: { href: string; linkLabel: string }[];
+  companyLinks?: { href: string; linkLabel: string; previewImages?: string[] }[];
   href?: string;
   linkLabel?: string;
   linkInline?: boolean;
@@ -28,6 +30,7 @@ export function ProjectCard({
   backTitle,
   backDescription,
   highlightBackDescription,
+  backDescriptionNoWrapDesktop,
   backDescription2,
   highlightBackDescription2,
   companyLinks,
@@ -39,6 +42,39 @@ export function ProjectCard({
   onFlip,
 }: ProjectCardProps) {
   const [hasFlipped, setHasFlipped] = useState(false);
+  const [expandedPreviewImage, setExpandedPreviewImage] = useState<number | null>(null);
+  const [canCloseExpandedPreview, setCanCloseExpandedPreview] = useState(true);
+  const [isCompanyPreviewOpen, setIsCompanyPreviewOpen] = useState(false);
+  const companyPreviewRef = useRef<HTMLDivElement>(null);
+  const companyPreviewPanelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isCompanyPreviewOpen) return;
+
+    const closePreviewOutside = (event: MouseEvent) => {
+      const isInsideExpandedArea = [companyPreviewRef.current, companyPreviewPanelRef.current]
+        .filter((element): element is HTMLDivElement => element !== null)
+        .some((element) => {
+          const bounds = element.getBoundingClientRect();
+          const padding = 16;
+
+          return (
+            event.clientX >= bounds.left - padding &&
+            event.clientX <= bounds.right + padding &&
+            event.clientY >= bounds.top - padding &&
+            event.clientY <= bounds.bottom + padding
+          );
+        });
+
+      if (isInsideExpandedArea) return;
+
+      setExpandedPreviewImage(null);
+      setIsCompanyPreviewOpen(false);
+    };
+
+    window.addEventListener("mousemove", closePreviewOutside);
+    return () => window.removeEventListener("mousemove", closePreviewOutside);
+  }, [isCompanyPreviewOpen]);
   const projectLink = href ? (
     <a
       href={href}
@@ -99,7 +135,7 @@ export function ProjectCard({
               <h2 className="mt-6 font-heading text-2xl font-semibold tracking-tight text-white">
                 {backTitle}
               </h2>
-              <p className={`mt-4 text-sm leading-6 text-zinc-300 ${highlightBackDescription ? `${answerHighlightStyle} lg:whitespace-nowrap xl:text-[13px]` : ""}`}>
+              <p className={`mt-4 text-sm leading-6 text-zinc-300 ${highlightBackDescription ? answerHighlightStyle : ""} ${backDescriptionNoWrapDesktop ? "lg:whitespace-nowrap xl:text-[13px]" : ""}`}>
                 {backDescription}
                 {linkInline && projectLink && <> {projectLink}</>}
               </p>
@@ -110,17 +146,57 @@ export function ProjectCard({
               )}
               {companyLinks && companyLinks.length > 0 && (
                 <ul className="mt-3 space-y-2">
-                  {companyLinks.map(({ href: companyHref, linkLabel: companyLinkLabel }) => (
+                  {companyLinks.map(({ href: companyHref, linkLabel: companyLinkLabel, previewImages }) => (
                     <li key={companyHref}>
-                      <a
-                        href={companyHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        tabIndex={isFlipped ? 0 : -1}
-                        className="pointer-events-auto relative z-10 text-sm font-semibold text-neon-mint underline underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neon-mint"
+                      <div
+                        ref={companyPreviewRef}
+                        className="group/company pointer-events-auto relative inline-flex"
+                        onMouseEnter={() => setIsCompanyPreviewOpen(true)}
                       >
-                        {companyLinkLabel}
-                      </a>
+                        <a
+                          href={companyHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          tabIndex={isFlipped ? 0 : -1}
+                          className="pointer-events-auto relative z-10 text-sm font-semibold text-neon-mint underline underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neon-mint"
+                        >
+                          {companyLinkLabel}
+                        </a>
+                        {previewImages && previewImages.length > 0 && (
+                          <div ref={companyPreviewPanelRef} className={`company-preview absolute left-0 top-full z-50 mt-2 block w-[17rem] max-w-[calc(100vw-3rem)] cursor-default ${isCompanyPreviewOpen ? "company-preview-visible" : ""}`}>
+                            {previewImages.map((imageSrc, imageIndex) => (
+                              <Image
+                                key={imageSrc}
+                                src={imageSrc}
+                                alt={`${companyLinkLabel} - captura del sitio web`}
+                                width={480}
+                                height={300}
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  setCanCloseExpandedPreview(false);
+                                  setExpandedPreviewImage(imageIndex);
+                                  window.setTimeout(() => setCanCloseExpandedPreview(true), 450);
+                                  window.setTimeout(() => {
+                                    setExpandedPreviewImage((currentImage) =>
+                                      currentImage === imageIndex ? null : currentImage,
+                                    );
+                                  }, 850);
+                                }}
+                                onMouseLeave={() => {
+                                  if (canCloseExpandedPreview && expandedPreviewImage === imageIndex) {
+                                    setExpandedPreviewImage(null);
+                                  }
+                                }}
+                              className={`company-preview-image absolute bottom-8 left-1/2 h-20 w-20 cursor-zoom-in rounded-lg border border-neon-mint/30 object-cover object-top shadow-glow ${
+                                  expandedPreviewImage === imageIndex
+                                    ? "company-preview-image-expanded cursor-zoom-out"
+                                    : ""
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </li>
                   ))}
                 </ul>

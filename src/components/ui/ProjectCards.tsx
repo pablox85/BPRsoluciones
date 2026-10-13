@@ -10,9 +10,10 @@ type Project = {
   backTitle: string;
   backDescription: string;
   highlightBackDescription?: boolean;
+  backDescriptionNoWrapDesktop?: boolean;
   backDescription2?: string;
   highlightBackDescription2?: boolean;
-  companyLinks?: { href: string; linkLabel: string }[];
+  companyLinks?: { href: string; linkLabel: string; previewImages?: string[] }[];
   href?: string;
   linkLabel?: string;
   linkInline?: boolean;
