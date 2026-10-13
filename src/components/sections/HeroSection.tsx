@@ -14,15 +14,15 @@ export function HeroSection() {
           </p>
           <h1 className="max-w-2xl font-heading text-3xl font-semibold leading-[1.2] tracking-[-0.055em] text-white sm:text-4xl lg:text-5xl">
             <span className="block">Tu página web desde USD 150.</span>
-            <span className="block">Profesional, rápida y adaptada a celular.</span>
+            <span className="block">Profesional y rápida.</span>
             <span className="block">Lista para mostrar lo que ofrecés.</span>
           </h1>
           <h2 className="mt-6 max-w-xl text-base font-normal leading-7 text-zinc-300 sm:text-lg">
-            Páginas web para empresas en Uruguay, pensadas para generar consultas y
+            Páginas web pensadas para generar consultas y
             acompañar tus objetivos comerciales.
           </h2>
           <p className="mt-3 max-w-xl text-base leading-7 text-zinc-300 sm:text-lg">
-            Hacemos desarrollo web en Uruguay, automatizaciones con inteligencia
+            Hacemos desarrollo web desde Uruguay, automatizaciones con inteligencia
             artificial y software a medida para que tu empresa venda más y ahorre tiempo.
           </p>
           <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">

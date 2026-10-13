@@ -20,11 +20,15 @@ const projects = [
     description:
       "Diseñamos páginas claras, rápidas y preparadas para que cada visita encuentre el próximo paso.",
     backTitle: "Webs pensadas para maximizar las ventas.",
+    highlightBackDescription: true,
     backDescription:
       "Empresas que contrataron nuestros servicios.",
-    backDescription2: "Lorem ipsum.",
-    href: "https://www.polarizadosdeleste.com/?utm_source=BprSoluciones",
-    linkLabel: "Polarizados del este",
+    companyLinks: [
+      {
+        href: "https://www.polarizadosdeleste.com/?utm_source=BprSoluciones",
+        linkLabel: "Polarizados del este",
+      },
+    ],
     accent: "from-neon-mint/25 via-ink-850 to-ink-950",
   },
   {
@@ -49,7 +53,7 @@ const projects = [
     backTitle: "Tecnología que se adapta a tu forma de trabajar.",
     backDescription:
       "Diseñamos software a medida para resolver necesidades concretas y acompañar la evolución de tu negocio.",
-    backDescription2: "Lorem ipsum.",
+    backDescription2: "",
     accent: "from-violet-400/20 via-ink-850 to-ink-950",
   },
 ];

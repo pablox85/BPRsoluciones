@@ -9,8 +9,10 @@ type Project = {
   description: string;
   backTitle: string;
   backDescription: string;
+  highlightBackDescription?: boolean;
   backDescription2?: string;
   highlightBackDescription2?: boolean;
+  companyLinks?: { href: string; linkLabel: string }[];
   href?: string;
   linkLabel?: string;
   linkInline?: boolean;
@@ -21,7 +23,7 @@ export function ProjectCards({ projects }: { projects: Project[] }) {
   const [flippedProject, setFlippedProject] = useState<string | null>(null);
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
       {projects.map((project) => (
         <ProjectCard
           key={project.title}

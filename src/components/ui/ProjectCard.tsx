@@ -9,8 +9,10 @@ type ProjectCardProps = {
   description: string;
   backTitle: string;
   backDescription: string;
+  highlightBackDescription?: boolean;
   backDescription2?: string;
   highlightBackDescription2?: boolean;
+  companyLinks?: { href: string; linkLabel: string }[];
   href?: string;
   linkLabel?: string;
   linkInline?: boolean;
@@ -25,8 +27,10 @@ export function ProjectCard({
   description,
   backTitle,
   backDescription,
+  highlightBackDescription,
   backDescription2,
   highlightBackDescription2,
+  companyLinks,
   href,
   linkLabel,
   linkInline,
@@ -95,7 +99,7 @@ export function ProjectCard({
               <h2 className="mt-6 font-heading text-2xl font-semibold tracking-tight text-white">
                 {backTitle}
               </h2>
-              <p className="mt-4 text-sm leading-6 text-zinc-300">
+              <p className={`mt-4 text-sm leading-6 text-zinc-300 ${highlightBackDescription ? `${answerHighlightStyle} lg:whitespace-nowrap xl:text-[13px]` : ""}`}>
                 {backDescription}
                 {linkInline && projectLink && <> {projectLink}</>}
               </p>
@@ -103,6 +107,23 @@ export function ProjectCard({
                 <p className={`mt-3 text-sm leading-6 text-zinc-300 ${highlightBackDescription2 ? answerHighlightStyle : ""}`}>
                   {backDescription2}
                 </p>
+              )}
+              {companyLinks && companyLinks.length > 0 && (
+                <ul className="mt-3 space-y-2">
+                  {companyLinks.map(({ href: companyHref, linkLabel: companyLinkLabel }) => (
+                    <li key={companyHref}>
+                      <a
+                        href={companyHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        tabIndex={isFlipped ? 0 : -1}
+                        className="pointer-events-auto relative z-10 text-sm font-semibold text-neon-mint underline underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neon-mint"
+                      >
+                        {companyLinkLabel}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               )}
               {!linkInline && projectLink}
             </div>
