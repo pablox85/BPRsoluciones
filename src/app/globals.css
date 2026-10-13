@@ -94,7 +94,7 @@ textarea:focus-visible {
 
 @keyframes projectCardUnflip {
   from {
-    transform: rotateY(180deg);
+    transform: rotateY(-180deg);
   }
 
   to {
