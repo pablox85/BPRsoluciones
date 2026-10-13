@@ -8,6 +8,7 @@ import {
   LineChart,
   SearchCheck,
 } from "lucide-react";
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import { cardSurfaceClass } from "@/components/ui/Card";
@@ -38,6 +39,7 @@ const items = [
     label: "Nuestros proyectos",
     description: "Conocé algunos de los proyectos que desarrollamos para nuestros clientes.",
     icon: FolderKanban,
+    href: "/proyectos",
   },
 ];
 
@@ -104,7 +106,7 @@ export function TrustBar() {
       className="px-4 sm:px-6 lg:px-8"
     >
       <div className="mx-auto grid max-w-6xl grid-cols-2 items-start gap-3 md:grid-cols-5">
-        {items.map(({ label, description, icon: Icon }, index) => (
+        {items.map(({ label, description, icon: Icon, href }, index) => (
           <article
             key={label}
             className={`stagger-card ${cardSurfaceClass} relative min-w-0 transition ${
@@ -148,6 +150,14 @@ export function TrustBar() {
                 <p className="pb-4 pl-8 pt-1 text-xs leading-5 text-zinc-400">
                   {description}
                 </p>
+                {href ? (
+                  <Link
+                    href={href}
+                    className="mb-4 ml-8 inline-flex text-xs font-semibold text-neon-mint underline underline-offset-4 transition hover:text-white"
+                  >
+                    Ver nuestros proyectos
+                  </Link>
+                ) : null}
               </div>
             </div>
           </article>

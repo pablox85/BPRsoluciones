@@ -115,7 +115,7 @@ textarea:focus-visible {
   opacity: 0;
   pointer-events: none;
   transform: translateY(0.5rem);
-  transition: opacity 750ms ease-in, transform 750ms ease-in, visibility 0s linear 750ms;
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out, visibility 0s linear 200ms;
   visibility: hidden;
 }
 
@@ -127,6 +127,18 @@ textarea:focus-visible {
   animation: mazo 220ms ease-out both;
 }
 
+.company-preview-closing {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(1rem);
+  visibility: visible;
+  animation: mazoClose 750ms ease-in-out both;
+}
+
+.company-preview-closing .company-preview-image {
+  transition-duration: 1000ms, 1000ms;
+}
+
 @keyframes mazo {
   from {
     opacity: 0;
@@ -136,6 +148,18 @@ textarea:focus-visible {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes mazoClose {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(0.5rem);
   }
 }
 

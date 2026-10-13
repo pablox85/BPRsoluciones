@@ -45,11 +45,13 @@ export function ProjectCard({
   const [expandedPreviewImage, setExpandedPreviewImage] = useState<number | null>(null);
   const [canCloseExpandedPreview, setCanCloseExpandedPreview] = useState(true);
   const [isCompanyPreviewOpen, setIsCompanyPreviewOpen] = useState(false);
+  const [isCompanyPreviewClosing, setIsCompanyPreviewClosing] = useState(false);
   const companyPreviewRef = useRef<HTMLDivElement>(null);
   const companyPreviewPanelRef = useRef<HTMLDivElement>(null);
+  const companyPreviewCloseTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!isCompanyPreviewOpen) return;
+    if (!isCompanyPreviewOpen || isCompanyPreviewClosing) return;
 
     const closePreviewOutside = (event: MouseEvent) => {
       const isInsideExpandedArea = [companyPreviewRef.current, companyPreviewPanelRef.current]
@@ -69,12 +71,25 @@ export function ProjectCard({
       if (isInsideExpandedArea) return;
 
       setExpandedPreviewImage(null);
-      setIsCompanyPreviewOpen(false);
+      setIsCompanyPreviewClosing(true);
+      companyPreviewCloseTimeoutRef.current = window.setTimeout(() => {
+        setIsCompanyPreviewOpen(false);
+        setIsCompanyPreviewClosing(false);
+        companyPreviewCloseTimeoutRef.current = null;
+      }, 1000);
     };
 
     window.addEventListener("mousemove", closePreviewOutside);
     return () => window.removeEventListener("mousemove", closePreviewOutside);
-  }, [isCompanyPreviewOpen]);
+  }, [isCompanyPreviewClosing, isCompanyPreviewOpen]);
+
+  useEffect(() => {
+    return () => {
+      if (companyPreviewCloseTimeoutRef.current) {
+        window.clearTimeout(companyPreviewCloseTimeoutRef.current);
+      }
+    };
+  }, []);
   const projectLink = href ? (
     <a
       href={href}
@@ -151,7 +166,14 @@ export function ProjectCard({
                       <div
                         ref={companyPreviewRef}
                         className="group/company pointer-events-auto relative inline-flex"
-                        onMouseEnter={() => setIsCompanyPreviewOpen(true)}
+                        onMouseEnter={() => {
+                          if (companyPreviewCloseTimeoutRef.current) {
+                            window.clearTimeout(companyPreviewCloseTimeoutRef.current);
+                            companyPreviewCloseTimeoutRef.current = null;
+                          }
+                          setIsCompanyPreviewClosing(false);
+                          setIsCompanyPreviewOpen(true);
+                        }}
                       >
                         <a
                           href={companyHref}
@@ -163,7 +185,7 @@ export function ProjectCard({
                           {companyLinkLabel}
                         </a>
                         {previewImages && previewImages.length > 0 && (
-                          <div ref={companyPreviewPanelRef} className={`company-preview absolute left-0 top-full z-50 mt-2 block w-[17rem] max-w-[calc(100vw-3rem)] cursor-default ${isCompanyPreviewOpen ? "company-preview-visible" : ""}`}>
+                          <div ref={companyPreviewPanelRef} className={`company-preview absolute left-0 top-full z-50 mt-2 block w-[17rem] max-w-[calc(100vw-3rem)] cursor-default ${isCompanyPreviewOpen ? "company-preview-visible" : ""} ${isCompanyPreviewClosing ? "company-preview-closing" : ""}`}>
                             {previewImages.map((imageSrc, imageIndex) => (
                               <Image
                                 key={imageSrc}

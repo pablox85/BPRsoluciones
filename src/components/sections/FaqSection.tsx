@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import { answerHighlightStyle } from "@/components/ui/answerHighlightStyle";
 import { Section, SectionHeader } from "@/components/ui/Section";
@@ -119,6 +120,14 @@ export function FaqSection({ page, heading = "h2" }: FaqSectionProps) {
           </details>
         ))}
       </div>
+      {page === "home" ? (
+        <Link
+          href="/preguntas-frecuentes"
+          className="mt-6 inline-flex text-sm font-semibold text-neon-mint underline underline-offset-4 transition hover:text-white"
+        >
+          Ver más preguntas
+        </Link>
+      ) : null}
     </Section>
   );
 }

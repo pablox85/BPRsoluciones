@@ -29,7 +29,7 @@ export const services = [
     price: "USD 150",
     estimatedTime: "3 a 7 días hábiles",
     description: "Landing simple, rápida, optimizada y analítica.",
-    features: ["Diseñada para vender más", "Optimizada para Google", "Carga rápida"],
+    features: [ "Hosting por un año","Diseñada para vender más", "Optimizada para Google", "Carga rápida"],
   },
   {
     name: "Business",
@@ -37,7 +37,7 @@ export const services = [
     estimatedTime: "2 a 3 semanas",
     description:
       "Web corporativa con posicionamiento en Google, secciones comerciales y analítica.",
-    features: ["Todo lo de Starter", "Arquitectura comercial", "Máximo rendimiento", "Medición de resultados", "Comportamiento de usuarios"],
+    features: [ "Todo lo de Starter", "Hosting por un año", "Arquitectura comercial", "Máximo rendimiento", "Medición de resultados", "Comportamiento de usuarios"],
   },
   {
     name: "Premium",
@@ -45,7 +45,7 @@ export const services = [
     estimatedTime: "4 a 6 semanas",
     description:
       "Web completa con posicionamiento en Google, automatización, métricas y arquitectura escalable.",
-    features: ["Todo lo de Starter + Business", "Automatización (IA)", "Sistema escalable"],
+    features: ["Todo lo de Starter + Business",  "Hosting por un año", "Automatización (IA)", "Sistema escalable"],
   },
  {
   name: "A medida",
@@ -75,6 +75,7 @@ export const serviceDetails = [
     "Preparada para aparecer en Google",
     "Botón de WhatsApp, formulario o agenda online",
     "Estadísticas para conocer visitas",
+    "Hosting por un año",
   ],
   bestFor:
     "Profesionales, comercios, servicios y emprendimientos que necesitan empezar a vender online.",
@@ -93,6 +94,7 @@ export const serviceDetails = [
     "Optimización para Google",
     "Sitio rápido y preparado para celulares",
     "Estadísticas, medición de resultados y comportamiento de usuarios",
+    "Hosting por un año",
   ],
   bestFor:
     "Empresas de servicios, consultoras, estudios y pymes en crecimiento.",
@@ -111,6 +113,7 @@ export const serviceDetails = [
     "Automatización de consultas y procesos",
     "Estadísticas y paneles de resultados",
     "Conexión con las herramientas que ya utilizás",
+    "Hosting por un año",
   ],
   bestFor:
     "Empresas que ya venden y quieren conseguir más clientes, optimizar procesos y crecer.",
