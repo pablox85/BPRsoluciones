@@ -78,10 +78,6 @@ textarea:focus-visible {
   background-size: 48px 48px, 48px 48px, auto, auto, auto;
 }
 
-.page-content {
-  animation: pageEnter 0.7s ease-out both;
-}
-
 @keyframes projectCardFlip {
   from {
     transform: rotateY(0deg);
@@ -308,9 +304,8 @@ textarea:focus-visible {
 
   .hero-logo-glow {
     filter:
-      drop-shadow(0 0 18px rgba(0, 255, 198, 0.42))
-      drop-shadow(0 0 46px rgba(0, 217, 255, 0.18));
-    animation: heroLogoGlow 1.5s ease-in-out infinite;
+      drop-shadow(0 0 20px rgba(0, 255, 198, 0.48))
+      drop-shadow(0 0 51px rgba(0, 217, 255, 0.21));
   }
 }
 
@@ -408,18 +403,6 @@ html:not(.motion-ready) .site-shell *::after {
   animation: logoSparkle var(--sparkle-duration, 900ms) ease-out both;
 }
 
-@keyframes pageEnter {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes logoSparkle {
   0% {
     opacity: 0;
@@ -434,21 +417,6 @@ html:not(.motion-ready) .site-shell *::after {
   100% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.25);
-  }
-}
-
-@keyframes heroLogoGlow {
-  0%,
-  100% {
-    filter:
-      drop-shadow(0 0 16px rgba(0, 255, 198, 0.34))
-      drop-shadow(0 0 38px rgba(0, 217, 255, 0.14));
-  }
-
-  50% {
-    filter:
-      drop-shadow(0 0 26px rgba(0, 255, 198, 0.62))
-      drop-shadow(0 0 64px rgba(0, 217, 255, 0.28));
   }
 }
 

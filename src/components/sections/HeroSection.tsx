@@ -8,7 +8,7 @@ export function HeroSection() {
   return (
     <section className="px-4 pb-16 pt-12 sm:px-6 md:pt-20 lg:px-8 lg:pb-28">
       <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
-        <div className="scroll-reveal reveal-up">
+        <div>
           <p className="eyebrow mb-5 inline-flex border-l-2 border-neon-mint pl-3">
             BPR soluciones digitales
           </p>
@@ -44,12 +44,12 @@ export function HeroSection() {
             </Link>
           </div>
         </div>
-        <div className="scroll-reveal reveal-up order-first flex justify-center lg:order-none">
+        <div className="order-first flex justify-center lg:order-none">
           <Image
-            src="/images/bpr2.png"
+            src="/images/bpr-hero.webp"
             alt="BPR Soluciones"
-            width={1972}
-            height={798}
+            width={960}
+            height={388}
             sizes="(max-width: 511px) calc(100vw - 32px), (max-width: 1023px) 480px, (max-width: 1151px) 44vw, 480px"
             className="hero-logo-glow h-auto w-full max-w-[30rem] object-contain"
             preload

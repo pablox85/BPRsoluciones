@@ -32,10 +32,11 @@ export function Logo() {
   return (
     <Link href="/" className="relative flex min-h-11 items-center" aria-label="BPR Soluciones">
       <Image
-        src="/images/bpr2.png"
+        src="/images/bpr-header.webp"
         alt="BPR Soluciones"
-        width={1972}
-        height={798}
+        width={352}
+        height={142}
+        sizes="(max-width: 767px) 144px, (max-width: 1023px) 160px, 176px"
         className="h-auto w-36 sm:w-40 md:w-44"
       />
       <span ref={sparkleRef} className="logo-sparkle" aria-hidden="true" />
