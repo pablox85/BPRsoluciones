@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import posthog from "posthog-js";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { siteConfig } from "@/config/site";
@@ -265,6 +266,14 @@ export function FloatingWhatsApp() {
       onClick={(event) => {
         if (drag.current.moved) {
           event.preventDefault();
+          return;
+        }
+
+        if (
+          process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN?.trim() &&
+          process.env.NEXT_PUBLIC_POSTHOG_HOST?.trim()
+        ) {
+          posthog.capture("whatsapp_contact_started", { placement: "floating_button" });
         }
       }}
       data-floating-whatsapp

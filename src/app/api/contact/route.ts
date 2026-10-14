@@ -1,5 +1,7 @@
-import { NextResponse } from "next/server";
+import { SeverityNumber } from "@opentelemetry/api-logs";
+import { after, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { emitContactLog, posthogLogProvider } from "../../../../instrumentation";
 
 export const runtime = "nodejs";
 
@@ -17,6 +19,17 @@ function readText(value: unknown, maxLength: number) {
 
 function apiError(error: string, code: string, status: number, requestId: string) {
   return NextResponse.json({ error, code, requestId }, { status });
+}
+
+function logContactOutcome(
+  body: string,
+  severityNumber: SeverityNumber,
+  attributes: Record<string, boolean | string>,
+) {
+  emitContactLog(body, severityNumber, attributes);
+  after(async () => {
+    await posthogLogProvider?.forceFlush();
+  });
 }
 
 function classifyMailError(error: MailError) {
@@ -95,6 +108,9 @@ export async function POST(request: Request) {
     const to = process.env.CONTACT_TO_EMAIL?.trim();
 
     if (!host || !user || !pass || !to || !Number.isFinite(port)) {
+      logContactOutcome("Contact email configuration is incomplete", SeverityNumber.ERROR, {
+        "contact.outcome": "configuration_missing",
+      });
       console.error("[contact] Configuración SMTP incompleta.", {
         requestId,
         hasHost: Boolean(host),
@@ -140,6 +156,11 @@ export async function POST(request: Request) {
       ].join("\n"),
     });
 
+    logContactOutcome("Contact email sent", SeverityNumber.INFO, {
+      "contact.outcome": "sent",
+      "contact.has_selected_service": Boolean(service),
+    });
+
     return NextResponse.json({ ok: true, requestId });
   } catch (error) {
     if (error instanceof SyntaxError) {
@@ -149,6 +170,10 @@ export async function POST(request: Request) {
     const mailError = error as MailError;
     const diagnostic = classifyMailError(mailError);
 
+    logContactOutcome("Contact email delivery failed", SeverityNumber.ERROR, {
+      "contact.outcome": "delivery_failed",
+      "contact.error_code": diagnostic.code,
+    });
     console.error("[contact] Falló el envío SMTP.", {
       requestId,
       code: mailError.code ?? "UNKNOWN",

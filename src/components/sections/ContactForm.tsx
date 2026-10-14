@@ -3,6 +3,7 @@
 import { CheckCircle2, Mail, Send, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import Link from "next/link";
+import posthog from "posthog-js";
 import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import { services, siteConfig } from "@/config/site";
 import { cardSurfaceClass } from "@/components/ui/Card";
@@ -63,6 +64,15 @@ export function ContactForm() {
       return;
     }
 
+    if (
+      process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN?.trim() &&
+      process.env.NEXT_PUBLIC_POSTHOG_HOST?.trim()
+    ) {
+      posthog.capture("contact_form_submitted", {
+        has_selected_service: Boolean(formData.get("service")),
+      });
+    }
+
     formRef.current?.reset();
     setStatus("success");
     setMessage("¡Gracias! Recibimos tu consulta y te responderemos a la brevedad.");
@@ -89,6 +99,14 @@ export function ContactForm() {
             href={siteConfig.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => {
+              if (
+                process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN?.trim() &&
+                process.env.NEXT_PUBLIC_POSTHOG_HOST?.trim()
+              ) {
+                posthog.capture("whatsapp_contact_started", { placement: "contact_page" });
+              }
+            }}
             className={`flex min-h-12 items-center gap-3 ${cardSurfaceClass} px-4 text-sm font-semibold text-white transition hover:border-neon-mint/40 hover:bg-ink-850`}
           >
             <FaWhatsapp className="size-5 text-neon-mint" aria-hidden="true" />
