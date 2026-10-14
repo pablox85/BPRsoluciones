@@ -51,13 +51,13 @@ export function buildMetadata({
     icons: {
       icon: [
         {
-          url: "/images/favicon-bpr.png",
+          url: "/images/favicon-square.png",
           type: "image/png",
-          sizes: "512x512",
+          sizes: "1254x1254",
         },
       ],
-      shortcut: "/images/favicon-bpr.png",
-      apple: "/images/favicon-bpr.png",
+      shortcut: "/images/favicon-square.png",
+      apple: "/images/favicon-square.png",
     },
   };
 }
