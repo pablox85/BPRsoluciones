@@ -7,7 +7,7 @@ import { Section, SectionHeader } from "@/components/ui/Section";
 import { buildMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Nuestros proyectos | BPR Soluciones",
+  title: "Nuestros proyectos",
   path: "/proyectos",
   description:
     "Conocé algunos de los proyectos web y soluciones digitales que desarrollamos para empresas y emprendimientos.",

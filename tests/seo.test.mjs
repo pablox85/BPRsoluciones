@@ -22,14 +22,14 @@ test('JSON-LD escapes script termination without changing data', () => {
 
 const root = '.next/server/app/';
 const articles = readdirSync(root + 'blog').filter(f => f.endsWith('.html')).map(f => 'blog/' + f);
-const files = ['index.html', 'servicios.html', 'desarrollo-web-uruguay.html', 'preguntas-frecuentes.html', 'blog.html', 'contacto.html', ...articles];
+const files = ['index.html', 'servicios.html', 'desarrollo-web-uruguay.html', 'proyectos.html', 'preguntas-frecuentes.html', 'blog.html', 'contacto.html', ...articles];
 const nodesOf = html => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap(m => {
   const data = JSON.parse(m[1]);
   return data['@graph'] || [data];
 });
 
-test('twelve public pages: unique metadata, matching schema, correct canonicals', () => {
-  assert.equal(files.length, 12);
+test('thirteen public pages: unique metadata, matching schema, correct canonicals', () => {
+  assert.equal(files.length, 13);
   const titles = new Set(), descriptions = new Set(), canonicals = new Set();
   for (const file of files) {
     const html = readFileSync(root + file, 'utf8');
@@ -78,7 +78,7 @@ test('twelve public pages: unique metadata, matching schema, correct canonicals'
       assert(html.includes('property="og:type" content="article"'));
     } else assert(html.includes('property="og:type" content="website"'));
   }
-  for (const collection of [titles, descriptions, canonicals]) assert.equal(collection.size, 12);
+  for (const collection of [titles, descriptions, canonicals]) assert.equal(collection.size, 13);
 });
 
 test('Service offers match the visible plans and their actual anchors', () => {
@@ -93,7 +93,7 @@ test('Service offers match the visible plans and their actual anchors', () => {
 });
 
 test('hero reserves the real image aspect ratio and supplies responsive sizes', async () => {
-  const { width, height } = await sharp('public/images/bpr2.png').metadata();
+  const { width, height } = await sharp('public/images/bpr-hero.webp').metadata();
   const html = readFileSync(root + 'index.html', 'utf8');
   const image = html.match(/<img[^>]+hero-logo-glow[^>]*>/)[0];
   assert(image.includes(`width="${width}"`));
@@ -106,8 +106,8 @@ test('hero reserves the real image aspect ratio and supplies responsive sizes', 
 test('sitemap and robots use canonical origin, contain only public pages', () => {
   const xml = readFileSync(root + 'sitemap.xml.body', 'utf8');
   const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
-  assert.equal(urls.length, 12);
-  assert.equal(new Set(urls).size, 12);
+  assert.equal(urls.length, 13);
+  assert.equal(new Set(urls).size, 13);
   assert(urls.every(url => new URL(url).origin === 'https://bprsoluciones.uy' && !url.includes('/api/')));
   assert(readFileSync(root + 'robots.txt.body', 'utf8').includes('Sitemap: https://bprsoluciones.uy/sitemap.xml'));
 });

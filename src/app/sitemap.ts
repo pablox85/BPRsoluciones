@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/servicios",
     "/desarrollo-web-uruguay",
+    "/proyectos",
     "/preguntas-frecuentes",
     "/blog",
     "/contacto",
