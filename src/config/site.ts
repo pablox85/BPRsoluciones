@@ -8,7 +8,7 @@ export const siteConfig = {
   whatsappUrl:
     process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/59891343651",
   instagramUrl:
-    process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "https://instagram.com/bprsoluciones",
+    process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? null,
   email: process.env.NEXT_PUBLIC_EMAIL?.trim() || "bprsoluciones1@gmail.com",
   calendarUrl:
     process.env.NEXT_PUBLIC_CALENDAR_URL ?? "https://cal.com/bprsoluciones",
@@ -20,6 +20,7 @@ export const navLinks = [
   { href: "/desarrollo-web-uruguay", label: "Desarrollo web" },
   { href: "/proyectos", label: "Nuestros proyectos" },
   { href: "/preguntas-frecuentes", label: "FAQs" },
+  
   { href: "/contacto", label: "Contacto" },
 ];
 

@@ -23,6 +23,9 @@ export function Footer() {
               {link.label}
             </Link>
           ))}
+          <Link href="/blog" className="flex min-h-11 items-center text-zinc-400 hover:text-white">
+            Blog
+          </Link>
         </nav>
         <div className="grid content-start gap-3 text-sm">
           <p className="font-heading font-semibold text-white">Contacto</p>
@@ -36,16 +39,18 @@ export function Footer() {
             +59891343651
             <ArrowUpRight className="size-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
           </Link>
-          <Link
-            href={siteConfig.instagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex min-h-11 items-center gap-2 text-zinc-400 hover:text-white"
-          >
-            <FaInstagram className="size-4" aria-hidden="true" />
-            Bpr Soluciones
-            <ArrowUpRight className="size-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-          </Link>
+          {siteConfig.instagramUrl && (
+            <Link
+              href={siteConfig.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex min-h-11 items-center gap-2 text-zinc-400 hover:text-white"
+            >
+              <FaInstagram className="size-4" aria-hidden="true" />
+              Bpr Soluciones
+              <ArrowUpRight className="size-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+            </Link>
+          )}
           <Link
             href={getEmailHref()}
             target="_blank"
