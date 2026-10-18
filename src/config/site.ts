@@ -9,7 +9,7 @@ export const siteConfig = {
     process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/59891343651",
   instagramUrl:
     process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? null,
-  email: process.env.NEXT_PUBLIC_EMAIL?.trim() || "bprsoluciones1@gmail.com",
+  email: process.env.NEXT_PUBLIC_EMAIL?.trim() || "info@bprsoulciones.uy",
   calendarUrl:
     process.env.NEXT_PUBLIC_CALENDAR_URL ?? "https://cal.com/bprsoluciones",
 };
