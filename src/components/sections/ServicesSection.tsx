@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { services } from "@/config/site";
+import { services, siteConfig } from "@/config/site";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 
@@ -21,6 +21,13 @@ const homeServiceIds: Record<string, string> = {
 
 type ServicesSectionProps = {
   showDetailsLinks?: boolean;
+};
+
+const getWhatsAppInquiryUrl = (serviceName: string) => {
+  const url = new URL(siteConfig.whatsappUrl);
+  url.searchParams.set("text", `Hola, quiero consultar por el plan ${serviceName}.`);
+
+  return url.toString();
 };
 
 export function ServicesSection({ showDetailsLinks = false }: ServicesSectionProps) {
@@ -137,6 +144,7 @@ export function ServicesSection({ showDetailsLinks = false }: ServicesSectionPro
             onToggle={() =>
               setOpenIndex((current) => (current === index ? null : index))
             }
+            inquiryHref={getWhatsAppInquiryUrl(service.name)}
             detailsHref={
               showDetailsLinks
                 ? `/servicios?plan=${serviceDetailIds[service.name]}#${serviceDetailIds[service.name]}`

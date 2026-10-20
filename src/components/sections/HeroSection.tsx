@@ -1,31 +1,53 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { ButtonLink } from "@/components/ui/Buttons";
 import { siteConfig } from "@/config/site";
 
 export function HeroSection() {
   return (
-    <section className="px-4 pb-16 pt-12 sm:px-6 md:pt-20 lg:px-8 lg:pb-28">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
-        <div>
-          <p className="eyebrow mb-5 inline-flex border-l-2 border-neon-mint pl-3">
+    <section className="overflow-x-clip px-[clamp(1rem,4vw,2rem)] pb-[clamp(2.5rem,6vw,7rem)] pt-[clamp(1.5rem,5vw,5rem)]">
+      <div className="mx-auto grid max-w-6xl items-center gap-[clamp(1.5rem,4vw,3rem)] lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="min-w-0">
+          <p className="eyebrow mb-[clamp(0.75rem,2vw,1.25rem)] inline-flex border-l-2 border-neon-mint pl-3">
             BPR soluciones digitales
           </p>
-          <h1 className="max-w-2xl font-heading text-3xl font-semibold leading-[1.2] tracking-[-0.055em] text-white sm:text-4xl lg:text-5xl">
-            <span className="block">Tu página web desde USD 150.</span>
-            <span className="block">Profesional y rápida.</span>
-            <span className="block">Lista para mostrar lo que ofrecés.</span>
+          <h1 className="max-w-2xl font-heading text-[clamp(2rem,4.5vw,3.5rem)] font-semibold leading-[1.08] tracking-[-0.055em] text-white">
+            Tu página web profesional desde USD 150.
           </h1>
-          <h2 className="mt-6 max-w-xl text-base font-normal leading-7 text-zinc-300 sm:text-lg">
-            Páginas web pensadas para generar consultas y
-            acompañar tus objetivos comerciales.
-          </h2>
-          <p className="mt-3 max-w-xl text-base leading-7 text-zinc-300 sm:text-lg">
-            Hacemos desarrollo web desde Uruguay, automatizaciones con inteligencia
-            artificial y software a medida para que tu empresa venda más y ahorre tiempo.
-          </p>
-          <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
+          <ul
+            aria-label="Beneficios principales"
+            className="mt-[clamp(0.75rem,2vw,1.5rem)] grid max-w-2xl gap-1 text-[clamp(1.15rem,2.5vw,1.5rem)] font-medium leading-[1.35] text-zinc-100"
+          >
+            {[
+              "Conseguí más clientes.",
+              "Mostrá tu negocio.",
+              "Generá consultas.",
+            ].map((item) => (
+              <li key={item} className="flex items-baseline gap-3">
+                <Check
+                  className="size-4 shrink-0 text-neon-mint"
+                  aria-hidden="true"
+                />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-[clamp(0.75rem,2vw,1.25rem)] max-w-xl space-y-[clamp(0.75rem,1.5vw,1rem)] text-[clamp(0.95rem,1.5vw,1.125rem)] leading-[1.65] text-zinc-300">
+            <p>
+              Diseñamos páginas web rápidas y modernas para negocios y empresas de Uruguay,
+              diseñadas para convertir visitas en consultas.
+            </p>
+            <p>
+              También desarrollamos automatizaciones con inteligencia artificial y software a
+              medida para ahorrar tiempo y optimizar procesos.
+            </p>
+          </div>
+          <div
+            data-hero-cta
+            className="mt-[clamp(1rem,2.5vw,2rem)] grid grid-cols-[repeat(auto-fit,minmax(8rem,1fr))] gap-3 [&>a:first-child]:col-span-full sm:flex sm:flex-wrap sm:[&>a:first-child]:col-auto"
+          >
             <ButtonLink href={siteConfig.whatsappUrl} className="gap-2">
               <FaWhatsapp className="size-4" aria-hidden="true" />
               WhatsApp
@@ -44,7 +66,7 @@ export function HeroSection() {
             </Link>
           </div>
         </div>
-        <div className="order-first flex justify-center lg:order-none">
+        <div className="flex min-w-0 justify-center">
           <Image
             src="/images/bpr-hero.webp"
             alt="BPR Soluciones"

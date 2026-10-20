@@ -2,6 +2,7 @@ import { Check, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { cardSurfaceClass } from "@/components/ui/Card";
+import { ButtonLink } from "@/components/ui/Buttons";
 
 type ServiceCardProps = {
   name: string;
@@ -16,6 +17,7 @@ type ServiceCardProps = {
   animationSettled?: boolean;
   onToggle?: () => void;
   detailsHref?: string;
+  inquiryHref: string;
   id?: string;
 };
 
@@ -32,6 +34,7 @@ export function ServiceCard({
   animationSettled = true,
   onToggle,
   detailsHref,
+  inquiryHref,
   id,
 }: ServiceCardProps) {
   return (
@@ -110,6 +113,12 @@ export function ServiceCard({
               Ver plan completo
             </Link>
           ) : null}
+          <ButtonLink
+            href={inquiryHref}
+            className="mt-5 w-full"
+          >
+            Consultar {name}
+          </ButtonLink>
         </div>
       </div>
     </article>

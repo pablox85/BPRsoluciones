@@ -127,6 +127,24 @@ export function FloatingWhatsApp() {
     );
   }, []);
 
+  const overlapsHeroCta = useCallback((buttonPosition: Position) => {
+    const ctaRect = document.querySelector("[data-hero-cta]")?.getBoundingClientRect();
+
+    if (!ctaRect) return false;
+
+    return (
+      buttonPosition.x < ctaRect.right &&
+      buttonPosition.x + BUTTON_SIZE > ctaRect.left &&
+      buttonPosition.y < ctaRect.bottom &&
+      buttonPosition.y + BUTTON_SIZE > ctaRect.top
+    );
+  }, []);
+
+  const isOverlappingHeroCta =
+    typeof document !== "undefined" && position
+      ? overlapsHeroCta(position)
+      : false;
+
   const savePosition = (side: Side, bottomPercent: number) => {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ side, bottomPercent }));
@@ -277,7 +295,7 @@ export function FloatingWhatsApp() {
         }
       }}
       data-floating-whatsapp
-      className={`${FLOATING_WHATSAPP_STYLE} ${isFooterCoveringButtonArea ? "pointer-events-none opacity-0" : ""} ${isDragging
+      className={`${FLOATING_WHATSAPP_STYLE} ${isFooterCoveringButtonArea || isOverlappingHeroCta ? "pointer-events-none opacity-0" : ""} ${isDragging
           ? "transition-none"
           : "transition-[left,top,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
       }`}

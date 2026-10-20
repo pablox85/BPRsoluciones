@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { navLinks } from "@/config/site";
 import { Logo } from "@/components/ui/Logo";
 
 export function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const mobileSecondaryLinks = navLinks.filter((link) =>
     ["/servicios", "/contacto"].includes(link.href),
   );
@@ -30,8 +31,30 @@ export function Header() {
     };
   }, [pathname]);
 
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      if (
+        event.target instanceof Node &&
+        !headerRef.current?.contains(event.target)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsidePointer);
+    };
+  }, [isMenuOpen]);
+
   return (
-    <header className="sticky top-0 z-50 px-3 pt-3 sm:px-5 lg:px-8">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-50 px-3 pt-3 sm:px-5 lg:px-8"
+    >
       <div className="navbar-frame relative mx-auto flex min-h-16 w-full max-w-7xl flex-wrap items-center justify-between gap-3 rounded-[1.35rem] border border-white/[0.1] bg-ink-950/80 px-3 shadow-[0_16px_45px_rgba(1,13,15,0.3),inset_0_1px_0_rgba(223,255,250,0.05)] backdrop-blur-2xl sm:px-5">
         <svg
           aria-hidden="true"
