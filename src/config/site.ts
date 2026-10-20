@@ -1,4 +1,5 @@
 import { normalizeSiteUrl } from "@/lib/seo/site-url";
+import { title } from "node:process";
 
 export const siteConfig = {
   name: "BPR Soluciones",
@@ -20,6 +21,7 @@ export const navLinks = [
   { href: "/desarrollo-web-uruguay", label: "Desarrollo web" },
   { href: "/proyectos", label: "Nuestros proyectos" },
   { href: "/preguntas-frecuentes", label: "FAQs" },
+  { href: "/blog", label: "Blog" },
   
   { href: "/contacto", label: "Contacto" },
 ];
@@ -201,7 +203,7 @@ export const processSteps = [
 export const blogPosts = [
   {
     slug: "web-rapida-vs-web-linda",
-    title: "Web rápida vs. web linda: ¿cuál convierte más?",
+    title: "Web rápida vs. web linda: cuál convierte más?",
     category: "Performance y conversión",
     excerpt:
       "El diseño atrae, la velocidad y los datos hacen que funcione.",
@@ -240,6 +242,13 @@ export const blogPosts = [
     category: "Desarrollo web",
     excerpt:
       "Una guía para comparar propuestas de desarrollo web según objetivos, alcance y posibilidades de crecimiento.",
+  },
+  {
+    slug: "web-instagram",
+    title: "Por qué tu negocio necesita una página web si ya tiene Instagram?",
+    category: "Desarrollo web",
+    excerpt:
+      "Instagram te da visibilidad; una página web te ayuda a aparecer en Google y transformar el interés en consultas.",
   },
 ];
 
@@ -312,7 +321,7 @@ export const blogArticles = [
   },
   {
     slug: "web-rapida-vs-web-linda",
-    title: "Web rápida vs. web linda: ¿cuál convierte más?",
+    title: "Web rápida vs. web linda: cuál convierte más?",
     category: "Performance y conversión",
     readingTime: "4 min de lectura",
     lead:
@@ -441,5 +450,53 @@ export const blogArticles = [
     ],
     conclusion:
       "Un buen desarrollo web combina criterio comercial, una ejecución técnica cuidada y una forma de trabajo transparente. Elegí una propuesta que te ayude a resolver lo que importa hoy y a construir lo que sigue.",
+  },
+  {
+    slug: "web-instagram",
+    title: "Por qué tu negocio necesita una página web si ya tiene Instagram?",
+    category: "Desarrollo web",
+    readingTime: "2 min de lectura",
+    lead:
+      "Cuántos clientes podrías estar perdiendo porque no te encuentran en Google?",
+    leadBullet: true,
+    sections: [
+      {
+        title:
+          "Instagram te da visibilidad. Una página web te ayuda a transformar el interés en consultas.",
+        paragraphs: [],
+        bullets: [
+          "Instagram te permite mostrar tus productos y conectar con seguidores.",
+          "Una web te ayuda a ordenarlos",
+          "Tus próximos clientes también buscan servicios en Google, comparan opciones y necesitan información antes de contratar.",
+        ],
+      },
+      {
+        title: "Tus clientes te están buscando. Te encuentran?",
+        paragraphs: [
+          "Imaginá que tenés una gomería en Las Piedras. Alguien busca «gomería cerca de mí» en Google.",
+          "Una página web optimizada para SEO local puede aumentar tus oportunidades de aparecer en búsquedas relevantes y facilitar que esa persona te contacte.",
+          "Lo mismo sucede con comercios, profesionales y empresas de servicios en Uruguay.",
+        ],
+      },
+      {
+        title: "Más confianza. Más oportunidades.",
+        paragraphs: ["Una web profesional permite que tus potenciales clientes:"],
+        bullets: [
+          "Encuentren tus servicios y precios fácilmente.",
+          "Conozcan tus trabajos y tu empresa.",
+          "Soliciten informacion directamente por WhatsApp.",
+          "Accedan a información sin depender de Instagram.",
+        ],
+      },
+      {
+        title: "Tu página web profesional desde USD 150",
+        paragraphs: [
+          "En BPR Soluciones diseñamos páginas web rápidas, modernas y pensadas para generar consultas.",
+          "No necesitás invertir miles de dólares para comenzar a fortalecer tu presencia digital.",
+        ],
+      },
+    ],
+    conclusion:
+      "No necesitás elegir entre Instagram y una web. Necesitás que trabajen juntos. Tu próximo cliente podría estar buscándote ahora. Va a encontrar tu negocio?",
   },
 ] as const;

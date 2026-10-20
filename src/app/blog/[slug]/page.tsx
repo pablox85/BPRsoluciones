@@ -45,6 +45,11 @@ const articleMetadata: Record<
     description:
       "Una guía para elegir un servicio de desarrollo web en Uruguay según objetivos comerciales, alcance, soporte y posibilidades de crecimiento.",
   },
+  "web-instagram": {
+    title: "¿Por qué tu negocio necesita una página web si ya tiene Instagram?",
+    description:
+      "Descubrí cómo una página web ayuda a tu negocio a aparecer en Google, generar confianza y convertir el interés de Instagram en consultas.",
+  },
 };
 
 const getArticle = (slug: string) =>

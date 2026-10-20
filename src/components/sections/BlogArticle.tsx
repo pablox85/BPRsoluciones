@@ -1,16 +1,30 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Clock3 } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check, Clock3, X } from "lucide-react";
+import { ButtonLink } from "@/components/ui/Buttons";
+import { siteConfig } from "@/config/site";
 
 type BlogArticleData = {
   title: string;
   category: string;
   readingTime: string;
   lead: string;
+  leadBullet?: boolean;
   sections: readonly {
     title: string;
     paragraphs: readonly string[];
+    bullets?: readonly string[];
   }[];
   conclusion: string;
+};
+
+const getArticleWhatsAppUrl = (articleTitle: string) => {
+  const url = new URL(siteConfig.whatsappUrl);
+  url.searchParams.set(
+    "text",
+    `Hola, estuve leyendo el artículo "${articleTitle}" del blog de BPR Soluciones y quisiera hacer una consulta.`,
+  );
+
+  return url.toString();
 };
 
 function BackToBlog() {
@@ -39,9 +53,18 @@ export function BlogArticle({ article }: { article: BlogArticleData }) {
       <h1 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-white sm:text-4xl">
         {article.title}
       </h1>
-      <p className="mt-5 max-w-3xl text-base leading-8 text-zinc-300 sm:text-lg">
-        {article.lead}
-      </p>
+      {article.leadBullet ? (
+        <ul className="mt-5 max-w-3xl text-base leading-8 text-zinc-300 sm:text-lg">
+          <li className="flex gap-3">
+            <X className="mt-1.5 size-4 shrink-0 text-neon-mint" aria-hidden="true" />
+            <span>{article.lead}</span>
+          </li>
+        </ul>
+      ) : (
+        <p className="mt-5 max-w-3xl text-base leading-8 text-zinc-300 sm:text-lg">
+          {article.lead}
+        </p>
+      )}
 
       <div className="mt-10 grid gap-8">
         {article.sections.map((section) => (
@@ -53,6 +76,16 @@ export function BlogArticle({ article }: { article: BlogArticleData }) {
               {section.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
+              {section.bullets ? (
+                <ul className="grid gap-2 pt-1">
+                  {section.bullets.map((bullet) => (
+                    <li key={bullet} className="flex gap-3">
+                      <Check className="mt-1 size-4 shrink-0 text-neon-mint" aria-hidden="true" />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </div>
           </section>
         ))}
@@ -61,9 +94,20 @@ export function BlogArticle({ article }: { article: BlogArticleData }) {
       <p className="mt-10 max-w-3xl border-l-2 border-neon-mint pl-4 text-base leading-7 text-zinc-100">
         {article.conclusion}
       </p>
-
-      <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-7 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-xl text-sm leading-6 text-zinc-400">
+      <div className="mt-6 flex max-w-3xl flex-col items-center md:items-end">
+        <p className="w-full text-lg font-medium leading-7 text-white">
+          ¿Te quedó alguna duda o tenés una idea en mente?
+        </p>
+        <ButtonLink
+          href={getArticleWhatsAppUrl(article.title)}
+          className="mt-4 gap-2"
+        >
+          Charlamos por WhatsApp
+          <ArrowUpRight className="size-4" aria-hidden="true" />
+        </ButtonLink>
+      </div>
+      <div className="mt-6">
+        <p className="max-w-xl border-t border-white/10 pt-6 text-sm leading-6 text-zinc-400">
           ¿Querés aplicar estas ideas a tu empresa? Conocé nuestros{" "}
           <Link href="/servicios" className="text-neon-mint underline underline-offset-4">
             planes web y soluciones a medida
@@ -74,13 +118,6 @@ export function BlogArticle({ article }: { article: BlogArticleData }) {
           </Link>{" "}
           o contanos qué necesitás.
         </p>
-        <Link
-          href="/contacto"
-          className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-neon-mint px-5 text-sm font-bold text-ink-950 transition hover:bg-white"
-        >
-          Hablemos de tu web
-          <ArrowUpRight className="size-4" aria-hidden="true" />
-        </Link>
       </div>
 
       <div className="mt-6 border-t border-white/10 pt-5">
